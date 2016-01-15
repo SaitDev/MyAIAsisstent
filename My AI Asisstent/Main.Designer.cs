@@ -1,6 +1,6 @@
 ﻿namespace MyAIAsisstent
 {
-    partial class Login
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -50,6 +50,7 @@
             this.materialSingleLineTextField1.Size = new System.Drawing.Size(172, 23);
             this.materialSingleLineTextField1.TabIndex = 0;
             this.materialSingleLineTextField1.TabStop = false;
+            this.materialSingleLineTextField1.Text = "Sait";
             this.materialSingleLineTextField1.UseSystemPasswordChar = false;
             this.materialSingleLineTextField1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.materialSingleLineTextField1_KeyDown);
             // 
@@ -73,6 +74,7 @@
             // 
             // materialFlatButton1
             // 
+            this.materialFlatButton1.AutoSize = true;
             this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton1.Depth = 0;
             this.materialFlatButton1.Location = new System.Drawing.Point(59, 240);
@@ -90,6 +92,7 @@
             // 
             // materialFlatButton2
             // 
+            this.materialFlatButton2.AutoSize = true;
             this.materialFlatButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton2.Depth = 0;
             this.materialFlatButton2.Location = new System.Drawing.Point(187, 240);
@@ -97,13 +100,13 @@
             this.materialFlatButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton2.Name = "materialFlatButton2";
             this.materialFlatButton2.Primary = false;
-            this.materialFlatButton2.Size = new System.Drawing.Size(72, 36);
+            this.materialFlatButton2.Size = new System.Drawing.Size(43, 36);
             this.materialFlatButton2.TabIndex = 3;
             this.materialFlatButton2.Text = "Quit ";
             this.materialFlatButton2.UseVisualStyleBackColor = true;
             this.materialFlatButton2.Click += new System.EventHandler(this.materialFlatButton2_Click);
             // 
-            // Login
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -113,11 +116,15 @@
             this.Controls.Add(this.materialSingleLineTextField2);
             this.Controls.Add(this.materialSingleLineTextField1);
             this.MaximizeBox = false;
-            this.Name = "Login";
+            this.Name = "Main";
+            this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Shown += new System.EventHandler(this.Login_Shown);
+            this.ResizeEnd += new System.EventHandler(this.Main_ResizeEnd);
+            this.Move += new System.EventHandler(this.Main_Move);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

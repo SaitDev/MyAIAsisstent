@@ -14,13 +14,13 @@ namespace MyAIAsisstent
 {
     public partial class Setting : MaterialForm
     {
-        private Login _login;
+        private Main _main;
         private MaterialSkinManager materialSkinManager;
-        public Setting(Login lgi)
+        public Setting(Main main)
         {
             InitializeComponent();;
-            _login = lgi;
-            materialSkinManager = _login.materialSkinManager;
+            _main = main;
+            materialSkinManager = _main.materialSkinManager;
             materialSkinManager.AddFormToManage(this);
         }
 
@@ -34,12 +34,13 @@ namespace MyAIAsisstent
 
         private void Setting_Shown(object sender, EventArgs e)
         {
-            _login.Hide();
+            //_main.Hide();
         }
 
-        private void Setting_FormClosed(object sender, FormClosedEventArgs e)
+        private void Setting_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _login.Show();
+            this.Hide();
+            e.Cancel = true;
         }
 
         private void Setting_Layout(object sender, LayoutEventArgs e)
@@ -89,5 +90,9 @@ namespace MyAIAsisstent
             this.Close();
         }
 
+        private void materialRaisedButton3_Click(object sender, EventArgs e)
+        {
+            _main.Close();
+        }
     }
 }

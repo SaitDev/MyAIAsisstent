@@ -5,5 +5,14 @@
     <Setting Name="LightTheme" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="Location1" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">100, 100</Value>
+    </Setting>
+    <Setting Name="Opacity1" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.7</Value>
+    </Setting>
+    <Setting Name="Note1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">df</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -34,5 +34,41 @@ namespace MyAIAsisstent.Properties {
                 this["LightTheme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100, 100")]
+        public global::System.Drawing.Point Location1 {
+            get {
+                return ((global::System.Drawing.Point)(this["Location1"]));
+            }
+            set {
+                this["Location1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.7")]
+        public double Opacity1 {
+            get {
+                return ((double)(this["Opacity1"]));
+            }
+            set {
+                this["Opacity1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("df")]
+        public string Note1 {
+            get {
+                return ((string)(this["Note1"]));
+            }
+            set {
+                this["Note1"] = value;
+            }
+        }
     }
 }

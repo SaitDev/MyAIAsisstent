@@ -79,7 +79,12 @@ namespace MaterialSkin.Controls
         };
 
         private const int STATUS_BAR_BUTTON_WIDTH = STATUS_BAR_HEIGHT;
-        private const int STATUS_BAR_HEIGHT = 24;
+        /// <summary>
+        /// 
+        /// Window buttons size
+        /// 
+        /// </summary>
+        private const int STATUS_BAR_HEIGHT = 25;
         private const int ACTION_BAR_HEIGHT = 40;
 
         private const uint TPM_LEFTALIGN = 0x0000;

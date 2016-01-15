@@ -14,24 +14,46 @@ using System.Security.Cryptography;
 
 namespace MyAIAsisstent
 {
-    public partial class Login : MaterialForm
+    public partial class Main : MaterialForm
     {
         private const string pass = "120d0a9f6c11649cea1c8eaeccb1e1d3";
         public MaterialSkinManager materialSkinManager;
-        private Setting _setting;
-        public Login()
+        public Setting _setting;
+        private Notes[] notes;
+        public Main()
         {
             InitializeComponent();
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.LightBlue800, Primary.Red500, Accent.LightBlue400, TextShade.WHITE);
-            
+            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Green600, Primary.Green700, Primary.Green200, Accent.Red100, TextShade.WHITE);
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.LightBlue800, Primary.BlueGrey400, Accent.LightBlue400, TextShade.WHITE);
+            if (Properties.Settings.Default.LightTheme)
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            }
+            else
+            {
+                materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+            }
+            _setting = new Setting(this);
+            notes = new Notes[5];
         }
 
         private void Login_Shown(object sender, EventArgs e)
         {
             materialFlatButton2.AutoSize = false;
             materialFlatButton2.Size = new Size(72, 36);
+            this.Opacity = 1;
+        }
+
+        private void Main_Move(object sender, EventArgs e)
+        {
+            this.Opacity = .5;
+        }
+
+        private void Main_ResizeEnd(object sender, EventArgs e)
+        {
+            this.Opacity = 1;
         }
 
         private void materialFlatButton1_Click(object sender, EventArgs e)
@@ -39,17 +61,11 @@ namespace MyAIAsisstent
             if (materialSingleLineTextField1.Text == "")
             {
                 MessageBox.Show("You forget to enter username", "Invaild input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                materialSingleLineTextField1.Focus();
-                this.ActiveControl = materialSingleLineTextField1;
-                materialSingleLineTextField1.Select();
                 return;
             }
             else if (materialSingleLineTextField2.Text == "")
             {
                 MessageBox.Show("You forget to enter password", "Invaild input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                materialSingleLineTextField2.Focus();
-                this.ActiveControl = materialSingleLineTextField2;
-                materialSingleLineTextField2.Select();
                 return;
             }
             if (materialSingleLineTextField1.Text.ToUpper() == "SAIT")
@@ -59,35 +75,35 @@ namespace MyAIAsisstent
                     //materialSingleLineTextField1.Text = hash;
                     if (VerifyMd5Hash(md5Hash, materialSingleLineTextField2.Text, pass))
                     {
-                        _setting = new Setting(this);
-                        _setting.Show();
+                        notes[0] = new Notes(this);
+                        notes[0].Text = "Note 1";
+                        notes[0].Show();
+                        this.Hide();
                     }
+                    else MessageBox.Show("User or password is incorrect.","Login failed");
                 }
-            else MessageBox.Show("User or password is incorrect.");
+            else MessageBox.Show("User or password is incorrect.", "Login failed");
         }
 
         private void materialFlatButton2_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+            this.Close();
         }
 
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
-
             // Convert the input string to a byte array and compute the hash.
             byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
             // Create a new Stringbuilder to collect the bytes
             // and create a string.
             StringBuilder sBuilder = new StringBuilder();
-
             // Loop through each byte of the hashed data 
             // and format each one as a hexadecimal string.
             for (int i = 0; i < data.Length; i++)
             {
                 sBuilder.Append(data[i].ToString("x2"));
             }
-
             // Return the hexadecimal string.
             return sBuilder.ToString();
         }
@@ -96,10 +112,8 @@ namespace MyAIAsisstent
         {
             // Hash the input.
             string hashOfInput = GetMd5Hash(md5Hash, input);
-
             // Create a StringComparer an compare the hashes.
             StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
             if (0 == comparer.Compare(hashOfInput, hash))
             {
                 return true;
