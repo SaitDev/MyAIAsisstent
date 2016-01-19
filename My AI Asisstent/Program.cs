@@ -15,7 +15,8 @@ namespace MyAIAsisstent
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Main _main = new Main();
+            Application.Run();
         }
     }
 }

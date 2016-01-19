@@ -34,6 +34,8 @@
             this.metroLink2 = new MetroFramework.Controls.MetroLink();
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.materialToolStripMenuItem1 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
+            this.materialToolStripMenuItem2 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
+            this.materialToolStripMenuItem3 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.opacityToolStripMenuItem = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.toolStripMenuItem1 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
@@ -41,8 +43,6 @@
             this.toolStripMenuItem3 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.toolStripMenuItem4 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.toolStripMenuItem5 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
-            this.materialToolStripMenuItem2 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
-            this.materialToolStripMenuItem3 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +55,7 @@
             this.materialLabel1.Location = new System.Drawing.Point(12, 85);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(193, 151);
+            this.materialLabel1.Size = new System.Drawing.Size(193, 166);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.Text = global::MyAIAsisstent.Properties.Settings.Default.Note1;
             this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -68,9 +68,9 @@
             // 
             // 
             this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(63, 1);
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(29, 2);
             this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(175, 175);
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(161, 161);
             this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox1.CustomButton.TabIndex = 1;
             this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -80,7 +80,7 @@
             this.metroTextBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.metroTextBox1.Lines = new string[] {
         "metroTextBox1"};
-            this.metroTextBox1.Location = new System.Drawing.Point(12, 85);
+            this.metroTextBox1.Location = new System.Drawing.Point(12, 76);
             this.metroTextBox1.MaxLength = 32767;
             this.metroTextBox1.Multiline = true;
             this.metroTextBox1.Name = "metroTextBox1";
@@ -89,7 +89,7 @@
             this.metroTextBox1.SelectedText = "";
             this.metroTextBox1.SelectionLength = 0;
             this.metroTextBox1.SelectionStart = 0;
-            this.metroTextBox1.Size = new System.Drawing.Size(193, 151);
+            this.metroTextBox1.Size = new System.Drawing.Size(193, 166);
             this.metroTextBox1.TabIndex = 2;
             this.metroTextBox1.Text = "metroTextBox1";
             this.metroTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -152,6 +152,22 @@
             this.materialToolStripMenuItem1.Size = new System.Drawing.Size(125, 30);
             this.materialToolStripMenuItem1.Text = "New";
             // 
+            // materialToolStripMenuItem2
+            // 
+            this.materialToolStripMenuItem2.AutoSize = false;
+            this.materialToolStripMenuItem2.Name = "materialToolStripMenuItem2";
+            this.materialToolStripMenuItem2.Size = new System.Drawing.Size(120, 30);
+            this.materialToolStripMenuItem2.Text = "Edit";
+            this.materialToolStripMenuItem2.Click += new System.EventHandler(this.materialToolStripMenuItem2_Click);
+            // 
+            // materialToolStripMenuItem3
+            // 
+            this.materialToolStripMenuItem3.AutoSize = false;
+            this.materialToolStripMenuItem3.Name = "materialToolStripMenuItem3";
+            this.materialToolStripMenuItem3.Size = new System.Drawing.Size(120, 30);
+            this.materialToolStripMenuItem3.Text = "Delete";
+            this.materialToolStripMenuItem3.Click += new System.EventHandler(this.materialToolStripMenuItem3_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -210,28 +226,12 @@
             this.toolStripMenuItem5.Text = "60%";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
-            // materialToolStripMenuItem2
-            // 
-            this.materialToolStripMenuItem2.AutoSize = false;
-            this.materialToolStripMenuItem2.Name = "materialToolStripMenuItem2";
-            this.materialToolStripMenuItem2.Size = new System.Drawing.Size(120, 30);
-            this.materialToolStripMenuItem2.Text = "Edit";
-            this.materialToolStripMenuItem2.Click += new System.EventHandler(this.materialToolStripMenuItem2_Click);
-            // 
-            // materialToolStripMenuItem3
-            // 
-            this.materialToolStripMenuItem3.AutoSize = false;
-            this.materialToolStripMenuItem3.Name = "materialToolStripMenuItem3";
-            this.materialToolStripMenuItem3.Size = new System.Drawing.Size(120, 30);
-            this.materialToolStripMenuItem3.Text = "Delete";
-            this.materialToolStripMenuItem3.Click += new System.EventHandler(this.materialToolStripMenuItem3_Click);
-            // 
             // Notes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(217, 247);
+            this.ClientSize = new System.Drawing.Size(217, 254);
             this.ContextMenuStrip = this.materialContextMenuStrip1;
             this.Controls.Add(this.metroLink2);
             this.Controls.Add(this.metroLink1);
@@ -245,6 +245,7 @@
             this.ShowInTaskbar = false;
             this.Sizable = false;
             this.Text = "Notes";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Notes_FormClosing);
             this.Shown += new System.EventHandler(this.Notes_Shown);
             this.ResizeEnd += new System.EventHandler(this.Notes_ResizeEnd);

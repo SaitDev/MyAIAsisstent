@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using MaterialSkin;
 using MaterialSkin.Controls;
+using Microsoft.Win32;
 
 namespace MyAIAsisstent
 {
@@ -16,6 +17,7 @@ namespace MyAIAsisstent
     {
         private Main _main;
         private MaterialSkinManager materialSkinManager;
+        RegistryKey regApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
         public Setting(Main main)
         {
             InitializeComponent();;
@@ -82,6 +84,11 @@ namespace MyAIAsisstent
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
                 materialRadioButton2.Checked = true;
             }
+            if (Properties.Settings.Default.AutoStart)
+            {
+                regApp.SetValue("MyAIAsisstent", Application.ExecutablePath.ToString());
+            }
+            else regApp.DeleteValue("MyAIAsisstent", false); ;
             Properties.Settings.Default.Save();
         }
 
@@ -92,7 +99,9 @@ namespace MyAIAsisstent
 
         private void materialRaisedButton3_Click(object sender, EventArgs e)
         {
-            _main.Close();
+            //_main.Close();
+            //_main.appClose = true;
+            Environment.Exit(0);
         }
     }
 }

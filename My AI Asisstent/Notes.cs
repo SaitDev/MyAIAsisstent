@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using MaterialSkin;
@@ -30,12 +24,12 @@ namespace MyAIAsisstent
 
         private void Notes_Shown(object sender, EventArgs e)
         {
-            this.Opacity = Properties.Settings.Default.Opacity1;
+            Opacity = Properties.Settings.Default.Opacity1;
         }
 
         private void Notes_Move(object sender, EventArgs e)
         {
-            this.Opacity = 0.5;
+            Opacity = 0.5;
             moved = true;
         }
 
@@ -52,6 +46,7 @@ namespace MyAIAsisstent
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //if (_main.appClose) return;
             string t = this.Text;
             string s = "Are you sure want to delete " + t;
             if ((MessageBox.Show(this, s, t, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)) == DialogResult.Yes)

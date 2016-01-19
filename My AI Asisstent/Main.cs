@@ -20,6 +20,7 @@ namespace MyAIAsisstent
         public MaterialSkinManager materialSkinManager;
         public Setting _setting;
         private Notes[] notes;
+        //public bool appClose = false;
         public Main()
         {
             InitializeComponent();
@@ -37,6 +38,15 @@ namespace MyAIAsisstent
             }
             _setting = new Setting(this);
             notes = new Notes[5];
+
+            if (Properties.Settings.Default.RequiredPassword == false)
+            {
+                //Visible = false;
+                notes[0] = new Notes(this);
+                notes[0].Text = "Note 1";
+                notes[0].Show();
+            }
+            else Visible = true;
         }
 
         private void Login_Shown(object sender, EventArgs e)
