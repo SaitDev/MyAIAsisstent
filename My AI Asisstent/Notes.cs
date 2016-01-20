@@ -10,15 +10,14 @@ namespace MyAIAsisstent
     public partial class Notes : MaterialForm
     {
         private Main _main;
-        private bool moved;
+        private bool moved, close = false;
         public Notes(Main main)
         {
             InitializeComponent();
             main.materialSkinManager.AddFormToManage(this);
             _main = main;
-            metroLink1.BackColor = ColorTranslator.FromHtml("#42a5f5");
+            //metroLink1.BackColor = ColorTranslator.FromHtml("#42a5f5");
             metroLink1.Enabled = false;
-            metroLink2.BackColor = ColorTranslator.FromHtml("#42a5f5");
             metroTextBox1.Text = materialLabel1.Text;
         }
 
@@ -46,14 +45,22 @@ namespace MyAIAsisstent
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (_main.appClose) return;
+            if (close) return;
             string t = this.Text;
             string s = "Are you sure want to delete " + t;
             if ((MessageBox.Show(this, s, t, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)) == DialogResult.Yes)
             {
                 materialLabel1.Text = "";
                 Properties.Settings.Default.Save();
-                _main.Close();
+                close = true;
+                _main.noteCount--;
+                if (_main.noteCount == 0) Environment.Exit(0);
+                else
+                {
+                    Properties.Settings.Default.Notes = _main.noteCount;
+                    Properties.Settings.Default.Save();
+                    this.Close();
+                }
             }
             else e.Cancel = true;
         }
@@ -127,6 +134,20 @@ namespace MyAIAsisstent
         private void materialToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void metroLink3_Click(object sender, EventArgs e)
+        {
+            _main.noteCount++;
+            var i = _main.noteCount - 1;
+            _main.notes[i] = new Notes(_main);
+            _main.notes[i].Text = "Note " + _main.noteCount.ToString();
+            _main.notes[i].Show();
+        }
+
+        private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            metroLink3.PerformClick();
         }
     }
 }

@@ -19,7 +19,8 @@ namespace MyAIAsisstent
         private const string pass = "120d0a9f6c11649cea1c8eaeccb1e1d3";
         public MaterialSkinManager materialSkinManager;
         public Setting _setting;
-        private Notes[] notes;
+        public Notes[] notes;
+        public int noteCount;
         //public bool appClose = false;
         public Main()
         {
@@ -37,14 +38,16 @@ namespace MyAIAsisstent
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
             _setting = new Setting(this);
-            notes = new Notes[5];
-
+            notes = new Notes[10];
+            noteCount = Properties.Settings.Default.Notes;
             if (Properties.Settings.Default.RequiredPassword == false)
             {
                 //Visible = false;
-                notes[0] = new Notes(this);
-                notes[0].Text = "Note 1";
-                notes[0].Show();
+                int i;
+                for (i = 0; i < noteCount; i++)
+                {
+                    createNote(i);
+                }
             }
             else Visible = true;
         }
@@ -85,9 +88,14 @@ namespace MyAIAsisstent
                     //materialSingleLineTextField1.Text = hash;
                     if (VerifyMd5Hash(md5Hash, materialSingleLineTextField2.Text, pass))
                     {
-                        notes[0] = new Notes(this);
-                        notes[0].Text = "Note 1";
-                        notes[0].Show();
+                        int i;
+                        for (i = 0; i < noteCount; i++)
+                        {
+                            //notes[i] = new Notes(this);
+                            //notes[i].Text = "Note " + noteCount.ToString();
+                            //notes[i].Show();
+                            createNote(i);
+                        }
                         this.Hide();
                     }
                     else MessageBox.Show("User or password is incorrect.","Login failed");
@@ -144,6 +152,15 @@ namespace MyAIAsisstent
         {
             if (e.KeyCode == Keys.Enter)
                 materialFlatButton1.PerformClick();
+        }
+
+        public void createNote (int i)
+        {
+            notes[i] = new Notes(this);
+            notes[i].Text = "Note " + (i+1).ToString();
+            notes[i].Show();
+            Properties.Settings.Default.Notes = noteCount;
+            Properties.Settings.Default.Save();
         }
     }
 }

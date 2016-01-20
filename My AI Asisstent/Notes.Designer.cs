@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
             this.metroLink1 = new MetroFramework.Controls.MetroLink();
             this.metroLink2 = new MetroFramework.Controls.MetroLink();
@@ -43,23 +42,10 @@
             this.toolStripMenuItem3 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.toolStripMenuItem4 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.toolStripMenuItem5 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
+            this.metroLink3 = new MetroFramework.Controls.MetroLink();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MyAIAsisstent.Properties.Settings.Default, "Note1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(12, 85);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(193, 166);
-            this.materialLabel1.TabIndex = 0;
-            this.materialLabel1.Text = global::MyAIAsisstent.Properties.Settings.Default.Note1;
-            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.materialLabel1.DoubleClick += new System.EventHandler(this.materialLabel1_DoubleClick);
             // 
             // metroTextBox1
             // 
@@ -79,7 +65,7 @@
             this.metroTextBox1.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.metroTextBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.metroTextBox1.Lines = new string[] {
-        "metroTextBox1"};
+        "df"};
             this.metroTextBox1.Location = new System.Drawing.Point(12, 76);
             this.metroTextBox1.MaxLength = 32767;
             this.metroTextBox1.Multiline = true;
@@ -91,7 +77,7 @@
             this.metroTextBox1.SelectionStart = 0;
             this.metroTextBox1.Size = new System.Drawing.Size(193, 166);
             this.metroTextBox1.TabIndex = 2;
-            this.metroTextBox1.Text = "metroTextBox1";
+            this.metroTextBox1.Text = "df";
             this.metroTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.metroTextBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.metroTextBox1.UseCustomBackColor = true;
@@ -104,12 +90,12 @@
             // metroLink1
             // 
             this.metroLink1.AutoSize = true;
-            this.metroLink1.BackColor = System.Drawing.Color.Gray;
+            this.metroLink1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
             this.metroLink1.Image = global::MyAIAsisstent.Properties.Resources.save_white;
             this.metroLink1.ImageSize = 34;
-            this.metroLink1.Location = new System.Drawing.Point(174, 30);
+            this.metroLink1.Location = new System.Drawing.Point(174, 28);
             this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(41, 31);
+            this.metroLink1.Size = new System.Drawing.Size(41, 33);
             this.metroLink1.TabIndex = 3;
             this.metroLink1.UseCustomBackColor = true;
             this.metroLink1.UseSelectable = true;
@@ -118,12 +104,12 @@
             // metroLink2
             // 
             this.metroLink2.AutoSize = true;
-            this.metroLink2.BackColor = System.Drawing.Color.Gray;
+            this.metroLink2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
             this.metroLink2.Image = global::MyAIAsisstent.Properties.Resources.setting_white;
             this.metroLink2.ImageSize = 34;
-            this.metroLink2.Location = new System.Drawing.Point(133, 30);
+            this.metroLink2.Location = new System.Drawing.Point(133, 27);
             this.metroLink2.Name = "metroLink2";
-            this.metroLink2.Size = new System.Drawing.Size(41, 31);
+            this.metroLink2.Size = new System.Drawing.Size(41, 35);
             this.metroLink2.TabIndex = 4;
             this.metroLink2.UseCustomBackColor = true;
             this.metroLink2.UseSelectable = true;
@@ -151,6 +137,7 @@
             this.materialToolStripMenuItem1.Name = "materialToolStripMenuItem1";
             this.materialToolStripMenuItem1.Size = new System.Drawing.Size(125, 30);
             this.materialToolStripMenuItem1.Text = "New";
+            this.materialToolStripMenuItem1.Click += new System.EventHandler(this.materialToolStripMenuItem1_Click);
             // 
             // materialToolStripMenuItem2
             // 
@@ -226,6 +213,35 @@
             this.toolStripMenuItem5.Text = "60%";
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
+            // metroLink3
+            // 
+            this.metroLink3.AutoSize = true;
+            this.metroLink3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
+            this.metroLink3.Image = global::MyAIAsisstent.Properties.Resources.add_white;
+            this.metroLink3.ImageSize = 34;
+            this.metroLink3.Location = new System.Drawing.Point(92, 27);
+            this.metroLink3.Name = "metroLink3";
+            this.metroLink3.Size = new System.Drawing.Size(41, 35);
+            this.metroLink3.TabIndex = 5;
+            this.metroLink3.UseCustomBackColor = true;
+            this.metroLink3.UseSelectable = true;
+            this.metroLink3.Click += new System.EventHandler(this.metroLink3_Click);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MyAIAsisstent.Properties.Settings.Default, "Note1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel1.Location = new System.Drawing.Point(12, 85);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(193, 166);
+            this.materialLabel1.TabIndex = 0;
+            this.materialLabel1.Text = global::MyAIAsisstent.Properties.Settings.Default.Note1;
+            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.materialLabel1.DoubleClick += new System.EventHandler(this.materialLabel1_DoubleClick);
+            // 
             // Notes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,12 +249,12 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(217, 254);
             this.ContextMenuStrip = this.materialContextMenuStrip1;
+            this.Controls.Add(this.metroLink3);
             this.Controls.Add(this.metroLink2);
             this.Controls.Add(this.metroLink1);
             this.Controls.Add(this.metroTextBox1);
             this.Controls.Add(this.materialLabel1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::MyAIAsisstent.Properties.Settings.Default, "Location1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.Location = global::MyAIAsisstent.Properties.Settings.Default.Location1;
+            this.Location = new System.Drawing.Point(100, 100);
             this.MaximizeBox = false;
             this.Name = "Notes";
             this.Opacity = 0.7D;
@@ -273,5 +289,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem2;
         private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem3;
+        private MetroFramework.Controls.MetroLink metroLink3;
     }
 }
