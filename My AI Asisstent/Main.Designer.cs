@@ -74,38 +74,32 @@
             // 
             // materialFlatButton1
             // 
-            this.materialFlatButton1.AutoSize = true;
-            this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton1.Depth = 0;
             this.materialFlatButton1.Icon = global::MyAIAsisstent.Properties.Resources.ok_blue;
+            this.materialFlatButton1.IconSize = new System.Drawing.Size(25, 26);
             this.materialFlatButton1.Location = new System.Drawing.Point(50, 240);
-            this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(0);
             this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton1.Name = "materialFlatButton1";
-            this.materialFlatButton1.Padding = new System.Windows.Forms.Padding(10);
             this.materialFlatButton1.Primary = false;
             this.materialFlatButton1.Size = new System.Drawing.Size(101, 36);
             this.materialFlatButton1.TabIndex = 2;
             this.materialFlatButton1.Text = "Confirm";
-            this.materialFlatButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.materialFlatButton1.UseCompatibleTextRendering = true;
             this.materialFlatButton1.UseVisualStyleBackColor = true;
             this.materialFlatButton1.Click += new System.EventHandler(this.materialFlatButton1_Click);
             // 
             // materialFlatButton2
             // 
-            this.materialFlatButton2.AutoSize = true;
-            this.materialFlatButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton2.Depth = 0;
             this.materialFlatButton2.Icon = global::MyAIAsisstent.Properties.Resources.quit_blue;
+            this.materialFlatButton2.IconSize = new System.Drawing.Size(25, 26);
             this.materialFlatButton2.Location = new System.Drawing.Point(187, 240);
-            this.materialFlatButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialFlatButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton2.Name = "materialFlatButton2";
             this.materialFlatButton2.Primary = false;
             this.materialFlatButton2.Size = new System.Drawing.Size(72, 36);
             this.materialFlatButton2.TabIndex = 3;
-            this.materialFlatButton2.Text = "Quit ";
+            this.materialFlatButton2.Text = "Quit";
             this.materialFlatButton2.UseVisualStyleBackColor = true;
             this.materialFlatButton2.Click += new System.EventHandler(this.materialFlatButton2_Click);
             // 
@@ -113,6 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(327, 292);
             this.Controls.Add(this.materialFlatButton2);
             this.Controls.Add(this.materialFlatButton1);
@@ -127,7 +122,6 @@
             this.ResizeEnd += new System.EventHandler(this.Main_ResizeEnd);
             this.Move += new System.EventHandler(this.Main_Move);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

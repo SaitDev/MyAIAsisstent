@@ -39,10 +39,18 @@ namespace MyAIAsisstent
             }
             _setting = new Setting(this);
             notes = new Notes[10];
-            noteCount = Properties.Settings.Default.Notes;
+            noteCount = Properties.Settings.Default.NoteCount;
             if (Properties.Settings.Default.RequiredPassword == false)
             {
                 //Visible = false;
+                if (noteCount == 0)
+                {
+                    noteCount++;
+                    Properties.Settings.Default.NoteCount--;
+                    Properties.Settings.Default.Save();
+                    createNote(0);
+                    return;
+                }
                 int i;
                 for (i = 0; i < noteCount; i++)
                 {
@@ -50,6 +58,12 @@ namespace MyAIAsisstent
                 }
             }
             else Visible = true;
+            /*
+            Double[] temp = Properties.Settings.Default.Opacitys;
+            Array.Resize<Double>(ref temp, 10);
+            Properties.Settings.Default.Opacitys = temp;
+            Properties.Settings.Default.Save();
+            */
         }
 
         private void Login_Shown(object sender, EventArgs e)
@@ -106,7 +120,8 @@ namespace MyAIAsisstent
         private void materialFlatButton2_Click(object sender, EventArgs e)
         {
             //Application.Exit();
-            this.Close();
+            //this.Close();
+            Environment.Exit(0);
         }
 
         private string GetMd5Hash(MD5 md5Hash, string input)
@@ -157,9 +172,10 @@ namespace MyAIAsisstent
         public void createNote (int i)
         {
             notes[i] = new Notes(this);
+            notes[i].index = i;
             notes[i].Text = "Note " + (i+1).ToString();
             notes[i].Show();
-            Properties.Settings.Default.Notes = noteCount;
+            Properties.Settings.Default.NoteCount++;
             Properties.Settings.Default.Save();
         }
     }

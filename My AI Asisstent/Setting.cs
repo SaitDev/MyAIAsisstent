@@ -90,6 +90,7 @@ namespace MyAIAsisstent
             }
             else regApp.DeleteValue("MyAIAsisstent", false); ;
             Properties.Settings.Default.Save();
+            Close();
         }
 
         private void materialRaisedButton2_Click(object sender, EventArgs e)

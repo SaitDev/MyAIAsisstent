@@ -5,14 +5,11 @@
     <Setting Name="LightTheme" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Location1" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">100, 100</Value>
-    </Setting>
-    <Setting Name="Opacity1" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.7</Value>
-    </Setting>
-    <Setting Name="Note1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">df</Value>
+    <Setting Name="Notes" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Double click to edit&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="RequiredPassword" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -20,8 +17,23 @@
     <Setting Name="AutoStart" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Notes" Type="System.Int32" Scope="User">
+    <Setting Name="NoteCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Locations" Type="System.Drawing.Point[]" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfPoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;Point&gt;
+    &lt;X&gt;100&lt;/X&gt;
+    &lt;Y&gt;100&lt;/Y&gt;
+  &lt;/Point&gt;
+&lt;/ArrayOfPoint&gt;</Value>
+    </Setting>
+    <Setting Name="Opacitys" Type="System.Double[]" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfDouble xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;double&gt;0.9&lt;/double&gt;
+&lt;/ArrayOfDouble&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

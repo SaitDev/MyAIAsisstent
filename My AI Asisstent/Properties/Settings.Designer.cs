@@ -37,37 +37,15 @@ namespace MyAIAsisstent.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100, 100")]
-        public global::System.Drawing.Point Location1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>Double click to edit</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection Notes {
             get {
-                return ((global::System.Drawing.Point)(this["Location1"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["Notes"]));
             }
             set {
-                this["Location1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.7")]
-        public double Opacity1 {
-            get {
-                return ((double)(this["Opacity1"]));
-            }
-            set {
-                this["Opacity1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("df")]
-        public string Note1 {
-            get {
-                return ((string)(this["Note1"]));
-            }
-            set {
-                this["Note1"] = value;
+                this["Notes"] = value;
             }
         }
         
@@ -98,12 +76,40 @@ namespace MyAIAsisstent.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int Notes {
+        public int NoteCount {
             get {
-                return ((int)(this["Notes"]));
+                return ((int)(this["NoteCount"]));
             }
             set {
-                this["Notes"] = value;
+                this["NoteCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfPoint xmlns:xsi=\"http://www.w3.o" +
+            "rg/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <Po" +
+            "int>\r\n    <X>100</X>\r\n    <Y>100</Y>\r\n  </Point>\r\n</ArrayOfPoint>")]
+        public System.Drawing.Point[] Locations {
+            get {
+                return ((System.Drawing.Point[])(this["Locations"]));
+            }
+            set {
+                this["Locations"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfDouble xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <d" +
+            "ouble>0.9</double>\r\n</ArrayOfDouble>")]
+        public double[] Opacitys {
+            get {
+                return ((double[])(this["Opacitys"]));
+            }
+            set {
+                this["Opacitys"] = value;
             }
         }
     }

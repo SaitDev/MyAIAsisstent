@@ -17,9 +17,17 @@ namespace MaterialSkin.Controls
         [Browsable(false)]
         public MouseState MouseState { get; set; }
         public bool Primary { get; set; }
-
+        private bool _autosize;
+        
         private readonly AnimationManager animationManager;
         private readonly AnimationManager hoverAnimationManager;
+
+        private Size _iconsize = new Size(25,25);
+        public Size IconSize
+        {
+            get { return _iconsize; }
+            set { if (!(value==null)) _iconsize = value; }
+        }
 
         private SizeF textSize;
 
@@ -55,10 +63,11 @@ namespace MaterialSkin.Controls
             animationManager.OnAnimationProgress += sender => Invalidate();
 
             //UNDONE : Remove this function and use Design view Properties
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            AutoSize = true;
+            //AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            //AutoSize = true;
             //Margin = new Padding(4, 6, 4, 6);
-            Padding = new Padding(0);
+            //Padding = new Padding(0);
+            _autosize = AutoSize;
         }
 
         public override string Text
@@ -103,13 +112,19 @@ namespace MaterialSkin.Controls
                 }
                 g.SmoothingMode = SmoothingMode.None;
             }
-
+            
             //Icon
-            Rectangle iconRect = new Rectangle(4, 6, 24, 24);
+            Rectangle iconRect = new Rectangle(4, 5, 24, 24);
 
             if (String.IsNullOrEmpty(Text))
                 // Center Icon
                 iconRect.X += 2;
+
+            if (!_autosize)
+            {
+                iconRect.Width = _iconsize.Width;
+                iconRect.Height = _iconsize.Height;
+            }
 
             if (Icon != null)
                 g.DrawImage(Icon, iconRect);
@@ -127,12 +142,14 @@ namespace MaterialSkin.Controls
                 // 24: icon width
                 // Second 4: space between Icon and Text
                 // Third 4: right padding
-                textRect.Width -= 4 + 24 + 4 + 4;
+                if (_autosize) textRect.Width -= 4 + 24 + 4 + 4;
+                else textRect.Width -= 4 + 24 + 4 + 4;
 
                 // First 4: left padding
                 // 24: icon width
                 // Second 4: space between Icon and Text
-                textRect.X += 4 + 24 + 4;
+                if (_autosize) textRect.X += 4 + 24 + 4;
+                else textRect.X += 4 + _iconsize.Width + 4;
             }
 
             g.DrawString(

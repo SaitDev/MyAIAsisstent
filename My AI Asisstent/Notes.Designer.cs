@@ -229,7 +229,6 @@
             // 
             // materialLabel1
             // 
-            this.materialLabel1.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::MyAIAsisstent.Properties.Settings.Default, "Note1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -238,7 +237,6 @@
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(193, 166);
             this.materialLabel1.TabIndex = 0;
-            this.materialLabel1.Text = global::MyAIAsisstent.Properties.Settings.Default.Note1;
             this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.materialLabel1.DoubleClick += new System.EventHandler(this.materialLabel1_DoubleClick);
             // 
