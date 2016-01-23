@@ -42,19 +42,20 @@ namespace MyAIAsisstent
             noteCount = Properties.Settings.Default.NoteCount;
             if (Properties.Settings.Default.RequiredPassword == false)
             {
-                //Visible = false;
                 if (noteCount == 0)
                 {
-                    noteCount++;
-                    Properties.Settings.Default.NoteCount--;
-                    Properties.Settings.Default.Save();
-                    createNote(0);
-                    return;
+                    //noteCount++;
+                    //Properties.Settings.Default.NoteCount--;
+                    //Properties.Settings.Default.Save();
+                    newNote(0);
                 }
-                int i;
-                for (i = 0; i < noteCount; i++)
+                else
                 {
-                    createNote(i);
+                    int i;
+                    for (i = 0; i < noteCount; i++)
+                    {
+                        createNote(i);
+                    }
                 }
             }
             else Visible = true;
@@ -99,7 +100,6 @@ namespace MyAIAsisstent
                 using (MD5 md5Hash = MD5.Create())
                 {
                     string hash = GetMd5Hash(md5Hash, materialSingleLineTextField2.Text);
-                    //materialSingleLineTextField1.Text = hash;
                     if (VerifyMd5Hash(md5Hash, materialSingleLineTextField2.Text, pass))
                     {
                         int i;
@@ -123,6 +123,8 @@ namespace MyAIAsisstent
             //this.Close();
             Environment.Exit(0);
         }
+
+        #region MD5 Hash
 
         private string GetMd5Hash(MD5 md5Hash, string input)
         {
@@ -157,6 +159,8 @@ namespace MyAIAsisstent
             }
         }
 
+        #endregion 
+
         private void materialSingleLineTextField1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -175,8 +179,14 @@ namespace MyAIAsisstent
             notes[i].index = i;
             notes[i].Text = "Note " + (i+1).ToString();
             notes[i].Show();
-            Properties.Settings.Default.NoteCount++;
-            Properties.Settings.Default.Save();
+        }
+
+        public void newNote (int i)
+        {
+            noteCount++;
+            //Properties.Settings.Default.NoteCount++;
+            //Properties.Settings.Default.Save();
+            createNote(i);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace MyAIAsisstent
         private Main _main;
         public int index;
         private bool moved, close = false;
+        Random rnd = new Random();
 
         public Notes(Main main)
         {
@@ -42,7 +43,7 @@ namespace MyAIAsisstent
                 Array.Resize<Double>(ref temp2, _main.noteCount);
                 Properties.Settings.Default.Opacitys = temp2;
 
-                Properties.Settings.Default.Locations[index] = new Point(100, 100);
+                Properties.Settings.Default.Locations[index] = new Point(rnd.Next(300), rnd.Next(300));
                 Properties.Settings.Default.Opacitys[index] = 0.9;
                 Properties.Settings.Default.Notes.Add("Double click to edit");
                 Properties.Settings.Default.NoteCount++;
@@ -179,17 +180,21 @@ namespace MyAIAsisstent
 
         private void metroLink3_Click(object sender, EventArgs e)
         {
-            if (_main.noteCount == 9)
+            /*
+            if (_main.noteCount == 10)
             {
                 MessageBox.Show("Reached limitation of note");
-                return;
             }
+            else */
+            _main.newNote(_main.noteCount);
+            /*
             _main.noteCount++;
             var i = _main.noteCount - 1;
             _main.notes[i] = new Notes(_main);
             _main.notes[i].index = i;
             _main.notes[i].Text = "Note " + _main.noteCount.ToString();
             _main.notes[i].Show();
+            */
         }
 
         private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
