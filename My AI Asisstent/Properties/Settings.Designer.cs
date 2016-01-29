@@ -112,5 +112,17 @@ namespace MyAIAsisstent.Properties {
                 this["Opacitys"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NoteOnTop {
+            get {
+                return ((bool)(this["NoteOnTop"]));
+            }
+            set {
+                this["NoteOnTop"] = value;
+            }
+        }
     }
 }

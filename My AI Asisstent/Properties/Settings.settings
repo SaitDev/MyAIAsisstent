@@ -35,5 +35,8 @@
   &lt;double&gt;0.9&lt;/double&gt;
 &lt;/ArrayOfDouble&gt;</Value>
     </Setting>
+    <Setting Name="NoteOnTop" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

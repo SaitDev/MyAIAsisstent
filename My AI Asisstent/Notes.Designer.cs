@@ -34,6 +34,7 @@
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.materialToolStripMenuItem1 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.materialToolStripMenuItem2 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
+            this.materialToolStripMenuItem4 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.materialToolStripMenuItem3 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.opacityToolStripMenuItem = new MaterialSkin.Controls.MaterialToolStripMenuItem();
@@ -123,13 +124,14 @@
             this.materialContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.materialToolStripMenuItem1,
             this.materialToolStripMenuItem2,
+            this.materialToolStripMenuItem4,
             this.materialToolStripMenuItem3,
             this.toolStripSeparator2,
             this.opacityToolStripMenuItem});
             this.materialContextMenuStrip1.Margin = new System.Windows.Forms.Padding(16, 8, 16, 8);
             this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
-            this.materialContextMenuStrip1.Size = new System.Drawing.Size(127, 130);
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(160, 182);
             // 
             // materialToolStripMenuItem1
             // 
@@ -143,22 +145,29 @@
             // 
             this.materialToolStripMenuItem2.AutoSize = false;
             this.materialToolStripMenuItem2.Name = "materialToolStripMenuItem2";
-            this.materialToolStripMenuItem2.Size = new System.Drawing.Size(120, 30);
+            this.materialToolStripMenuItem2.Size = new System.Drawing.Size(125, 30);
             this.materialToolStripMenuItem2.Text = "Edit";
             this.materialToolStripMenuItem2.Click += new System.EventHandler(this.materialToolStripMenuItem2_Click);
+            // 
+            // materialToolStripMenuItem4
+            // 
+            this.materialToolStripMenuItem4.AutoSize = false;
+            this.materialToolStripMenuItem4.Name = "materialToolStripMenuItem4";
+            this.materialToolStripMenuItem4.Size = new System.Drawing.Size(125, 30);
+            this.materialToolStripMenuItem4.Text = "On top most";
             // 
             // materialToolStripMenuItem3
             // 
             this.materialToolStripMenuItem3.AutoSize = false;
             this.materialToolStripMenuItem3.Name = "materialToolStripMenuItem3";
-            this.materialToolStripMenuItem3.Size = new System.Drawing.Size(120, 30);
+            this.materialToolStripMenuItem3.Size = new System.Drawing.Size(125, 30);
             this.materialToolStripMenuItem3.Text = "Delete";
             this.materialToolStripMenuItem3.Click += new System.EventHandler(this.materialToolStripMenuItem3_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(123, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(152, 6);
             // 
             // opacityToolStripMenuItem
             // 
@@ -232,10 +241,10 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(12, 85);
+            this.materialLabel1.Location = new System.Drawing.Point(12, 78);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(193, 166);
+            this.materialLabel1.Size = new System.Drawing.Size(193, 164);
             this.materialLabel1.TabIndex = 0;
             this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.materialLabel1.DoubleClick += new System.EventHandler(this.materialLabel1_DoubleClick);
@@ -259,8 +268,8 @@
             this.ShowInTaskbar = false;
             this.Sizable = false;
             this.Text = "Notes";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Notes_FormClosing);
+            this.Load += new System.EventHandler(this.Notes_Load);
             this.Shown += new System.EventHandler(this.Notes_Shown);
             this.ResizeEnd += new System.EventHandler(this.Notes_ResizeEnd);
             this.Move += new System.EventHandler(this.Notes_Move);
@@ -288,5 +297,6 @@
         private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem2;
         private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem3;
         private MetroFramework.Controls.MetroLink metroLink3;
+        private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem4;
     }
 }

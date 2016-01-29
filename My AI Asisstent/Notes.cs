@@ -25,7 +25,7 @@ namespace MyAIAsisstent
             metroLink1.Enabled = false;
         }
 
-        private void Notes_Shown(object sender, EventArgs e)
+        private void Notes_Load(object sender, EventArgs e)
         {
             if ((index < Properties.Settings.Default.NoteCount)&&(Properties.Settings.Default.NoteCount!=0))
             {
@@ -54,6 +54,7 @@ namespace MyAIAsisstent
                 materialLabel1.Text = Properties.Settings.Default.Notes[index];
                 metroTextBox1.Text = materialLabel1.Text;
             }
+            
         }
 
         private void Notes_Move(object sender, EventArgs e)
@@ -195,6 +196,12 @@ namespace MyAIAsisstent
             _main.notes[i].Text = "Note " + _main.noteCount.ToString();
             _main.notes[i].Show();
             */
+        }
+
+        private void Notes_Shown(object sender, EventArgs e)
+        {
+            this.materialContextMenuStrip1.AutoSize = false;
+            this.materialContextMenuStrip1.Size = new Size(127, this.materialContextMenuStrip1.Size.Height - 20);
         }
 
         private void materialToolStripMenuItem1_Click(object sender, EventArgs e)

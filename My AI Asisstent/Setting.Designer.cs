@@ -38,6 +38,8 @@
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.materialCheckBox2 = new MaterialSkin.Controls.MaterialCheckBox();
             this.materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialCheckBox3 = new MaterialSkin.Controls.MaterialCheckBox();
             this.SuspendLayout();
             // 
             // materialRaisedButton1
@@ -79,7 +81,7 @@
             this.materialRadioButton2.Depth = 0;
             this.materialRadioButton2.Font = new System.Drawing.Font("Roboto", 10F);
             this.materialRadioButton2.ForeColor = System.Drawing.Color.Transparent;
-            this.materialRadioButton2.Location = new System.Drawing.Point(338, 204);
+            this.materialRadioButton2.Location = new System.Drawing.Point(335, 192);
             this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -97,7 +99,7 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(98, 124);
+            this.materialLabel2.Location = new System.Drawing.Point(95, 116);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(23, 19);
@@ -111,7 +113,7 @@
             this.materialCheckBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MyAIAsisstent.Properties.Settings.Default, "AutoStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.materialCheckBox1.Depth = 0;
             this.materialCheckBox1.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox1.Location = new System.Drawing.Point(189, 120);
+            this.materialCheckBox1.Location = new System.Drawing.Point(186, 112);
             this.materialCheckBox1.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -128,7 +130,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(83, 205);
+            this.materialLabel1.Location = new System.Drawing.Point(80, 193);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(55, 19);
@@ -158,13 +160,13 @@
             // materialDivider1
             // 
             this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.CausesValidation = false;
             this.materialDivider1.Depth = 0;
             this.materialDivider1.Location = new System.Drawing.Point(0, 334);
             this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialDivider1.Name = "materialDivider1";
             this.materialDivider1.Size = new System.Drawing.Size(534, 55);
             this.materialDivider1.TabIndex = 16;
-            this.materialDivider1.Text = "materialDivider1";
             // 
             // materialCheckBox2
             // 
@@ -173,7 +175,7 @@
             this.materialCheckBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MyAIAsisstent.Properties.Settings.Default, "RequiredPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.materialCheckBox2.Depth = 0;
             this.materialCheckBox2.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox2.Location = new System.Drawing.Point(331, 120);
+            this.materialCheckBox2.Location = new System.Drawing.Point(328, 112);
             this.materialCheckBox2.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -192,7 +194,7 @@
             this.materialRadioButton1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MyAIAsisstent.Properties.Settings.Default, "LightTheme", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.materialRadioButton1.Depth = 0;
             this.materialRadioButton1.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialRadioButton1.Location = new System.Drawing.Point(210, 204);
+            this.materialRadioButton1.Location = new System.Drawing.Point(195, 192);
             this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -204,11 +206,44 @@
             this.materialRadioButton1.UseVisualStyleBackColor = true;
             this.materialRadioButton1.CheckedChanged += new System.EventHandler(this.materialRadioButton1_CheckedChanged);
             // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel3.Location = new System.Drawing.Point(82, 265);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(50, 19);
+            this.materialLabel3.TabIndex = 18;
+            this.materialLabel3.Text = "Notes";
+            // 
+            // materialCheckBox3
+            // 
+            this.materialCheckBox3.AutoSize = true;
+            this.materialCheckBox3.Checked = global::MyAIAsisstent.Properties.Settings.Default.NoteOnTop;
+            this.materialCheckBox3.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MyAIAsisstent.Properties.Settings.Default, "NoteOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.materialCheckBox3.Depth = 0;
+            this.materialCheckBox3.Font = new System.Drawing.Font("Roboto", 10F);
+            this.materialCheckBox3.Location = new System.Drawing.Point(234, 258);
+            this.materialCheckBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckBox3.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckBox3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckBox3.Name = "materialCheckBox3";
+            this.materialCheckBox3.Ripple = true;
+            this.materialCheckBox3.Size = new System.Drawing.Size(152, 30);
+            this.materialCheckBox3.TabIndex = 19;
+            this.materialCheckBox3.Text = "Display on top most";
+            this.materialCheckBox3.UseVisualStyleBackColor = true;
+            // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 388);
+            this.Controls.Add(this.materialCheckBox3);
+            this.Controls.Add(this.materialLabel3);
             this.Controls.Add(this.materialCheckBox2);
             this.Controls.Add(this.materialRaisedButton3);
             this.Controls.Add(this.materialLabel1);
@@ -246,6 +281,8 @@
         private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton3;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox3;
     }
 }
 
