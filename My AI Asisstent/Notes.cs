@@ -33,6 +33,7 @@ namespace MyAIAsisstent
                 Opacity = Properties.Settings.Default.Opacitys[index];
                 materialLabel1.Text = Properties.Settings.Default.Notes[index];
                 metroTextBox1.Text = materialLabel1.Text;
+                TopMost = Properties.Settings.Default.NoteOnTop[index];
            }
             else
             {
@@ -42,9 +43,13 @@ namespace MyAIAsisstent
                 Double[] temp2 = Properties.Settings.Default.Opacitys;
                 Array.Resize<Double>(ref temp2, _main.noteCount);
                 Properties.Settings.Default.Opacitys = temp2;
+                Boolean[] temp3 = Properties.Settings.Default.NoteOnTop;
+                Array.Resize<Boolean>(ref temp3, _main.noteCount);
+                Properties.Settings.Default.NoteOnTop = temp3;
 
                 Properties.Settings.Default.Locations[index] = new Point(rnd.Next(300), rnd.Next(300));
                 Properties.Settings.Default.Opacitys[index] = 0.9;
+                Properties.Settings.Default.NoteOnTop[index] = false;
                 Properties.Settings.Default.Notes.Add("Double click to edit");
                 Properties.Settings.Default.NoteCount++;
                 Properties.Settings.Default.Save();
@@ -129,6 +134,7 @@ namespace MyAIAsisstent
 
         private void metroLink2_Click(object sender, EventArgs e)
         {
+            _main._setting.bindSetting(index);
             _main._setting.Show();
         }
 
@@ -202,6 +208,12 @@ namespace MyAIAsisstent
         {
             this.materialContextMenuStrip1.AutoSize = false;
             this.materialContextMenuStrip1.Size = new Size(127, this.materialContextMenuStrip1.Size.Height - 20);
+        }
+
+        private void materialToolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            TopMost = !TopMost;
+            Properties.Settings.Default.Save();
         }
 
         private void materialToolStripMenuItem1_Click(object sender, EventArgs e)

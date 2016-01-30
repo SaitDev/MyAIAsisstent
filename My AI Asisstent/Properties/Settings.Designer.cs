@@ -115,10 +115,12 @@ namespace MyAIAsisstent.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool NoteOnTop {
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfBoolean xmlns:xsi=\"http://www.w3" +
+            ".org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <" +
+            "boolean>false</boolean>\r\n</ArrayOfBoolean>")]
+        public bool[] NoteOnTop {
             get {
-                return ((bool)(this["NoteOnTop"]));
+                return ((bool[])(this["NoteOnTop"]));
             }
             set {
                 this["NoteOnTop"] = value;

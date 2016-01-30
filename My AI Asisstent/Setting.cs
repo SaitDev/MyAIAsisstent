@@ -18,6 +18,9 @@ namespace MyAIAsisstent
         private Main _main;
         private MaterialSkinManager materialSkinManager;
         RegistryKey regApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+        private string bindadress;
+        private int noteIndex;
+
         public Setting(Main main)
         {
             InitializeComponent();;
@@ -42,6 +45,7 @@ namespace MyAIAsisstent
         private void Setting_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
+            //this.materialCheckBox3.DataBindings.Remove(new System.Windows.Forms.Binding("Checked", global::MyAIAsisstent.Properties.Settings.Default, bindadress, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             e.Cancel = true;
         }
 
@@ -88,8 +92,10 @@ namespace MyAIAsisstent
             {
                 regApp.SetValue("MyAIAsisstent", Application.ExecutablePath.ToString());
             }
-            else regApp.DeleteValue("MyAIAsisstent", false); ;
+            else regApp.DeleteValue("MyAIAsisstent", false);
+            Properties.Settings.Default.NoteOnTop[noteIndex] = materialCheckBox3.Checked;
             Properties.Settings.Default.Save();
+            _main.notes[noteIndex].TopMost = materialCheckBox3.Checked;
             Close();
         }
 
@@ -103,6 +109,15 @@ namespace MyAIAsisstent
             //_main.Close();
             //_main.appClose = true;
             Environment.Exit(0);
+        }
+
+        public void bindSetting (int index)
+        {
+            noteIndex = index;
+            materialCheckBox3.Checked = Properties.Settings.Default.NoteOnTop[noteIndex];
+            //bindadress = "NoteOnTop[" + noteIndex.ToString() + "]";
+            //materialCheckBox3.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, bindadress, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            //this.materialCheckBox3.DataBindings.Add(new Binding())
         }
     }
 }

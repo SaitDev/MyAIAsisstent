@@ -222,8 +222,6 @@
             // materialCheckBox3
             // 
             this.materialCheckBox3.AutoSize = true;
-            this.materialCheckBox3.Checked = global::MyAIAsisstent.Properties.Settings.Default.NoteOnTop;
-            this.materialCheckBox3.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MyAIAsisstent.Properties.Settings.Default, "NoteOnTop", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.materialCheckBox3.Depth = 0;
             this.materialCheckBox3.Font = new System.Drawing.Font("Roboto", 10F);
             this.materialCheckBox3.Location = new System.Drawing.Point(234, 258);
