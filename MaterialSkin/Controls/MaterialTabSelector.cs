@@ -15,8 +15,15 @@ namespace MaterialSkin.Controls
         public MaterialSkinManager SkinManager { get { return MaterialSkinManager.Instance; } }
         [Browsable(false)]
         public MouseState MouseState { get; set; }
-        
-		private MaterialTabControl baseTabControl;
+        private bool useCustomHightlight;
+        [Category("Appearance")]
+        public bool UseCustomHightlight
+        {
+            get { return useCustomHightlight; }
+            set { useCustomHightlight = value; }
+        }
+
+        private MaterialTabControl baseTabControl;
         public MaterialTabControl BaseTabControl
         {
             get { return baseTabControl; }
@@ -116,7 +123,11 @@ namespace MaterialSkin.Controls
             int x = previousActiveTabRect.X + (int)((activeTabPageRect.X - previousActiveTabRect.X) * animationProgress);
             int width = previousActiveTabRect.Width + (int)((activeTabPageRect.Width - previousActiveTabRect.Width) * animationProgress);
 
-			g.FillRectangle(SkinManager.ColorScheme.AccentBrush, x, y, width, TAB_INDICATOR_HEIGHT);
+            if (useCustomHightlight)
+            {
+                g.FillRectangle(new SolidBrush(((int)Accent.Blue700).ToColor()), x, y, width, TAB_INDICATOR_HEIGHT);
+            }
+			else g.FillRectangle(SkinManager.ColorScheme.AccentBrush, x, y, width, TAB_INDICATOR_HEIGHT);
         }
 
         private int CalculateTextAlpha(int tabIndex, double animationProgress)

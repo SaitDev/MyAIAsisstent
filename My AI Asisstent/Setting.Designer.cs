@@ -253,6 +253,7 @@
             this.Controls.Add(this.materialRadioButton2);
             this.Controls.Add(this.materialDivider1);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Setting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
@@ -279,8 +280,8 @@
         private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton3;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox3;
+        public MaterialSkin.Controls.MaterialCheckBox materialCheckBox3;
+        public MaterialSkin.Controls.MaterialLabel materialLabel3;
     }
 }
 

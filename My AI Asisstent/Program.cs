@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using System.Threading;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
 namespace MyAIAsisstent
 {
     static class Program
@@ -10,13 +14,25 @@ namespace MyAIAsisstent
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        /// 
+
+        public static Main _main;
+        static Mutex mutex = new Mutex(true, "MyAIAsisstent");
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Main _main = new Main();
-            Application.Run();
+            if (mutex.WaitOne(TimeSpan.Zero, true))
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                _main = new Main();
+                Application.Run();
+                mutex.ReleaseMutex();
+            }
+            else
+            {
+                
+            }
         }
     }
 }

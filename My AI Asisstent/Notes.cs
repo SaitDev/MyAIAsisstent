@@ -11,16 +11,16 @@ namespace MyAIAsisstent
 {
     public partial class Notes : MaterialForm
     {
-        private Main _main;
+        private Login _login;
         public int index;
         private bool moved, close = false;
         Random rnd = new Random();
 
-        public Notes(Main main)
+        public Notes(Login login)
         {
             InitializeComponent();
-            main.materialSkinManager.AddFormToManage(this);
-            _main = main;
+            login._main.materialSkinManager.AddFormToManage(this);
+            _login = login;
             //metroLink1.BackColor = ColorTranslator.FromHtml("#42a5f5");
             metroLink1.Enabled = false;
         }
@@ -38,13 +38,13 @@ namespace MyAIAsisstent
             else
             {
                 Point[] temp1 = Properties.Settings.Default.Locations;
-                Array.Resize<Point>(ref temp1, _main.noteCount);
+                Array.Resize<Point>(ref temp1, _login.noteCount);
                 Properties.Settings.Default.Locations = temp1;
                 Double[] temp2 = Properties.Settings.Default.Opacitys;
-                Array.Resize<Double>(ref temp2, _main.noteCount);
+                Array.Resize<Double>(ref temp2, _login.noteCount);
                 Properties.Settings.Default.Opacitys = temp2;
                 Boolean[] temp3 = Properties.Settings.Default.NoteOnTop;
-                Array.Resize<Boolean>(ref temp3, _main.noteCount);
+                Array.Resize<Boolean>(ref temp3, _login.noteCount);
                 Properties.Settings.Default.NoteOnTop = temp3;
 
                 Properties.Settings.Default.Locations[index] = new Point(rnd.Next(300), rnd.Next(300));
@@ -97,12 +97,12 @@ namespace MyAIAsisstent
                 Properties.Settings.Default.Opacitys = temp2.ToArray();
                 Properties.Settings.Default.Notes.RemoveAt(index);
                 Properties.Settings.Default.Save();
-                _main.noteCount--;
+                _login.noteCount--;
                 close = true;
-                if (_main.noteCount == 0) Environment.Exit(0);
+                if (_login.noteCount == 0) Environment.Exit(0);
                 else
                 {
-                    //Properties.Settings.Default.NoteCount = _main.noteCount;
+                    //Properties.Settings.Default.NoteCount = _login.noteCount;
                     //Properties.Settings.Default.Save();
                     this.Close();
                 }
@@ -112,7 +112,7 @@ namespace MyAIAsisstent
 
         private void materialLabel1_DoubleClick(object sender, EventArgs e)
         {
-            if (_main.materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
+            if (_login._main.materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
             {
                 metroTextBox1.BackColor = Color.FromArgb(255, 51, 51, 51);
                 metroTextBox1.ForeColor = ColorTranslator.FromHtml("#42a5f5");
@@ -134,8 +134,8 @@ namespace MyAIAsisstent
 
         private void metroLink2_Click(object sender, EventArgs e)
         {
-            _main._setting.bindSetting(index);
-            _main._setting.Show();
+            _login._setting.bindSetting(index);
+            _login._setting.Show();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -188,31 +188,32 @@ namespace MyAIAsisstent
         private void metroLink3_Click(object sender, EventArgs e)
         {
             /*
-            if (_main.noteCount == 10)
+            if (_login.noteCount == 10)
             {
                 MessageBox.Show("Reached limitation of note");
             }
             else */
-            _main.newNote(_main.noteCount);
+            _login.newNote(_login.noteCount);
             /*
-            _main.noteCount++;
-            var i = _main.noteCount - 1;
-            _main.notes[i] = new Notes(_main);
-            _main.notes[i].index = i;
-            _main.notes[i].Text = "Note " + _main.noteCount.ToString();
-            _main.notes[i].Show();
+            _login.noteCount++;
+            var i = _login.noteCount - 1;
+            _login.notes[i] = new Notes(_login);
+            _login.notes[i].index = i;
+            _login.notes[i].Text = "Note " + _login.noteCount.ToString();
+            _login.notes[i].Show();
             */
         }
 
         private void Notes_Shown(object sender, EventArgs e)
         {
             this.materialContextMenuStrip1.AutoSize = false;
-            this.materialContextMenuStrip1.Size = new Size(127, this.materialContextMenuStrip1.Size.Height - 20);
+            this.materialContextMenuStrip1.Size = new Size(127, this.materialContextMenuStrip1.Size.Height);
         }
 
         private void materialToolStripMenuItem4_Click(object sender, EventArgs e)
         {
             TopMost = !TopMost;
+            Properties.Settings.Default.NoteOnTop[index] = TopMost;
             Properties.Settings.Default.Save();
         }
 

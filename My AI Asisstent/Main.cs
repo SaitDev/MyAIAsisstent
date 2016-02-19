@@ -8,26 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using MaterialSkin;
 using MaterialSkin.Controls;
-using System.Security.Cryptography;
+using MaterialSkin;
+using System.Configuration;
 
 namespace MyAIAsisstent
 {
     public partial class Main : MaterialForm
     {
-        private const string pass = "120d0a9f6c11649cea1c8eaeccb1e1d3";
         public MaterialSkinManager materialSkinManager;
-        public Setting _setting;
-        public Notes[] notes;
-        public int noteCount;
-        //public bool appClose = false;
+        private Login _login;
+        private MaterialFlatButton lastActive;
+
         public Main()
         {
             InitializeComponent();
             materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            //materialSkinManager.ColorScheme = new ColorScheme(Primary.Green600, Primary.Green700, Primary.Green200, Accent.Red100, TextShade.WHITE);
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.LightBlue800, Primary.BlueGrey400, Accent.LightBlue400, TextShade.WHITE);
             if (Properties.Settings.Default.LightTheme)
             {
@@ -37,156 +33,217 @@ namespace MyAIAsisstent
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
-            _setting = new Setting(this);
-            notes = new Notes[10];
-            noteCount = Properties.Settings.Default.NoteCount;
-            if (Properties.Settings.Default.RequiredPassword == false)
+            materialSkinManager.AddFormToManage(this);
+            _login = new Login(this);
+            Show();
+
+            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            //MessageBox.Show(config.FilePath);
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Main_Shown(object sender, EventArgs e)
+        {
+            lastActive = materialFlatButton3;
+            //Form1 f = new Form1();
+            //f.Show();
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+        }
+
+        private void UpdateMenuButton()
+        {
+            if (SkinManager.Theme == MaterialSkinManager.Themes.DARK)
             {
-                if (noteCount == 0)
-                {
-                    //noteCount++;
-                    //Properties.Settings.Default.NoteCount--;
-                    //Properties.Settings.Default.Save();
-                    newNote(0);
-                }
-                else
-                {
-                    int i;
-                    for (i = 0; i < noteCount; i++)
-                    {
-                        createNote(i);
-                    }
-                }
+                materialFlatButton1.BackColor = Color.FromArgb(75, 75, 75);
+                materialFlatButton2.BackColor = Color.FromArgb(75, 75, 75);
+                materialFlatButton3.BackColor = Color.FromArgb(75, 75, 75);
             }
-            else Visible = true;
-            /*
-            Double[] temp = Properties.Settings.Default.Opacitys;
-            Array.Resize<Double>(ref temp, 10);
-            Properties.Settings.Default.Opacitys = temp;
-            Properties.Settings.Default.Save();
-            */
+            else
+            {
+                materialFlatButton1.BackColor = Color.FromArgb(224, 224, 224);
+                materialFlatButton2.BackColor = Color.FromArgb(224, 224, 224);
+                materialFlatButton3.BackColor = Color.FromArgb(224, 224, 224);
+            }
+            materialFlatButton1.UseCustomBackColor = true;
+            materialFlatButton2.UseCustomBackColor = true;
+            materialFlatButton3.UseCustomBackColor = true;
+            if (lastActive != null) lastActive.UseCustomBackColor = false;
+            else materialFlatButton3.UseCustomBackColor = false;
         }
 
-        private void Login_Shown(object sender, EventArgs e)
+        private void materialFlatButton_Click(object sender, EventArgs e)
         {
-            materialFlatButton2.AutoSize = false;
-            materialFlatButton2.Size = new Size(72, 36);
-            this.Opacity = 1;
-        }
-
-        private void Main_Move(object sender, EventArgs e)
-        {
-            this.Opacity = .5;
-        }
-
-        private void Main_ResizeEnd(object sender, EventArgs e)
-        {
-            this.Opacity = 1;
+            lastActive.UseCustomBackColor = true;
+            lastActive.Refresh();
+            ((MaterialFlatButton)sender).UseCustomBackColor = false;
+            ((MaterialFlatButton)sender).Refresh();
+            panel1.Location = ((MaterialFlatButton)sender).Location;
+            if ((MaterialFlatButton)sender != materialFlatButton1) lastActive = (MaterialFlatButton)sender;
         }
 
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
-            if (materialSingleLineTextField1.Text == "")
-            {
-                MessageBox.Show("You forget to enter username", "Invaild input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else if (materialSingleLineTextField2.Text == "")
-            {
-                MessageBox.Show("You forget to enter password", "Invaild input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (materialSingleLineTextField1.Text.ToUpper() == "SAIT")
-                using (MD5 md5Hash = MD5.Create())
-                {
-                    string hash = GetMd5Hash(md5Hash, materialSingleLineTextField2.Text);
-                    if (VerifyMd5Hash(md5Hash, materialSingleLineTextField2.Text, pass))
-                    {
-                        int i;
-                        for (i = 0; i < noteCount; i++)
-                        {
-                            //notes[i] = new Notes(this);
-                            //notes[i].Text = "Note " + noteCount.ToString();
-                            //notes[i].Show();
-                            createNote(i);
-                        }
-                        this.Hide();
-                    }
-                    else MessageBox.Show("User or password is incorrect.","Login failed");
-                }
-            else MessageBox.Show("User or password is incorrect.", "Login failed");
+            materialFlatButton_Click(sender, e);
+            if (_login._setting.Visible == true)
+                _login._setting.Hide();
+            _login._setting.materialCheckBox3.Enabled = false;
+            _login._setting.ShowDialog();
+            _login._setting.materialCheckBox3.Enabled = true;
+            materialFlatButton1.UseCustomBackColor = true;
+            materialFlatButton1.Refresh();
+            lastActive.UseCustomBackColor = false;
+            lastActive.Refresh();
+            panel1.Location = lastActive.Location;
         }
 
         private void materialFlatButton2_Click(object sender, EventArgs e)
         {
-            //Application.Exit();
-            //this.Close();
-            Environment.Exit(0);
+            materialFlatButton_Click(sender, e);
+            materialTabSelector1.Show();
+            materialTabControl1.Show();
+            materialFlatButton4.Show();
         }
 
-        #region MD5 Hash
-
-        private string GetMd5Hash(MD5 md5Hash, string input)
+        private void materialFlatButton3_Click(object sender, EventArgs e)
         {
-            // Convert the input string to a byte array and compute the hash.
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-            // Create a new Stringbuilder to collect the bytes
-            // and create a string.
-            StringBuilder sBuilder = new StringBuilder();
-            // Loop through each byte of the hashed data 
-            // and format each one as a hexadecimal string.
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
-            // Return the hexadecimal string.
-            return sBuilder.ToString();
+            materialFlatButton_Click(sender, e);
+            materialTabSelector1.Hide();
+            materialTabControl1.Hide();
+            materialFlatButton4.Hide();
         }
 
-        private bool VerifyMd5Hash(MD5 md5Hash, string input, string hash)
+        private void materialFlatButton4_Click(object sender, EventArgs e)
         {
-            // Hash the input.
-            string hashOfInput = GetMd5Hash(md5Hash, input);
-            // Create a StringComparer an compare the hashes.
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-            if (0 == comparer.Compare(hashOfInput, hash))
+            materialLabel1.Visible = !materialLabel1.Visible;
+            materialLabel1.ForeColor = SkinManager.ColorScheme.DarkPrimaryColor;
+            materialListView1.Visible = !materialListView1.Visible;
+            materialSingleLineTextField1.Focus();
+            /*
+            Notification noti = new Notification();
+            noti.Dismiss += DismissNotification;
+            noti.Remind += RemindNotification;
+            noti.Done += DoneNotification;
+            noti.Show(); */
+        }
+
+        private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (materialTabControl1.SelectedIndex == 1)
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                materialLabel1.Hide();
+                materialListView1.Hide();
             }
         }
 
-        #endregion 
-
-        private void materialSingleLineTextField1_KeyDown(object sender, KeyEventArgs e)
+        private void DismissNotification(Notification sender)
         {
-            if (e.KeyCode == Keys.Enter)
-                materialFlatButton1.PerformClick();
+            //MessageBox.Show("User canceled");
         }
 
-        private void materialSingleLineTextField2_KeyDown(object sender, KeyEventArgs e)
+        private void DoneNotification(Notification sender)
         {
-            if (e.KeyCode == Keys.Enter)
-                materialFlatButton1.PerformClick();
+            //MessageBox.Show("Done");
         }
 
-        public void createNote (int i)
+        private void RemindNotification(object sender, NotificationEventArgs e)
         {
-            notes[i] = new Notes(this);
-            notes[i].index = i;
-            notes[i].Text = "Note " + (i+1).ToString();
-            notes[i].Show();
+            //MessageBox.Show(e.Time.ToString());
         }
 
-        public void newNote (int i)
+        private void materialFlatButton5_Click(object sender, EventArgs e)
         {
-            noteCount++;
-            //Properties.Settings.Default.NoteCount++;
-            //Properties.Settings.Default.Save();
-            createNote(i);
+            _login.newNote(_login.noteCount);
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Environment.Exit(0);
+            }
+            catch (Exception exc)
+            {
+                string mess = string.Format("Exception error: {0}", exc.Message);
+                MessageBox.Show(mess);
+            }
+        }
+
+        private void materialToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void Main_BackColorChanged(object sender, EventArgs e)
+        {
+            UpdateMenuButton();
+            materialContextMenuStrip1.BackColor = this.BackColor;
+            timePickerPanel1.timePicker.ClockMenu.BackColor = this.BackColor;
+        }
+
+        private void materialSingleLineTextField1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+
+            }
+        }
+
+        private void materialSingleLineTextField1_Enter(object sender, EventArgs e)
+        {
+            //MessageBox.Show(materialSingleLineTextField1.BackColor.ToString() + this.BackColor.ToString());
+        }
+
+        private void materialListView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show(materialListView1.SelectedIndices.IndexOf(0).ToString());
+            //MessageBox.Show(materialListView1.SelectedItems.Count.ToString());
+        }
+
+        private void materialListView1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            MessageBox.Show("check");
+        }
+
+        private void materialListView1_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            MessageBox.Show("checked");
+        }
+
+        private void materialListView1_ItemActivate(object sender, EventArgs e)
+        {
+            //MessageBox.Show("active");
+        }
+
+        private void materialListView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            MessageBox.Show("column");
+        }
+
+        private void materialListView1_VirtualItemsSelectionRangeChanged(object sender, ListViewVirtualItemsSelectionRangeChangedEventArgs e)
+        {
+            MessageBox.Show("sh");
+        }
+
+        private void materialListView1_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show("click");
+            //MessageBox.Show(materialListView1.SelectedItems.Count.ToString());
+            //MessageBox.Show(materialListView1.SelectedItems[0].Text);
+            
         }
     }
 }

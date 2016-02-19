@@ -10,6 +10,22 @@ namespace MaterialSkin.Controls
 {
     public class MaterialFlatButton : Button, IMaterialControl
     {
+        private bool autoUpper = true;
+        [Category("Appearance")]
+        public bool AutoUpper
+        {
+            get { return autoUpper; }
+            set { autoUpper = value; }
+        }
+
+        private bool useCustomBackColor = false;
+        [Category("Appearance")]
+        public bool UseCustomBackColor
+        {
+            get { return useCustomBackColor; }
+            set { useCustomBackColor = value; }
+        }
+
         [Browsable(false)]
         public int Depth { get; set; }
         [Browsable(false)]
@@ -17,7 +33,6 @@ namespace MaterialSkin.Controls
         [Browsable(false)]
         public MouseState MouseState { get; set; }
         public bool Primary { get; set; }
-        private bool _autosize;
         
         private readonly AnimationManager animationManager;
         private readonly AnimationManager hoverAnimationManager;
@@ -47,7 +62,7 @@ namespace MaterialSkin.Controls
         public MaterialFlatButton()
         {
             Primary = false;
-
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             animationManager = new AnimationManager(false)
             {
                 Increment = 0.03,
@@ -67,7 +82,6 @@ namespace MaterialSkin.Controls
             //AutoSize = true;
             //Margin = new Padding(4, 6, 4, 6);
             //Padding = new Padding(0);
-            _autosize = AutoSize;
         }
 
         public override string Text
@@ -76,7 +90,8 @@ namespace MaterialSkin.Controls
             set
             {
                 base.Text = value;
-                textSize = CreateGraphics().MeasureString(value.ToUpper(), SkinManager.ROBOTO_MEDIUM_10);
+                if (autoUpper) value.ToUpper();
+                textSize = CreateGraphics().MeasureString(value, SkinManager.ROBOTO_MEDIUM_10);
                 if (AutoSize)
                     Size = GetPreferredSize();
                 Invalidate();
@@ -88,12 +103,25 @@ namespace MaterialSkin.Controls
             var g = pevent.Graphics;
             g.TextRenderingHint = TextRenderingHint.AntiAlias;
 
-            g.Clear(Parent.BackColor);
+            if (useCustomBackColor)
+            {
+                g.Clear(BackColor);
+            }
+            else g.Clear(Parent.BackColor);
 
             //Hover
-            Color c = SkinManager.GetFlatButtonHoverBackgroundColor();
-            using (Brush b = new SolidBrush(Color.FromArgb((int)(hoverAnimationManager.GetProgress() * c.A), c.RemoveAlpha())))
-                g.FillRectangle(b, ClientRectangle);
+            if (useCustomBackColor)
+            {
+                Color c = SkinManager.GetFlatButtonHoverBackgroundColor();
+                using (Brush b = new SolidBrush(Color.FromArgb((int)(hoverAnimationManager.GetProgress() * c.A), c.RemoveAlpha())))
+                    g.FillRectangle(b, ClientRectangle);
+            }
+            else
+            {
+                Color cc = Color.FromArgb(10.PercentageToColorComponent(), SkinManager.GetFlatButtonHoverBackgroundColor());
+                using (Brush b = new SolidBrush(Color.FromArgb((int)(hoverAnimationManager.GetProgress() * cc.A), cc.RemoveAlpha())))
+                    g.FillRectangle(b, ClientRectangle);
+            }
 
             //Ripple
             if (animationManager.IsAnimating())
@@ -120,7 +148,7 @@ namespace MaterialSkin.Controls
                 // Center Icon
                 iconRect.X += 2;
 
-            if (!_autosize)
+            if (!AutoSize)
             {
                 iconRect.Width = _iconsize.Width;
                 iconRect.Height = _iconsize.Height;
@@ -142,18 +170,19 @@ namespace MaterialSkin.Controls
                 // 24: icon width
                 // Second 4: space between Icon and Text
                 // Third 4: right padding
-                if (_autosize) textRect.Width -= 4 + 24 + 4 + 4;
+                if (AutoSize) textRect.Width -= 4 + 24 + 4 + 4;
                 else textRect.Width -= 4 + 24 + 4 + 4;
 
                 // First 4: left padding
                 // 24: icon width
                 // Second 4: space between Icon and Text
-                if (_autosize) textRect.X += 4 + 24 + 4;
+                if (AutoSize) textRect.X += 4 + 24 + 4;
                 else textRect.X += 4 + _iconsize.Width + 4;
             }
 
+            string temp = autoUpper ? Text.ToUpper() : Text;
             g.DrawString(
-                Text.ToUpper(),
+                temp,
                 SkinManager.ROBOTO_MEDIUM_10,
                 Enabled ? (Primary ? SkinManager.ColorScheme.PrimaryBrush : SkinManager.GetPrimaryTextBrush()) : SkinManager.GetFlatButtonDisabledTextBrush(),
                 textRect,

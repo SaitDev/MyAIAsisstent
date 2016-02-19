@@ -74,9 +74,9 @@ namespace MaterialSkin.Controls
             }
         }
 
-        protected override void OnMouseUp(MouseEventArgs mevent)
+        protected override void OnMouseDown(MouseEventArgs mevent)
         {
-            base.OnMouseUp(mevent);
+            base.OnMouseDown(mevent);
 
             animationManager.StartNewAnimation(AnimationDirection.In, mevent.Location);
         }

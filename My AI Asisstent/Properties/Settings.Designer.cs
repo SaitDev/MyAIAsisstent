@@ -126,5 +126,27 @@ namespace MyAIAsisstent.Properties {
                 this["NoteOnTop"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection RemindMessage {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["RemindMessage"]));
+            }
+            set {
+                this["RemindMessage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public System.DateTime[] Setting {
+            get {
+                return ((System.DateTime[])(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
+            }
+        }
     }
 }

@@ -41,5 +41,11 @@
   &lt;boolean&gt;false&lt;/boolean&gt;
 &lt;/ArrayOfBoolean&gt;</Value>
     </Setting>
+    <Setting Name="RemindMessage" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Setting" Type="System.DateTime[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

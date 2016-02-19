@@ -55,9 +55,9 @@
             // 
             // 
             this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(29, 2);
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(31, 2);
             this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(161, 161);
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(159, 159);
             this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox1.CustomButton.TabIndex = 1;
             this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -76,7 +76,7 @@
             this.metroTextBox1.SelectedText = "";
             this.metroTextBox1.SelectionLength = 0;
             this.metroTextBox1.SelectionStart = 0;
-            this.metroTextBox1.Size = new System.Drawing.Size(193, 166);
+            this.metroTextBox1.Size = new System.Drawing.Size(193, 164);
             this.metroTextBox1.TabIndex = 2;
             this.metroTextBox1.Text = "df";
             this.metroTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -94,9 +94,9 @@
             this.metroLink1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
             this.metroLink1.Image = global::MyAIAsisstent.Properties.Resources.save_white;
             this.metroLink1.ImageSize = 34;
-            this.metroLink1.Location = new System.Drawing.Point(174, 28);
+            this.metroLink1.Location = new System.Drawing.Point(174, 24);
             this.metroLink1.Name = "metroLink1";
-            this.metroLink1.Size = new System.Drawing.Size(41, 33);
+            this.metroLink1.Size = new System.Drawing.Size(41, 34);
             this.metroLink1.TabIndex = 3;
             this.metroLink1.UseCustomBackColor = true;
             this.metroLink1.UseSelectable = true;
@@ -108,9 +108,9 @@
             this.metroLink2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
             this.metroLink2.Image = global::MyAIAsisstent.Properties.Resources.setting_white;
             this.metroLink2.ImageSize = 34;
-            this.metroLink2.Location = new System.Drawing.Point(133, 27);
+            this.metroLink2.Location = new System.Drawing.Point(133, 24);
             this.metroLink2.Name = "metroLink2";
-            this.metroLink2.Size = new System.Drawing.Size(41, 35);
+            this.metroLink2.Size = new System.Drawing.Size(41, 34);
             this.metroLink2.TabIndex = 4;
             this.metroLink2.UseCustomBackColor = true;
             this.metroLink2.UseSelectable = true;
@@ -229,9 +229,9 @@
             this.metroLink3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(165)))), ((int)(((byte)(245)))));
             this.metroLink3.Image = global::MyAIAsisstent.Properties.Resources.add_white;
             this.metroLink3.ImageSize = 34;
-            this.metroLink3.Location = new System.Drawing.Point(92, 27);
+            this.metroLink3.Location = new System.Drawing.Point(92, 24);
             this.metroLink3.Name = "metroLink3";
-            this.metroLink3.Size = new System.Drawing.Size(41, 35);
+            this.metroLink3.Size = new System.Drawing.Size(41, 34);
             this.metroLink3.TabIndex = 5;
             this.metroLink3.UseCustomBackColor = true;
             this.metroLink3.UseSelectable = true;
@@ -242,7 +242,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(12, 78);
+            this.materialLabel1.Location = new System.Drawing.Point(12, 76);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(193, 164);
@@ -264,6 +264,7 @@
             this.Controls.Add(this.materialLabel1);
             this.Location = new System.Drawing.Point(100, 100);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Notes";
             this.Opacity = 0.7D;
             this.ShowInTaskbar = false;

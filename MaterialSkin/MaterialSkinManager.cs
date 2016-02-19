@@ -308,7 +308,7 @@ namespace MaterialSkin
         private void UpdateControl(Control controlToUpdate, Color newBackColor)
         {
             if (controlToUpdate == null) return;
-
+            
             if (controlToUpdate.ContextMenuStrip != null)
             {
                 UpdateToolStrip(controlToUpdate.ContextMenuStrip, newBackColor);
