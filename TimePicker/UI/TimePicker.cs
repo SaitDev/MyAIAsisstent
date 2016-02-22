@@ -9,7 +9,7 @@ public class TimePicker : MaskedTextBox<DateTime> {
 	private String dateTimeFormat = null;
 
 	public ClockControl ClockMenu = null;
-	private ToolStripDropDownAttacher attacher = null;
+	public ToolStripDropDownAttacher attacher = null;
 
 	///<summary>
 	///<para>Creates a time picker with the specified number of millisecond digits. The base format
@@ -95,7 +95,7 @@ public class TimePicker : MaskedTextBox<DateTime> {
 				this.Value = ClockMenu.Value;
 		}; 
         */
-
+        
 		attacher.MenuShowing += delegate {
 			Token t = this.TokenAt(this.SelectionStart);
 			if (t.SeqNo == 0)

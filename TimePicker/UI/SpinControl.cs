@@ -101,7 +101,7 @@ public class SpinControl : UserControl, IUpDown {
 		AntiAliasArrows = true;
 		ArrowFontSizeFactor = 0.4f;
 		ButtonWidthFactor = 2.0f;
-		ButtonStyle = SpinButtonStyle.Standard;
+		ButtonStyle = SpinButtonStyle.Modern;
 		FocusParentOnClick = false; // true;
 		Width = TextRenderer.MeasureText(ArrowUpText, ArrowFont).Width;
 	}
@@ -203,12 +203,12 @@ public class SpinControl : UserControl, IUpDown {
 			return;
 
 		DisposeImages();
-		ArrowUpImage = BitmapUtil.CreateIcon(ArrowUpText, ArrowFont, antialias:AntiAliasArrows);
-		ArrowDownImage = BitmapUtil.CreateIcon(ArrowDownText, ArrowFont, antialias:AntiAliasArrows);
-		ArrowUpImageDisabled = BitmapUtil.CreateIcon(ArrowUpText, ArrowFont, SystemColors.GrayText, antialias:AntiAliasArrows);
-		ArrowDownImageDisabled = BitmapUtil.CreateIcon(ArrowDownText, ArrowFont, SystemColors.GrayText, antialias:AntiAliasArrows);
+		//ArrowUpImage = BitmapUtil.CreateIcon(ArrowUpText, ArrowFont, antialias:AntiAliasArrows);
+		//ArrowDownImage = BitmapUtil.CreateIcon(ArrowDownText, ArrowFont, antialias:AntiAliasArrows);
+		//ArrowUpImageDisabled = BitmapUtil.CreateIcon(ArrowUpText, ArrowFont, SystemColors.GrayText, antialias:AntiAliasArrows);
+		//ArrowDownImageDisabled = BitmapUtil.CreateIcon(ArrowDownText, ArrowFont, SystemColors.GrayText, antialias:AntiAliasArrows);
 	}
-
+    
 	protected override void OnParentBackColorChanged(EventArgs e) {
 		base.OnParentBackColorChanged(e);
 		if (ButtonStyle == SpinButtonStyle.Standard) {
@@ -232,13 +232,13 @@ public class SpinControl : UserControl, IUpDown {
 			Font f = ArrowFont;
 			ArrowFont = new Font(f.FontFamily, Math.Max(ArrowMinimumFontSize, ArrowFontSizeFactor * this.Font.Size), f.Style, f.Unit, f.GdiCharSet, f.GdiVerticalFont);
 			UpdateArrowImages();
-			int w2 = (int) Math.Round(ButtonWidthFactor * Math.Max(ArrowUpImage.Width, ArrowDownImage.Width));
-			Width = Math.Max(w2, MinimumSize.Width);
+			//int w2 = (int) Math.Round(ButtonWidthFactor * Math.Max(ArrowUpImage.Width, ArrowDownImage.Width));
+			//Width = Math.Max(w2, MinimumSize.Width);
 			ResizeButtons();
 			f.Dispose(); // old arrow font
 		}
 	}
-
+    
 	void UpButton_MouseLeave(object sender, EventArgs e) {
 		upButtonState = 0;
 	}
