@@ -11,6 +11,9 @@ using System.Windows.Forms;
 using MaterialSkin.Controls;
 using MaterialSkin;
 using System.Configuration;
+using Opulos.Core.UI;
+using System.Runtime.InteropServices;
+using MetroFramework;
 
 namespace MyAIAsisstent
 {
@@ -19,12 +22,17 @@ namespace MyAIAsisstent
         public MaterialSkinManager materialSkinManager;
         private Login _login;
         private MaterialFlatButton lastActive;
+        private DateTime remindAtTime;
+        private bool remindCreating = false, messageInputed;
+
+        #region Form Managament
 
         public Main()
         {
             InitializeComponent();
             materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.LightBlue800, Primary.BlueGrey400, Accent.LightBlue400, TextShade.WHITE);
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.LightBlue800, Primary.BlueGrey400,
+                                                               Accent.LightBlue400, TextShade.WHITE);
             if (Properties.Settings.Default.LightTheme)
             {
                 materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -37,8 +45,8 @@ namespace MyAIAsisstent
             _login = new Login(this);
             Show();
 
-            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            //MessageBox.Show(config.FilePath);
+         //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+         //MessageBox.Show(config.FilePath);
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -49,8 +57,18 @@ namespace MyAIAsisstent
         private void Main_Shown(object sender, EventArgs e)
         {
             lastActive = materialFlatButton3;
-            //Form1 f = new Form1();
-            //f.Show();
+            materialLabel1.Font = SkinManager.ROBOTO_MEDIUM_12;
+            timePickerPanel1.Hide();
+            timePickerPanel1.timePicker.ClockMenu.SnapWindow(this.Handle, this.Handle, new SnapPoint
+            {
+                OffsetConstantX = this.Location.X + 180,
+                OffsetConstantY = materialListView1.Location.Y + 104
+            });
+            timePickerPanel1.timePicker.ValueChanged += TimePicker_ValueChanged;
+            timePickerPanel1.timePicker.ClockMenu.Closed += delegate (object o, ToolStripDropDownClosedEventArgs evnt)
+            {
+                materialSingleLineTextField1.Enabled = true;
+            };
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -58,6 +76,39 @@ namespace MyAIAsisstent
             this.Hide();
             e.Cancel = true;
         }
+
+        private void Main_BackColorChanged(object sender, EventArgs e)
+        {
+            UpdateMenuButton();
+            materialContextMenuStrip1.BackColor = this.BackColor;
+        }
+
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void materialToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Environment.Exit(0);
+            }
+            catch (Exception exc)
+            {
+                string mess = string.Format("Exception error: {0}", exc.Message);
+                MessageBox.Show(mess);
+            }
+        }
+
+        #endregion
+
+        #region Main Buttons
 
         private void UpdateMenuButton()
         {
@@ -121,26 +172,142 @@ namespace MyAIAsisstent
             materialFlatButton4.Hide();
         }
 
-        private void materialFlatButton4_Click(object sender, EventArgs e)
+        #endregion
+
+        private void TimePicker_ValueChanged(object sender, ValueChangedEventArgs<DateTime> e)
         {
-            materialLabel1.Visible = !materialLabel1.Visible;
-            materialLabel1.ForeColor = SkinManager.ColorScheme.DarkPrimaryColor;
-            materialListView1.Visible = !materialListView1.Visible;
-            materialSingleLineTextField1.Focus();
-            /*
-            Notification noti = new Notification();
-            noti.Dismiss += DismissNotification;
-            noti.Remind += RemindNotification;
-            noti.Done += DoneNotification;
-            noti.Show(); */
+            DateTime temp = DateTime.Now;
+            if (remindAtTime.Date < temp.Date)
+            {
+                //if (TimeSpan.Compare(timePickerPanel1.timePicker.Value.TimeOfDay, temp.TimeOfDay) > -1)
+                if (timePickerPanel1.timePicker.Value.TimeOfDay >= temp.TimeOfDay)
+                {
+                    materialListView2.Items[0].Text = "Today";
+                    remindAtTime = temp.Date + timePickerPanel1.timePicker.Value.TimeOfDay;
+                }
+                else
+                {
+                    materialListView2.Items[0].Text = "Tomorrow";
+                    remindAtTime = temp.AddDays(1).Date + timePickerPanel1.timePicker.Value.TimeOfDay;
+                }
+            }
+            else remindAtTime = remindAtTime.Date + timePickerPanel1.timePicker.Value.TimeOfDay;
+            materialListView3.Items[0].Text = timePickerPanel1.timePicker.Value.ToShortTimeString();
+            materialSingleLineTextField1.Enabled = true;
         }
 
         private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (materialTabControl1.SelectedIndex == 1)
             {
+                if (remindCreating)
+                {
+                    DialogResult answer = MetroMessageBox.Show(this, "You have not saved reminder. Are you sure to discard?",
+                                                                "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 150);
+                    if (answer == DialogResult.Yes)
+                    {
+                        materialLabel1.Hide();
+                        materialListView1.Hide();
+                        materialListView2.Hide();
+                        materialListView3.Hide();
+                        materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Clear();
+                        materialListView1.Items[0].Text = "Message to remind";
+                        materialListView2.Items[0].Text = "Day";
+                        materialListView3.Items[0].Text = "Time";
+                        remindCreating = false;
+                        messageInputed = false;
+                        remindAtTime = new DateTime();
+                        materialFlatButton4.Icon = Properties.Resources.alarm_blue;
+                        materialFlatButton5.Hide();
+                    }
+                    else
+                    {
+                        materialTabControl1.SelectedIndex = 0;
+                        tabPage1.Show();
+                    }
+                }
+            }
+        }
+
+        private void materialFlatButton4_Click(object sender, EventArgs e)
+        {
+            if (!remindCreating)
+            {
+                remindCreating = true;
+                materialLabel1.Text = "WHAT do you want me to remind?";
+                materialLabel1.Show();
+                materialLabel1.BackColor = SkinManager.GetFlatButtonHoverBackgroundColor();
+                materialLabel1.ForeColor = SkinManager.ColorScheme.PrimaryColor;
+                materialLabel1.Font = SkinManager.ROBOTO_MEDIUM_11;
+
+                materialListView1.Visible = !materialListView1.Visible;
+                materialListView1.Items[0].ForeColor = SkinManager.GetDividersColor();
+                materialListView2.Show();
+                materialListView3.Show();
+                materialFlatButton4.Icon = Properties.Resources.done_blue;
+                materialFlatButton5.Show();
+                materialSingleLineTextField1.TextChanged += materialSingleLineTextField1_TextChanged;
+                materialSingleLineTextField1.Focus();
+            }
+            else
+            {
+                if (messageInputed == false)
+                {
+                    MetroMessageBox.Show(this, "You didn't enter the reminder.", "",
+                                          MessageBoxButtons.OK, MessageBoxIcon.Asterisk, 120);
+                    materialSingleLineTextField1.Focus();
+                    return;
+                }
+                else if (materialListView2.Items[0].Text == "Day")
+                {
+                    MetroMessageBox.Show(this, "You didn't enter the Day to remind.", "",
+                                          MessageBoxButtons.OK, MessageBoxIcon.Asterisk, 120);
+                    materialListView2_Click(materialListView2, new EventArgs());
+                    return;
+                }
+                else if (materialListView3.Items[0].Text == "Time")
+                {
+                    MetroMessageBox.Show(this, "You didn't enter the Time to remind.", "",
+                                          MessageBoxButtons.OK, MessageBoxIcon.Asterisk, 120);
+                    materialListView3_Click(materialListView3, new EventArgs());
+                    return;
+                }
+                System.Timers.Timer t = new System.Timers.Timer();
+                t.AutoReset = false;
+                if (remindAtTime <= DateTime.Now)
+                    t.Interval = 10;
+                else t.Interval = (remindAtTime - DateTime.Now).TotalMilliseconds; 
+                string s = materialListView1.Items[0].Text; 
+                t.Elapsed += delegate (object o, System.Timers.ElapsedEventArgs evnt)
+                   {
+                       MessageBox.Show(s);
+                       /*       
+                       Notification noti = new Notification();
+                       noti.Dismiss += DismissNotification;
+                       noti.Remind += RemindNotification;
+                       noti.Done += DoneNotification;
+                       noti.Show(); */
+                       ((System.Timers.Timer)o).Stop();
+                       ((System.Timers.Timer)o).Enabled = false;
+                   };
+                t.Start();
+                //MessageBox.Show(remindAtTime.ToString());
+                //MessageBox.Show(t.Interval.ToString());
                 materialLabel1.Hide();
                 materialListView1.Hide();
+                materialListView2.Hide();
+                materialListView3.Hide();
+                materialListView1.Items[0].Text = "Message to remind";
+                materialListView2.Items[0].Text = "Day";
+                materialListView3.Items[0].Text = "Time";
+                remindCreating = false;
+                messageInputed = false;
+                remindAtTime = new DateTime();
+                materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                materialSingleLineTextField1.Clear();
+                materialFlatButton4.Icon = Properties.Resources.alarm_blue;
+                materialFlatButton5.Hide();
             }
         }
 
@@ -161,89 +328,135 @@ namespace MyAIAsisstent
 
         private void materialFlatButton5_Click(object sender, EventArgs e)
         {
+            DialogResult answer = MetroMessageBox.Show(this, "Are you sure to cancel this reminder?", "",
+                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 150);
+            if (answer == DialogResult.No) return;
+            materialLabel1.Hide();
+            materialListView1.Hide();
+            materialListView2.Hide();
+            materialListView3.Hide();
+            materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+            materialSingleLineTextField1.Clear();
+            materialListView1.Items[0].Text = "Message to remind";
+            materialListView2.Items[0].Text = "Day";
+            materialListView3.Items[0].Text = "Time";
+            remindCreating = false;
+            messageInputed = false;
+            remindAtTime = new DateTime();
+            materialFlatButton4.Icon = Properties.Resources.alarm_blue;
+            materialFlatButton5.Hide();
+        }
+
+        private void materialFlatButton6_Click(object sender, EventArgs e)
+        {
             _login.newNote(_login.noteCount);
-        }
-
-        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
-        {
-            this.Show();
-        }
-
-        private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Environment.Exit(0);
-            }
-            catch (Exception exc)
-            {
-                string mess = string.Format("Exception error: {0}", exc.Message);
-                MessageBox.Show(mess);
-            }
-        }
-
-        private void materialToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            this.Show();
-        }
-
-        private void Main_BackColorChanged(object sender, EventArgs e)
-        {
-            UpdateMenuButton();
-            materialContextMenuStrip1.BackColor = this.BackColor;
-            timePickerPanel1.timePicker.ClockMenu.BackColor = this.BackColor;
         }
 
         private void materialSingleLineTextField1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-
+                if (remindCreating)
+                {
+                    materialListView1.Items[0].Text = materialSingleLineTextField1.Text;
+                    materialLabel1.Focus();
+                }
             }
         }
 
-        private void materialSingleLineTextField1_Enter(object sender, EventArgs e)
+        private void materialSingleLineTextField1_TextChanged(object sender, EventArgs e)
         {
-            //MessageBox.Show(materialSingleLineTextField1.BackColor.ToString() + this.BackColor.ToString());
-        }
-
-        private void materialListView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //MessageBox.Show(materialListView1.SelectedIndices.IndexOf(0).ToString());
-            //MessageBox.Show(materialListView1.SelectedItems.Count.ToString());
-        }
-
-        private void materialListView1_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            MessageBox.Show("check");
-        }
-
-        private void materialListView1_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            MessageBox.Show("checked");
-        }
-
-        private void materialListView1_ItemActivate(object sender, EventArgs e)
-        {
-            //MessageBox.Show("active");
-        }
-
-        private void materialListView1_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            MessageBox.Show("column");
-        }
-
-        private void materialListView1_VirtualItemsSelectionRangeChanged(object sender, ListViewVirtualItemsSelectionRangeChangedEventArgs e)
-        {
-            MessageBox.Show("sh");
+            if (remindCreating) messageInputed = true;
+            materialListView1.Items[0].Text = materialSingleLineTextField1.Text;
         }
 
         private void materialListView1_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("click");
-            //MessageBox.Show(materialListView1.SelectedItems.Count.ToString());
-            //MessageBox.Show(materialListView1.SelectedItems[0].Text);
-            
+            if (monthCalendar1.Visible) monthCalendar1.Hide();
+            else if (timePickerPanel1.timePicker.ClockMenu.Visible) timePickerPanel1.timePicker.ClockMenu.Hide();
+            materialLabel1.Text = "WHAT do you want me to remind?";
+            if (messageInputed) materialSingleLineTextField1.Text = materialListView1.Items[0].Text;
+            materialSingleLineTextField1.Focus();
         }
+
+        private void materialListView2_Click(object sender, EventArgs e)
+        {
+            if (timePickerPanel1.timePicker.ClockMenu.Visible)
+                timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
+            materialLabel1.Text = "WHEN do you want me yo remind?";
+            monthCalendar1.MinDate = DateTime.Now;
+            monthCalendar1.Show();
+            materialSingleLineTextField1.Enabled = false;
+        }
+
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            DateTime temp = DateTime.Now;
+            remindAtTime = monthCalendar1.SelectionRange.Start.Date + remindAtTime.TimeOfDay;
+            if ((remindAtTime.Day - temp.Day) == 0)
+                materialListView2.Items[0].Text = "Today";
+            else if ((remindAtTime.Day - temp.Day) == 1)
+                materialListView2.Items[0].Text = "Tomorrow";
+            else materialListView2.Items[0].Text = monthCalendar1.SelectionRange.Start.ToShortDateString();
+            monthCalendar1.Hide();
+            materialSingleLineTextField1.Enabled = true;
+        }
+
+        private void materialListView3_Click(object sender, EventArgs e)
+        {
+            if (monthCalendar1.Visible) monthCalendar1.Hide();
+            materialLabel1.Text = "WHEN do you want me yo remind?";
+            DateTime temp1, temp2;
+            temp1 = DateTime.Now;
+            temp2 = temp1.Date + new TimeSpan(temp1.Hour, temp1.Minute, 0);
+            //timePickerPanel1.timePicker.attacher.ShowMenu();
+            timePickerPanel1.timePicker.ClockMenu.Show(this, 260, materialListView1.Location.Y + 104);
+            timePickerPanel1.timePicker.ClockMenu.Value = temp2;
+            SetWindowPos(timePickerPanel1.timePicker.ClockMenu.Handle, (IntPtr)(-1), 0, 0, 0, 0,
+                                                       SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
+            materialSingleLineTextField1.Enabled = false;
+        }
+
+        private const int SWP_NOSIZE = 0x0001;
+        private const int SWP_NOACTIVATE = 0x0010;
+        private const int SWP_NOMOVE = 0x0002;
+
+        private void materialTabSelector1_TabIndexChanged(object sender, EventArgs e)
+        {
+            if (materialTabControl1.SelectedIndex == 1)
+            {
+                if (remindCreating)
+                {
+                    DialogResult answer = MetroMessageBox.Show(this, "You have not saved reminder. Are you sure to discard?",
+                                                                "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 150);
+                    if (answer == DialogResult.Yes)
+                    {
+                        materialLabel1.Hide();
+                        materialListView1.Hide();
+                        materialListView2.Hide();
+                        materialListView3.Hide();
+                        materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Clear();
+                        materialListView1.Items[0].Text = "Message to remind";
+                        materialListView2.Items[0].Text = "Day";
+                        materialListView3.Items[0].Text = "Time";
+                        remindCreating = false;
+                        messageInputed = false;
+                        remindAtTime = new DateTime();
+                        materialFlatButton4.Icon = Properties.Resources.alarm_blue;
+                        materialFlatButton5.Hide();
+                    }
+                    else
+                    {
+                        materialTabControl1.SelectedIndex = 0;
+                        tabPage1.Show();
+                    }
+                }
+            }
+        }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, 
+                                                 int X, int Y, int cx, int cy, uint uFlags);
     }
 }

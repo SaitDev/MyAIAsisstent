@@ -29,27 +29,28 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Message to remind",
-            "sdasda\'",
-            "asdada"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Time",
-            "1",
-            "2",
-            "3"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Time");
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Day");
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Message to remind");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.panel1 = new System.Windows.Forms.Panel();
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.materialFlatButton5 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.timePickerPanel1 = new Opulos.Core.UI.TimePickerPanel();
+            this.materialListView3 = new MaterialSkin.Controls.MaterialListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.materialListView2 = new MaterialSkin.Controls.MaterialListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialListView1 = new MaterialSkin.Controls.MaterialListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.materialFlatButton4 = new MaterialSkin.Controls.MaterialFlatButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.materialFlatButton5 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.materialFlatButton6 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
@@ -60,7 +61,6 @@
             this.materialFlatButton2 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
-            this.timePickerPanel1 = new Opulos.Core.UI.TimePickerPanel();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -71,7 +71,7 @@
             // 
             this.materialSingleLineTextField1.Depth = 0;
             this.materialSingleLineTextField1.Hint = "What can I do for you?";
-            this.materialSingleLineTextField1.Location = new System.Drawing.Point(51, 396);
+            this.materialSingleLineTextField1.Location = new System.Drawing.Point(51, 395);
             this.materialSingleLineTextField1.MaxLength = 32767;
             this.materialSingleLineTextField1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSingleLineTextField1.Name = "materialSingleLineTextField1";
@@ -83,7 +83,6 @@
             this.materialSingleLineTextField1.TabIndex = 0;
             this.materialSingleLineTextField1.TabStop = false;
             this.materialSingleLineTextField1.UseSystemPasswordChar = false;
-            this.materialSingleLineTextField1.Enter += new System.EventHandler(this.materialSingleLineTextField1_Enter);
             this.materialSingleLineTextField1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.materialSingleLineTextField1_KeyPress);
             // 
             // materialDivider1
@@ -118,11 +117,14 @@
             this.materialTabControl1.Size = new System.Drawing.Size(280, 337);
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.Visible = false;
-            this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.materialFlatButton5);
+            this.tabPage1.Controls.Add(this.monthCalendar1);
             this.tabPage1.Controls.Add(this.timePickerPanel1);
+            this.tabPage1.Controls.Add(this.materialListView3);
+            this.tabPage1.Controls.Add(this.materialListView2);
             this.tabPage1.Controls.Add(this.materialLabel1);
             this.tabPage1.Controls.Add(this.materialListView1);
             this.tabPage1.Controls.Add(this.materialFlatButton4);
@@ -134,16 +136,120 @@
             this.tabPage1.Text = "Remind";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // materialFlatButton5
+            // 
+            this.materialFlatButton5.AutoUpper = true;
+            this.materialFlatButton5.Depth = 0;
+            this.materialFlatButton5.Icon = global::MyAIAsisstent.Properties.Resources.clear_blue;
+            this.materialFlatButton5.IconSize = new System.Drawing.Size(25, 25);
+            this.materialFlatButton5.Location = new System.Drawing.Point(198, 300);
+            this.materialFlatButton5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialFlatButton5.Name = "materialFlatButton5";
+            this.materialFlatButton5.Primary = false;
+            this.materialFlatButton5.Size = new System.Drawing.Size(40, 35);
+            this.materialFlatButton5.TabIndex = 9;
+            this.materialFlatButton5.UseCustomBackColor = false;
+            this.materialFlatButton5.UseVisualStyleBackColor = true;
+            this.materialFlatButton5.Visible = false;
+            this.materialFlatButton5.Click += new System.EventHandler(this.materialFlatButton5_Click);
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.AllowDrop = true;
+            this.monthCalendar1.CausesValidation = false;
+            this.monthCalendar1.Location = new System.Drawing.Point(4, 159);
+            this.monthCalendar1.MaxDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 8;
+            this.monthCalendar1.TabStop = false;
+            this.monthCalendar1.TitleBackColor = System.Drawing.Color.Transparent;
+            this.monthCalendar1.TitleForeColor = System.Drawing.Color.Transparent;
+            this.monthCalendar1.TrailingForeColor = System.Drawing.Color.Transparent;
+            this.monthCalendar1.Visible = false;
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            // 
+            // timePickerPanel1
+            // 
+            this.timePickerPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.timePickerPanel1.Location = new System.Drawing.Point(171, 167);
+            this.timePickerPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.timePickerPanel1.Name = "timePickerPanel1";
+            this.timePickerPanel1.Size = new System.Drawing.Size(100, 38);
+            this.timePickerPanel1.TabIndex = 4;
+            // 
+            // materialListView3
+            // 
+            this.materialListView3.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.materialListView3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.materialListView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3});
+            this.materialListView3.Depth = 0;
+            this.materialListView3.Font = new System.Drawing.Font("Roboto", 24F);
+            this.materialListView3.FullRowSelect = true;
+            this.materialListView3.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.materialListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem13});
+            this.materialListView3.Location = new System.Drawing.Point(140, 115);
+            this.materialListView3.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialListView3.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialListView3.Name = "materialListView3";
+            this.materialListView3.OwnerDraw = true;
+            this.materialListView3.Size = new System.Drawing.Size(136, 50);
+            this.materialListView3.TabIndex = 6;
+            this.materialListView3.UseCompatibleStateImageBehavior = false;
+            this.materialListView3.View = System.Windows.Forms.View.Details;
+            this.materialListView3.Visible = false;
+            this.materialListView3.Click += new System.EventHandler(this.materialListView3_Click);
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Time";
+            this.columnHeader3.Width = 136;
+            // 
+            // materialListView2
+            // 
+            this.materialListView2.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.materialListView2.AutoArrange = false;
+            this.materialListView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.materialListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2});
+            this.materialListView2.Depth = 0;
+            this.materialListView2.Font = new System.Drawing.Font("Roboto", 24F);
+            this.materialListView2.FullRowSelect = true;
+            this.materialListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.materialListView2.ImeMode = System.Windows.Forms.ImeMode.On;
+            listViewItem14.StateImageIndex = 0;
+            this.materialListView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem14});
+            this.materialListView2.Location = new System.Drawing.Point(4, 115);
+            this.materialListView2.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialListView2.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialListView2.MultiSelect = false;
+            this.materialListView2.Name = "materialListView2";
+            this.materialListView2.OwnerDraw = true;
+            this.materialListView2.Size = new System.Drawing.Size(136, 50);
+            this.materialListView2.TabIndex = 5;
+            this.materialListView2.UseCompatibleStateImageBehavior = false;
+            this.materialListView2.View = System.Windows.Forms.View.Details;
+            this.materialListView2.Visible = false;
+            this.materialListView2.Click += new System.EventHandler(this.materialListView2_Click);
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Day";
+            this.columnHeader2.Width = 136;
+            // 
             // materialLabel1
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(22, 20);
+            this.materialLabel1.Location = new System.Drawing.Point(15, 16);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(228, 19);
+            this.materialLabel1.Padding = new System.Windows.Forms.Padding(8);
+            this.materialLabel1.Size = new System.Drawing.Size(244, 35);
             this.materialLabel1.TabIndex = 2;
             this.materialLabel1.Text = "What do you want me to remind?";
             this.materialLabel1.Visible = false;
@@ -159,8 +265,7 @@
             this.materialListView1.FullRowSelect = true;
             this.materialListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
+            listViewItem15});
             this.materialListView1.Location = new System.Drawing.Point(4, 70);
             this.materialListView1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView1.MouseState = MaterialSkin.MouseState.OUT;
@@ -168,29 +273,23 @@
             this.materialListView1.Name = "materialListView1";
             this.materialListView1.OwnerDraw = true;
             this.materialListView1.Scrollable = false;
-            this.materialListView1.Size = new System.Drawing.Size(272, 200);
+            this.materialListView1.Size = new System.Drawing.Size(272, 45);
             this.materialListView1.TabIndex = 1;
-            this.materialListView1.TileSize = new System.Drawing.Size(272, 82);
             this.materialListView1.UseCompatibleStateImageBehavior = false;
             this.materialListView1.View = System.Windows.Forms.View.Details;
             this.materialListView1.Visible = false;
-            this.materialListView1.ItemActivate += new System.EventHandler(this.materialListView1_ItemActivate);
-            this.materialListView1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.materialListView1_ItemCheck);
-            this.materialListView1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.materialListView1_ItemChecked);
-            this.materialListView1.SelectedIndexChanged += new System.EventHandler(this.materialListView1_SelectedIndexChanged);
-            this.materialListView1.VirtualItemsSelectionRangeChanged += new System.Windows.Forms.ListViewVirtualItemsSelectionRangeChangedEventHandler(this.materialListView1_VirtualItemsSelectionRangeChanged);
             this.materialListView1.Click += new System.EventHandler(this.materialListView1_Click);
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "";
+            this.columnHeader1.Text = "Message";
             this.columnHeader1.Width = 272;
             // 
             // materialFlatButton4
             // 
             this.materialFlatButton4.AutoUpper = true;
             this.materialFlatButton4.Depth = 0;
-            this.materialFlatButton4.Icon = ((System.Drawing.Image)(resources.GetObject("materialFlatButton4.Icon")));
+            this.materialFlatButton4.Icon = global::MyAIAsisstent.Properties.Resources.alarm_blue;
             this.materialFlatButton4.IconSize = new System.Drawing.Size(28, 26);
             this.materialFlatButton4.Location = new System.Drawing.Point(239, 300);
             this.materialFlatButton4.MouseState = MaterialSkin.MouseState.HOVER;
@@ -205,7 +304,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.materialFlatButton5);
+            this.tabPage2.Controls.Add(this.materialFlatButton6);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -214,21 +313,21 @@
             this.tabPage2.Text = "Note";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // materialFlatButton5
+            // materialFlatButton6
             // 
-            this.materialFlatButton5.AutoUpper = true;
-            this.materialFlatButton5.Depth = 0;
-            this.materialFlatButton5.Icon = ((System.Drawing.Image)(resources.GetObject("materialFlatButton5.Icon")));
-            this.materialFlatButton5.IconSize = new System.Drawing.Size(28, 26);
-            this.materialFlatButton5.Location = new System.Drawing.Point(239, 300);
-            this.materialFlatButton5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton5.Name = "materialFlatButton5";
-            this.materialFlatButton5.Primary = false;
-            this.materialFlatButton5.Size = new System.Drawing.Size(40, 35);
-            this.materialFlatButton5.TabIndex = 2;
-            this.materialFlatButton5.UseCustomBackColor = false;
-            this.materialFlatButton5.UseVisualStyleBackColor = true;
-            this.materialFlatButton5.Click += new System.EventHandler(this.materialFlatButton5_Click);
+            this.materialFlatButton6.AutoUpper = true;
+            this.materialFlatButton6.Depth = 0;
+            this.materialFlatButton6.Icon = ((System.Drawing.Image)(resources.GetObject("materialFlatButton6.Icon")));
+            this.materialFlatButton6.IconSize = new System.Drawing.Size(28, 26);
+            this.materialFlatButton6.Location = new System.Drawing.Point(239, 300);
+            this.materialFlatButton6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialFlatButton6.Name = "materialFlatButton6";
+            this.materialFlatButton6.Primary = false;
+            this.materialFlatButton6.Size = new System.Drawing.Size(40, 35);
+            this.materialFlatButton6.TabIndex = 2;
+            this.materialFlatButton6.UseCustomBackColor = false;
+            this.materialFlatButton6.UseVisualStyleBackColor = true;
+            this.materialFlatButton6.Click += new System.EventHandler(this.materialFlatButton6_Click);
             // 
             // materialTabSelector1
             // 
@@ -242,6 +341,7 @@
             this.materialTabSelector1.Text = "materialTabSelector1";
             this.materialTabSelector1.UseCustomHightlight = true;
             this.materialTabSelector1.Visible = false;
+            this.materialTabSelector1.TabIndexChanged += new System.EventHandler(this.materialTabSelector1_TabIndexChanged);
             // 
             // notifyIcon1
             // 
@@ -341,15 +441,6 @@
             this.materialFlatButton1.UseVisualStyleBackColor = false;
             this.materialFlatButton1.Click += new System.EventHandler(this.materialFlatButton1_Click);
             // 
-            // timePickerPanel1
-            // 
-            this.timePickerPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.timePickerPanel1.Location = new System.Drawing.Point(70, 140);
-            this.timePickerPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.timePickerPanel1.Name = "timePickerPanel1";
-            this.timePickerPanel1.Size = new System.Drawing.Size(150, 150);
-            this.timePickerPanel1.TabIndex = 3;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,7 +456,7 @@
             this.Controls.Add(this.materialSingleLineTextField1);
             this.Controls.Add(this.materialDivider1);
             this.Controls.Add(this.materialTabControl1);
-            this.Location = new System.Drawing.Point(80, 280);
+            this.Location = new System.Drawing.Point(80, 275);
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Sizable = false;
@@ -398,7 +489,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage1;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton4;
-        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton5;
+        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton6;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
         private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem1;
@@ -408,5 +499,11 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Opulos.Core.UI.TimePickerPanel timePickerPanel1;
+        private MaterialSkin.Controls.MaterialListView materialListView2;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private MaterialSkin.Controls.MaterialListView materialListView3;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton5;
     }
 }
