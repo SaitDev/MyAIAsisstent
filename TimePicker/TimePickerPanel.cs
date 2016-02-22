@@ -13,12 +13,20 @@ namespace Opulos.Core.UI
     public partial class TimePickerPanel : UserControl
     {
         public TimePicker timePicker = new TimePicker(0, true, true);
+        int numEvents = 0;
 
         public TimePickerPanel()
         {
             InitializeComponent();
-            HFLP p = new HFLP(timePicker) { Padding = new Padding(0) };
+            
+            timePicker.ValueChanged += timePicker_ValueChanged;
+            HFLP p = new HFLP(timePicker) { Padding = new Padding(1) };
             Controls.Add(p);
+        }
+
+        void timePicker_ValueChanged(object sender, ValueChangedEventArgs<DateTime> e)
+        {
+            numEvents++;
         }
     }
 

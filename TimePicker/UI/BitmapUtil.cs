@@ -18,11 +18,11 @@ public static class BitmapUtil {
 
 		if (foreColor == null)
 			foreColor = Color.Black;
-        
+
 		Bitmap bm = new Bitmap(1,1);
 		Graphics graphics = Graphics.FromImage(bm);
 		graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-        Size size = drawMethod == DrawMethod.Graphics ? graphics.MeasureString(text, font).ToSize() : new Size(1, 1);//TextRenderer.MeasureText(text, font));
+		Size size = (drawMethod == DrawMethod.Graphics ? graphics.MeasureString(text, font).ToSize() : TextRenderer.MeasureText(text, font));
 		int w = size.Width;
 		int h = size.Height;
 		if (w == 0 || h == 0) return new Bitmap(1, 1);
@@ -43,7 +43,7 @@ public static class BitmapUtil {
 		left = right = top = bottom = -1;
 
 		// scanning saves about 50-60% of having to scan the entire image
-        
+
 		for (int i = 0; i < w; i++) {
 			for (int j = 0; j < h; j++) {
 				Color c = bitmap.GetPixel(i, j);
@@ -90,7 +90,7 @@ public static class BitmapUtil {
 			}
 			if (bottom >= 0) break;
 		}
-        
+
 		var r = new Rectangle(left, top, (right - left) + 1, (bottom - top) + 1);
 		//g2.DrawRectangle(Pens.Red, r.X, r.Y, r.Width - 1, r.Height - 1);
 		Bitmap b2 = bitmap.Clone(r, bitmap.PixelFormat);
