@@ -92,6 +92,7 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="Notification.cs">
       <SubType>Form</SubType>
     </Compile>

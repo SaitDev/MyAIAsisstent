@@ -49,6 +49,15 @@ namespace MyAIAsisstent
          //MessageBox.Show(config.FilePath);
         }
 
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            if (m.Msg == NativeMethods.WM_SHOWME)
+            {
+                this.Show();
+            }
+        }
+
         private void Main_Load(object sender, EventArgs e)
         {
             
@@ -420,40 +429,6 @@ namespace MyAIAsisstent
         private const int SWP_NOSIZE = 0x0001;
         private const int SWP_NOACTIVATE = 0x0010;
         private const int SWP_NOMOVE = 0x0002;
-
-        private void materialTabSelector1_TabIndexChanged(object sender, EventArgs e)
-        {
-            if (materialTabControl1.SelectedIndex == 1)
-            {
-                if (remindCreating)
-                {
-                    DialogResult answer = MetroMessageBox.Show(this, "You have not saved reminder. Are you sure to discard?",
-                                                                "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 150);
-                    if (answer == DialogResult.Yes)
-                    {
-                        materialLabel1.Hide();
-                        materialListView1.Hide();
-                        materialListView2.Hide();
-                        materialListView3.Hide();
-                        materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
-                        materialSingleLineTextField1.Clear();
-                        materialListView1.Items[0].Text = "Message to remind";
-                        materialListView2.Items[0].Text = "Day";
-                        materialListView3.Items[0].Text = "Time";
-                        remindCreating = false;
-                        messageInputed = false;
-                        remindAtTime = new DateTime();
-                        materialFlatButton4.Icon = Properties.Resources.alarm_blue;
-                        materialFlatButton5.Hide();
-                    }
-                    else
-                    {
-                        materialTabControl1.SelectedIndex = 0;
-                        tabPage1.Show();
-                    }
-                }
-            }
-        }
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, 

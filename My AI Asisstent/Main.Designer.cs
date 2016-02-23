@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Time");
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Day");
-            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Message to remind");
+            System.Windows.Forms.ListViewItem listViewItem31 = new System.Windows.Forms.ListViewItem("Time");
+            System.Windows.Forms.ListViewItem listViewItem32 = new System.Windows.Forms.ListViewItem("Day");
+            System.Windows.Forms.ListViewItem listViewItem33 = new System.Windows.Forms.ListViewItem("Message to remind");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
@@ -117,6 +117,7 @@
             this.materialTabControl1.Size = new System.Drawing.Size(280, 337);
             this.materialTabControl1.TabIndex = 0;
             this.materialTabControl1.Visible = false;
+            this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -188,7 +189,7 @@
             this.materialListView3.FullRowSelect = true;
             this.materialListView3.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem13});
+            listViewItem31});
             this.materialListView3.Location = new System.Drawing.Point(140, 115);
             this.materialListView3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView3.MouseState = MaterialSkin.MouseState.OUT;
@@ -218,9 +219,9 @@
             this.materialListView2.FullRowSelect = true;
             this.materialListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView2.ImeMode = System.Windows.Forms.ImeMode.On;
-            listViewItem14.StateImageIndex = 0;
+            listViewItem32.StateImageIndex = 0;
             this.materialListView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem14});
+            listViewItem32});
             this.materialListView2.Location = new System.Drawing.Point(4, 115);
             this.materialListView2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView2.MouseState = MaterialSkin.MouseState.OUT;
@@ -265,7 +266,7 @@
             this.materialListView1.FullRowSelect = true;
             this.materialListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem15});
+            listViewItem33});
             this.materialListView1.Location = new System.Drawing.Point(4, 70);
             this.materialListView1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView1.MouseState = MaterialSkin.MouseState.OUT;
@@ -341,7 +342,6 @@
             this.materialTabSelector1.Text = "materialTabSelector1";
             this.materialTabSelector1.UseCustomHightlight = true;
             this.materialTabSelector1.Visible = false;
-            this.materialTabSelector1.TabIndexChanged += new System.EventHandler(this.materialTabSelector1_TabIndexChanged);
             // 
             // notifyIcon1
             // 
