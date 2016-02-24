@@ -148,5 +148,17 @@ namespace MyAIAsisstent.Properties {
                 this["Setting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateSettingsRequired {
+            get {
+                return ((bool)(this["UpdateSettingsRequired"]));
+            }
+            set {
+                this["UpdateSettingsRequired"] = value;
+            }
+        }
     }
 }

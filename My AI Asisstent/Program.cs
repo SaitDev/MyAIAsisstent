@@ -25,6 +25,12 @@ namespace MyAIAsisstent
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+                if (Properties.Settings.Default.UpdateSettingsRequired)
+                {
+                    Properties.Settings.Default.Upgrade();
+                    Properties.Settings.Default.UpdateSettingsRequired = false;
+                    Properties.Settings.Default.Save();
+                }
                 _main = new Main();
                 Application.Run();
                 mutex.ReleaseMutex();

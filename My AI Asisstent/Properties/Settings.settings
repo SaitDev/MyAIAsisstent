@@ -47,5 +47,8 @@
     <Setting Name="Setting" Type="System.DateTime[]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="UpdateSettingsRequired" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
