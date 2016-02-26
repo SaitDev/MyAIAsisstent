@@ -1,4 +1,4 @@
-﻿namespace My_AI_Asisstent.Properties {
+﻿namespace MyAIAsisstent.Properties {
     
     
     // This class allows you to handle specific events on the settings class:

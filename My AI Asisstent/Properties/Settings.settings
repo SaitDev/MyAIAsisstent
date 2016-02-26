@@ -44,11 +44,20 @@
     <Setting Name="RemindMessage" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Setting" Type="System.DateTime[]" Scope="User">
+    <Setting Name="RemindAt" Type="System.DateTime[]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="UpdateSettingsRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RemindCompleted" Type="System.Boolean[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RemindFinishTime" Type="System.DateTime[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RemindAfter" Type="System.TimeSpan[]" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

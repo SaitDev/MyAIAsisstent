@@ -140,12 +140,12 @@ namespace MyAIAsisstent.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public System.DateTime[] Setting {
+        public System.DateTime[] RemindAt {
             get {
-                return ((System.DateTime[])(this["Setting"]));
+                return ((System.DateTime[])(this["RemindAt"]));
             }
             set {
-                this["Setting"] = value;
+                this["RemindAt"] = value;
             }
         }
         
@@ -158,6 +158,39 @@ namespace MyAIAsisstent.Properties {
             }
             set {
                 this["UpdateSettingsRequired"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool[] RemindCompleted {
+            get {
+                return ((bool[])(this["RemindCompleted"]));
+            }
+            set {
+                this["RemindCompleted"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public System.DateTime[] RemindFinishTime {
+            get {
+                return ((System.DateTime[])(this["RemindFinishTime"]));
+            }
+            set {
+                this["RemindFinishTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public System.TimeSpan[] RemindAfter {
+            get {
+                return ((System.TimeSpan[])(this["RemindAfter"]));
+            }
+            set {
+                this["RemindAfter"] = value;
             }
         }
     }

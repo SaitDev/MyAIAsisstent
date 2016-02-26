@@ -110,6 +110,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Reminder.cs" />
     <Compile Include="Setting.cs">
       <SubType>Form</SubType>
     </Compile>
