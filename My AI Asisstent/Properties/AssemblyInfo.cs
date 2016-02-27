@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("My AI Asisstent")]
-[assembly: AssemblyCopyright("Sait™ ©  2016")]
+[assembly: AssemblyCopyright("Copyright © Sait™ 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

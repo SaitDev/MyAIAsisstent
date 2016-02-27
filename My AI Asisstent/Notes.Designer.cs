@@ -67,7 +67,7 @@
             this.metroTextBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.metroTextBox1.Lines = new string[] {
         "df"};
-            this.metroTextBox1.Location = new System.Drawing.Point(12, 76);
+            this.metroTextBox1.Location = new System.Drawing.Point(12, 73);
             this.metroTextBox1.MaxLength = 32767;
             this.metroTextBox1.Multiline = true;
             this.metroTextBox1.Name = "metroTextBox1";
@@ -242,7 +242,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(12, 76);
+            this.materialLabel1.Location = new System.Drawing.Point(12, 73);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(193, 164);

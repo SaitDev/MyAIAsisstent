@@ -6,6 +6,7 @@ using MaterialSkin;
 using MaterialSkin.Controls;
 using System.Collections.Generic;
 using System.Linq;
+using MyAIAsisstent.Properties;
 
 namespace MyAIAsisstent
 {
@@ -13,7 +14,7 @@ namespace MyAIAsisstent
     {
         private Login _login;
         public int index;
-        private bool moved, close = false;
+        private bool moved;
         Random rnd = new Random();
 
         public Notes(Login login)
@@ -27,36 +28,36 @@ namespace MyAIAsisstent
 
         private void Notes_Load(object sender, EventArgs e)
         {
-            if ((index < Properties.Settings.Default.NoteCount)&&(Properties.Settings.Default.NoteCount!=0))
+            if ((index < Settings.Default.NoteCount) && (Settings.Default.NoteCount != 0))
             {
-                Location = Properties.Settings.Default.Locations[index];
-                Opacity = Properties.Settings.Default.Opacitys[index];
-                materialLabel1.Text = Properties.Settings.Default.Notes[index];
+                Location = Settings.Default.Locations[index];
+                Opacity = Settings.Default.Opacitys[index];
+                materialLabel1.Text = Settings.Default.Notes[index];
                 metroTextBox1.Text = materialLabel1.Text;
-                TopMost = Properties.Settings.Default.NoteOnTop[index];
+                TopMost = Settings.Default.NoteOnTop[index];
            }
             else
             {
-                Point[] temp1 = Properties.Settings.Default.Locations;
+                Point[] temp1 = Settings.Default.Locations;
                 Array.Resize<Point>(ref temp1, _login.noteCount);
-                Properties.Settings.Default.Locations = temp1;
-                Double[] temp2 = Properties.Settings.Default.Opacitys;
+                Settings.Default.Locations = temp1;
+                double[] temp2 = Settings.Default.Opacitys;
                 Array.Resize<Double>(ref temp2, _login.noteCount);
-                Properties.Settings.Default.Opacitys = temp2;
-                Boolean[] temp3 = Properties.Settings.Default.NoteOnTop;
+                Settings.Default.Opacitys = temp2;
+                bool[] temp3 = Settings.Default.NoteOnTop;
                 Array.Resize<Boolean>(ref temp3, _login.noteCount);
-                Properties.Settings.Default.NoteOnTop = temp3;
+                Settings.Default.NoteOnTop = temp3;
 
-                Properties.Settings.Default.Locations[index] = new Point(rnd.Next(300), rnd.Next(300));
-                Properties.Settings.Default.Opacitys[index] = 0.9;
-                Properties.Settings.Default.NoteOnTop[index] = false;
-                Properties.Settings.Default.Notes.Add("Double click to edit");
-                Properties.Settings.Default.NoteCount++;
-                Properties.Settings.Default.Save();
+                Settings.Default.Locations[index] = new Point(rnd.Next(300), rnd.Next(300));
+                Settings.Default.Opacitys[index] = 0.9;
+                Settings.Default.NoteOnTop[index] = false;
+                Settings.Default.Notes.Add("Double click to edit");
+                Settings.Default.NoteCount++;
+                Settings.Default.Save();
 
-                Location = Properties.Settings.Default.Locations[index];
-                Opacity = Opacity = Properties.Settings.Default.Opacitys[index];
-                materialLabel1.Text = Properties.Settings.Default.Notes[index];
+                Location = Settings.Default.Locations[index];
+                Opacity = Opacity = Settings.Default.Opacitys[index];
+                materialLabel1.Text = Settings.Default.Notes[index];
                 metroTextBox1.Text = materialLabel1.Text;
             }
             
@@ -72,9 +73,9 @@ namespace MyAIAsisstent
         {
             if (moved)
             {
-                this.Opacity = Properties.Settings.Default.Opacitys[index];
-                Properties.Settings.Default.Locations[index] = Location;
-                Properties.Settings.Default.Save();
+                this.Opacity = Settings.Default.Opacitys[index];
+                Settings.Default.Locations[index] = Location;
+                Settings.Default.Save();
                 moved = false;
             }
             //else this.Opacity = Properties.Settings.Default.Opacity1;
@@ -82,30 +83,23 @@ namespace MyAIAsisstent
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (close) return;
             string t = this.Text;
             string s = "Are you sure want to delete " + t;
             if ((MessageBox.Show(this, s, t, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)) == DialogResult.Yes)
             {
-                //materialLabel1.Text = "";
-                Properties.Settings.Default.NoteCount--;
-                var temp1 = new List<Point>(Properties.Settings.Default.Locations);
+                Settings.Default.NoteCount--;
+                var temp1 = new List<Point>(Settings.Default.Locations);
                 temp1.RemoveAt(index);
-                Properties.Settings.Default.Locations = temp1.ToArray();
-                var temp2 = new List<Double>(Properties.Settings.Default.Opacitys);
+                Settings.Default.Locations = temp1.ToArray();
+                var temp2 = new List<Double>(Settings.Default.Opacitys);
                 temp2.RemoveAt(index);
-                Properties.Settings.Default.Opacitys = temp2.ToArray();
-                Properties.Settings.Default.Notes.RemoveAt(index);
-                Properties.Settings.Default.Save();
-                _login.noteCount--;
-                close = true;
-                if (_login.noteCount == 0) Environment.Exit(0);
-                else
-                {
-                    //Properties.Settings.Default.NoteCount = _login.noteCount;
-                    //Properties.Settings.Default.Save();
-                    this.Close();
-                }
+                Settings.Default.Opacitys = temp2.ToArray();
+                var temp3 = new List<Boolean>(Settings.Default.NoteOnTop);
+                temp3.RemoveAt(index);
+                Settings.Default.NoteOnTop = temp3.ToArray();
+                Settings.Default.Notes.RemoveAt(index);
+                Settings.Default.Save();
+                _login.noteCount = Settings.Default.NoteCount;
             }
             else e.Cancel = true;
         }
@@ -127,9 +121,10 @@ namespace MyAIAsisstent
             materialLabel1.Text = metroTextBox1.Text;
             metroTextBox1.Hide();
             metroLink1.Enabled = false;
-            Properties.Settings.Default.Notes.RemoveAt(index);
-            Properties.Settings.Default.Notes.Insert(index, materialLabel1.Text);
-            Properties.Settings.Default.Save();
+            //Properties.Settings.Default.Notes.RemoveAt(index);
+            //Properties.Settings.Default.Notes.Insert(index, materialLabel1.Text);
+            Settings.Default.Notes[index] = materialLabel1.Text;
+            Settings.Default.Save();
         }
 
         private void metroLink2_Click(object sender, EventArgs e)
@@ -141,38 +136,38 @@ namespace MyAIAsisstent
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.Opacity = Convert.ToDouble(1.0);
-            Properties.Settings.Default.Opacitys[index] = 1;
-            Properties.Settings.Default.Save();
+            Settings.Default.Opacitys[index] = 1;
+            Settings.Default.Save();
             //MessageBox.Show(Properties.Settings.Default.Opacity1.ToString());
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             this.Opacity = (double)0.9;
-            Properties.Settings.Default.Opacitys[index] = 0.9;
-            Properties.Settings.Default.Save();
+            Settings.Default.Opacitys[index] = 0.9;
+            Settings.Default.Save();
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             //Properties.Settings.Default.Opacitys[index] = Convert.ToDouble(0.8);
             Opacity = (double)0.8;
-            Properties.Settings.Default.Opacitys[index] = 0.8;
-            Properties.Settings.Default.Save();
+            Settings.Default.Opacitys[index] = 0.8;
+            Settings.Default.Save();
         }
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
             this.Opacity = (double)0.7;
-            Properties.Settings.Default.Opacitys[index] = 0.7;
-            Properties.Settings.Default.Save();
+            Settings.Default.Opacitys[index] = 0.7;
+            Settings.Default.Save();
         }
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
             this.Opacity = (double)0.6;
-            Properties.Settings.Default.Opacitys[index] = 0.6;
-            Properties.Settings.Default.Save();
+            Settings.Default.Opacitys[index] = 0.6;
+            Settings.Default.Save();
         }
 
         private void materialToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -213,8 +208,8 @@ namespace MyAIAsisstent
         private void materialToolStripMenuItem4_Click(object sender, EventArgs e)
         {
             TopMost = !TopMost;
-            Properties.Settings.Default.NoteOnTop[index] = TopMost;
-            Properties.Settings.Default.Save();
+            Settings.Default.NoteOnTop[index] = TopMost;
+            Settings.Default.Save();
         }
 
         private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
