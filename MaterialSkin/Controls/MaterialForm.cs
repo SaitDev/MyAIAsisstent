@@ -622,7 +622,7 @@ namespace MaterialSkin.Controls
                 g.FillRectangle(downBrush, maxButtonBounds);
 
             if (buttonState == ButtonState.XOver && ControlBox)
-                g.FillRectangle(/*hoverBrush*/ new SolidBrush(Color.FromArgb(226, 25, 42)), xButtonBounds);
+                g.FillRectangle(/*hoverBrush*/ new SolidBrush(Color.FromArgb(240, 36, 36)), xButtonBounds);
 
             if (buttonState == ButtonState.XDown && ControlBox)
                 g.FillRectangle(/*downBrush*/ Brushes.IndianRed, xButtonBounds);
