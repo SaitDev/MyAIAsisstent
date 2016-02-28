@@ -25,27 +25,13 @@ namespace MyAIAsisstent.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LightTheme {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateSettingsRequired {
             get {
-                return ((bool)(this["LightTheme"]));
+                return ((bool)(this["UpdateSettingsRequired"]));
             }
             set {
-                this["LightTheme"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>Double click to edit</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection Notes {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["Notes"]));
-            }
-            set {
-                this["Notes"] = value;
+                this["UpdateSettingsRequired"] = value;
             }
         }
         
@@ -64,6 +50,18 @@ namespace MyAIAsisstent.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LightTheme {
+            get {
+                return ((bool)(this["LightTheme"]));
+            }
+            set {
+                this["LightTheme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool AutoStart {
             get {
                 return ((bool)(this["AutoStart"]));
@@ -75,7 +73,7 @@ namespace MyAIAsisstent.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int NoteCount {
             get {
                 return ((int)(this["NoteCount"]));
@@ -87,9 +85,17 @@ namespace MyAIAsisstent.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfPoint xmlns:xsi=\"http://www.w3.o" +
-            "rg/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <Po" +
-            "int>\r\n    <X>100</X>\r\n    <Y>100</Y>\r\n  </Point>\r\n</ArrayOfPoint>")]
+        public global::System.Collections.Specialized.StringCollection Notes {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["Notes"]));
+            }
+            set {
+                this["Notes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public System.Drawing.Point[] Locations {
             get {
                 return ((System.Drawing.Point[])(this["Locations"]));
@@ -101,9 +107,6 @@ namespace MyAIAsisstent.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfDouble xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <d" +
-            "ouble>0.9</double>\r\n</ArrayOfDouble>")]
         public double[] Opacitys {
             get {
                 return ((double[])(this["Opacitys"]));
@@ -115,9 +118,6 @@ namespace MyAIAsisstent.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfBoolean xmlns:xsi=\"http://www.w3" +
-            ".org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <" +
-            "boolean>false</boolean>\r\n</ArrayOfBoolean>")]
         public bool[] NoteOnTop {
             get {
                 return ((bool[])(this["NoteOnTop"]));
@@ -146,18 +146,6 @@ namespace MyAIAsisstent.Properties {
             }
             set {
                 this["RemindAt"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UpdateSettingsRequired {
-            get {
-                return ((bool)(this["UpdateSettingsRequired"]));
-            }
-            set {
-                this["UpdateSettingsRequired"] = value;
             }
         }
         

@@ -33,7 +33,7 @@ namespace MyAIAsisstent
             _main = main;
             _main.materialSkinManager.AddFormToManage(this);
             _setting = new Setting(this);
-            notes = new Notes[20];
+            notes = new Notes[10];
             noteCount = Properties.Settings.Default.NoteCount;
             if (Properties.Settings.Default.RequiredPassword == false)
             {
@@ -42,7 +42,7 @@ namespace MyAIAsisstent
                     //noteCount++;
                     //Properties.Settings.Default.NoteCount--;
                     //Properties.Settings.Default.Save();
-                    newNote(0);
+                    newNote();
                 }
                 else
                 {
@@ -242,12 +242,18 @@ namespace MyAIAsisstent
             notes[i].Show();
         }
 
-        public void newNote (int i)
+        public void newNote ()
         {
-            noteCount++;
+            if (noteCount > 9)
+            {
+                MessageBox.Show("Limit exceeded. Can not create new Note. Please update to the newest version.");
+                return;
+            }
             //Properties.Settings.Default.NoteCount++;
             //Properties.Settings.Default.Save();
-            createNote(i);
+            createNote(noteCount);
+            _main.newNoteLabel(noteCount);
+            noteCount++;
         }
     }
 }

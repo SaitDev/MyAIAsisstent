@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Time");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Day");
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Message to remind");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Time");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Day");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Message to remind");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
@@ -50,6 +50,9 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.materialFlatButton4 = new MaterialSkin.Controls.MaterialFlatButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.materialFlatButton9 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.materialFlatButton10 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.NoteLabel0 = new MaterialSkin.Controls.MaterialLabel();
             this.materialFlatButton6 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -61,6 +64,8 @@
             this.materialFlatButton2 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -111,6 +116,7 @@
             this.materialTabControl1.Controls.Add(this.tabPage2);
             this.materialTabControl1.Depth = 0;
             this.materialTabControl1.Location = new System.Drawing.Point(50, 59);
+            this.materialTabControl1.MinimumSize = new System.Drawing.Size(5, 5);
             this.materialTabControl1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialTabControl1.Name = "materialTabControl1";
             this.materialTabControl1.SelectedIndex = 0;
@@ -143,7 +149,7 @@
             this.materialFlatButton5.Depth = 0;
             this.materialFlatButton5.Icon = global::MyAIAsisstent.Properties.Resources.clear_blue;
             this.materialFlatButton5.IconSize = new System.Drawing.Size(25, 25);
-            this.materialFlatButton5.Location = new System.Drawing.Point(198, 300);
+            this.materialFlatButton5.Location = new System.Drawing.Point(198, 299);
             this.materialFlatButton5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton5.Name = "materialFlatButton5";
             this.materialFlatButton5.Primary = false;
@@ -190,7 +196,7 @@
             this.materialListView3.FullRowSelect = true;
             this.materialListView3.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7});
+            listViewItem1});
             this.materialListView3.Location = new System.Drawing.Point(140, 115);
             this.materialListView3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView3.MouseState = MaterialSkin.MouseState.OUT;
@@ -220,9 +226,9 @@
             this.materialListView2.FullRowSelect = true;
             this.materialListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView2.ImeMode = System.Windows.Forms.ImeMode.On;
-            listViewItem8.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.materialListView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem8});
+            listViewItem2});
             this.materialListView2.Location = new System.Drawing.Point(4, 115);
             this.materialListView2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView2.MouseState = MaterialSkin.MouseState.OUT;
@@ -267,7 +273,7 @@
             this.materialListView1.FullRowSelect = true;
             this.materialListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem9});
+            listViewItem3});
             this.materialListView1.Location = new System.Drawing.Point(4, 70);
             this.materialListView1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView1.MouseState = MaterialSkin.MouseState.OUT;
@@ -293,7 +299,7 @@
             this.materialFlatButton4.Depth = 0;
             this.materialFlatButton4.Icon = global::MyAIAsisstent.Properties.Resources.alarm_blue;
             this.materialFlatButton4.IconSize = new System.Drawing.Size(28, 26);
-            this.materialFlatButton4.Location = new System.Drawing.Point(239, 300);
+            this.materialFlatButton4.Location = new System.Drawing.Point(239, 299);
             this.materialFlatButton4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton4.Name = "materialFlatButton4";
             this.materialFlatButton4.Primary = false;
@@ -306,6 +312,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.materialFlatButton9);
+            this.tabPage2.Controls.Add(this.materialFlatButton10);
+            this.tabPage2.Controls.Add(this.NoteLabel0);
             this.tabPage2.Controls.Add(this.materialFlatButton6);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -314,6 +323,63 @@
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Note";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // materialFlatButton9
+            // 
+            this.materialFlatButton9.AutoUpper = true;
+            this.materialFlatButton9.Depth = 0;
+            this.materialFlatButton9.Enabled = false;
+            this.materialFlatButton9.Icon = global::MyAIAsisstent.Properties.Resources.edit_blue;
+            this.materialFlatButton9.IconSize = new System.Drawing.Size(25, 25);
+            this.materialFlatButton9.Location = new System.Drawing.Point(200, 299);
+            this.materialFlatButton9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialFlatButton9.Name = "materialFlatButton9";
+            this.materialFlatButton9.Primary = false;
+            this.materialFlatButton9.Size = new System.Drawing.Size(36, 36);
+            this.materialFlatButton9.TabIndex = 4;
+            this.materialFlatButton9.UseCustomBackColor = false;
+            this.materialFlatButton9.UseVisualStyleBackColor = true;
+            this.materialFlatButton9.Visible = false;
+            this.materialFlatButton9.Click += new System.EventHandler(this.materialFlatButton9_Click);
+            // 
+            // materialFlatButton10
+            // 
+            this.materialFlatButton10.AutoUpper = true;
+            this.materialFlatButton10.Depth = 0;
+            this.materialFlatButton10.Enabled = false;
+            this.materialFlatButton10.Icon = global::MyAIAsisstent.Properties.Resources.delete_blue;
+            this.materialFlatButton10.IconSize = new System.Drawing.Size(25, 25);
+            this.materialFlatButton10.Location = new System.Drawing.Point(162, 299);
+            this.materialFlatButton10.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialFlatButton10.Name = "materialFlatButton10";
+            this.materialFlatButton10.Primary = false;
+            this.materialFlatButton10.Size = new System.Drawing.Size(36, 36);
+            this.materialFlatButton10.TabIndex = 5;
+            this.materialFlatButton10.UseCustomBackColor = false;
+            this.materialFlatButton10.UseVisualStyleBackColor = true;
+            this.materialFlatButton10.Visible = false;
+            this.materialFlatButton10.Click += new System.EventHandler(this.materialFlatButton10_Click);
+            // 
+            // NoteLabel0
+            // 
+            this.NoteLabel0.AutoEllipsis = true;
+            this.NoteLabel0.AutoSize = true;
+            this.NoteLabel0.Depth = 0;
+            this.NoteLabel0.Font = new System.Drawing.Font("Roboto", 11F);
+            this.NoteLabel0.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.NoteLabel0.Location = new System.Drawing.Point(5, 8);
+            this.NoteLabel0.MaximumSize = new System.Drawing.Size(270, 60);
+            this.NoteLabel0.MinimumSize = new System.Drawing.Size(270, 40);
+            this.NoteLabel0.MouseState = MaterialSkin.MouseState.HOVER;
+            this.NoteLabel0.Name = "NoteLabel0";
+            this.NoteLabel0.Size = new System.Drawing.Size(270, 40);
+            this.NoteLabel0.TabIndex = 3;
+            this.NoteLabel0.Text = "materialLabel2";
+            this.NoteLabel0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.NoteLabel0.Click += new System.EventHandler(this.NoteLabel_Click);
+            this.NoteLabel0.MouseEnter += new System.EventHandler(this.NoteLabel_MouseEnter);
+            this.NoteLabel0.MouseLeave += new System.EventHandler(this.NoteLabel_MouseLeave);
             // 
             // materialFlatButton6
             // 
@@ -321,11 +387,11 @@
             this.materialFlatButton6.Depth = 0;
             this.materialFlatButton6.Icon = ((System.Drawing.Image)(resources.GetObject("materialFlatButton6.Icon")));
             this.materialFlatButton6.IconSize = new System.Drawing.Size(28, 26);
-            this.materialFlatButton6.Location = new System.Drawing.Point(239, 300);
+            this.materialFlatButton6.Location = new System.Drawing.Point(238, 299);
             this.materialFlatButton6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton6.Name = "materialFlatButton6";
             this.materialFlatButton6.Primary = false;
-            this.materialFlatButton6.Size = new System.Drawing.Size(40, 35);
+            this.materialFlatButton6.Size = new System.Drawing.Size(40, 36);
             this.materialFlatButton6.TabIndex = 2;
             this.materialFlatButton6.UseCustomBackColor = false;
             this.materialFlatButton6.UseVisualStyleBackColor = true;
@@ -442,6 +508,16 @@
             this.materialFlatButton1.UseVisualStyleBackColor = false;
             this.materialFlatButton1.Click += new System.EventHandler(this.materialFlatButton1_Click);
             // 
+            // timer2
+            // 
+            this.timer2.Interval = 10;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // timer3
+            // 
+            this.timer3.Interval = 10;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,14 +548,13 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.materialContextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton1;
@@ -488,7 +563,6 @@
         public MaterialSkin.Controls.MaterialFlatButton materialFlatButton3;
         private MaterialSkin.Controls.MaterialTabSelector materialTabSelector1;
         private MaterialSkin.Controls.MaterialTabControl materialTabControl1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage1;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton4;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton6;
@@ -507,5 +581,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton5;
+        private MaterialSkin.Controls.MaterialLabel NoteLabel0;
+        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton9;
+        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton10;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer3;
+        public MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
+        public System.Windows.Forms.TabPage tabPage2;
     }
 }

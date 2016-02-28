@@ -282,8 +282,6 @@
         }
 
         #endregion
-
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MetroFramework.Controls.MetroTextBox metroTextBox1;
         private MetroFramework.Controls.MetroLink metroLink1;
         private MetroFramework.Controls.MetroLink metroLink2;
@@ -300,5 +298,6 @@
         private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem3;
         private MetroFramework.Controls.MetroLink metroLink3;
         private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem4;
+        public MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }

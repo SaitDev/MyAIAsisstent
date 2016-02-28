@@ -15,6 +15,7 @@ namespace MyAIAsisstent
         private Login _login;
         public int index;
         private bool moved;
+        public bool close = false;
         Random rnd = new Random();
 
         public Notes(Login login)
@@ -35,22 +36,24 @@ namespace MyAIAsisstent
                 materialLabel1.Text = Settings.Default.Notes[index];
                 metroTextBox1.Text = materialLabel1.Text;
                 TopMost = Settings.Default.NoteOnTop[index];
-           }
+            }
             else
             {
                 Point[] temp1 = Settings.Default.Locations;
-                Array.Resize<Point>(ref temp1, _login.noteCount);
+                Array.Resize<Point>(ref temp1, index + 1);
                 Settings.Default.Locations = temp1;
                 double[] temp2 = Settings.Default.Opacitys;
-                Array.Resize<Double>(ref temp2, _login.noteCount);
+                Array.Resize<Double>(ref temp2, index + 1);
                 Settings.Default.Opacitys = temp2;
                 bool[] temp3 = Settings.Default.NoteOnTop;
-                Array.Resize<Boolean>(ref temp3, _login.noteCount);
+                Array.Resize<Boolean>(ref temp3, index + 1);
                 Settings.Default.NoteOnTop = temp3;
 
                 Settings.Default.Locations[index] = new Point(rnd.Next(300), rnd.Next(300));
                 Settings.Default.Opacitys[index] = 0.9;
                 Settings.Default.NoteOnTop[index] = false;
+                if (Settings.Default.Notes == null)
+                    Settings.Default.Notes = new System.Collections.Specialized.StringCollection();
                 Settings.Default.Notes.Add("Double click to edit");
                 Settings.Default.NoteCount++;
                 Settings.Default.Save();
@@ -60,7 +63,6 @@ namespace MyAIAsisstent
                 materialLabel1.Text = Settings.Default.Notes[index];
                 metroTextBox1.Text = materialLabel1.Text;
             }
-            
         }
 
         private void Notes_Move(object sender, EventArgs e)
@@ -83,25 +85,36 @@ namespace MyAIAsisstent
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (close)
+            {
+                DeleteNote();
+                return;
+            }
             string t = this.Text;
             string s = "Are you sure want to delete " + t;
             if ((MessageBox.Show(this, s, t, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)) == DialogResult.Yes)
             {
-                Settings.Default.NoteCount--;
-                var temp1 = new List<Point>(Settings.Default.Locations);
-                temp1.RemoveAt(index);
-                Settings.Default.Locations = temp1.ToArray();
-                var temp2 = new List<Double>(Settings.Default.Opacitys);
-                temp2.RemoveAt(index);
-                Settings.Default.Opacitys = temp2.ToArray();
-                var temp3 = new List<Boolean>(Settings.Default.NoteOnTop);
-                temp3.RemoveAt(index);
-                Settings.Default.NoteOnTop = temp3.ToArray();
-                Settings.Default.Notes.RemoveAt(index);
-                Settings.Default.Save();
-                _login.noteCount = Settings.Default.NoteCount;
+                DeleteNote();
             }
             else e.Cancel = true;
+        }
+
+        public void DeleteNote()
+        {
+            _login._main.deleteNoteLabel(index);
+            Settings.Default.NoteCount--;
+            var temp1 = new List<Point>(Settings.Default.Locations);
+            temp1.RemoveAt(index);
+            Settings.Default.Locations = temp1.ToArray();
+            var temp2 = new List<Double>(Settings.Default.Opacitys);
+            temp2.RemoveAt(index);
+            Settings.Default.Opacitys = temp2.ToArray();
+            var temp3 = new List<Boolean>(Settings.Default.NoteOnTop);
+            temp3.RemoveAt(index);
+            Settings.Default.NoteOnTop = temp3.ToArray();
+            Settings.Default.Notes.RemoveAt(index);
+            Settings.Default.Save();
+            _login.noteCount = Settings.Default.NoteCount;
         }
 
         private void materialLabel1_DoubleClick(object sender, EventArgs e)
@@ -121,6 +134,10 @@ namespace MyAIAsisstent
             materialLabel1.Text = metroTextBox1.Text;
             metroTextBox1.Hide();
             metroLink1.Enabled = false;
+            Size temp = _login._main.tabPage2.Controls["NoteLabel" + index.ToString()].Size;
+            _login._main.tabPage2.Controls["NoteLabel" + index.ToString()].Text = materialLabel1.Text;
+            if (_login._main.tabPage2.Controls["NoteLabel" + index.ToString()].Size != temp)
+                _login._main.UpdateNoteLabel(index);
             //Properties.Settings.Default.Notes.RemoveAt(index);
             //Properties.Settings.Default.Notes.Insert(index, materialLabel1.Text);
             Settings.Default.Notes[index] = materialLabel1.Text;
@@ -188,7 +205,7 @@ namespace MyAIAsisstent
                 MessageBox.Show("Reached limitation of note");
             }
             else */
-            _login.newNote(_login.noteCount);
+            _login.newNote();
             /*
             _login.noteCount++;
             var i = _login.noteCount - 1;

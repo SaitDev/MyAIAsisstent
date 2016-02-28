@@ -145,12 +145,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MaterialSkin\MaterialSkin.csproj">
@@ -163,6 +157,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\save_blue.png" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +202,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AI-Assistant.ico" />
+    <None Include="Resources\delete_blue.png" />
+    <None Include="Resources\edit_blue.png" />
     <None Include="Resources\clear_blue.png" />
     <None Include="Resources\done_blue.png" />
     <None Include="Resources\alarm_blue.png" />

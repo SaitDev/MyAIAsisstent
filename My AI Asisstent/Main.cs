@@ -24,13 +24,16 @@ namespace MyAIAsisstent
         private Login _login;
         private MaterialFlatButton lastActive;
         private DateTime remindAtTime;
-        private bool remindCreating = false, messageInputed;
+        private bool remindCreating = false, remindMessageInputed, noteEditing = false;
+        private DialogResult answer;
+        private Cursor HandCursor;
+        private MaterialLabel lastNoteLabelClick;
 
         #region Form Managament
 
         public Main()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.LightBlue800, Primary.BlueGrey400,
                                                                Accent.LightBlue400, TextShade.WHITE);
@@ -45,9 +48,9 @@ namespace MyAIAsisstent
             materialSkinManager.AddFormToManage(this);
             _login = new Login(this);
             Show();
-
-         //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-         //MessageBox.Show(config.FilePath);
+            
+            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            //MessageBox.Show(config.FilePath);
         }
 
         protected override void WndProc(ref Message m)
@@ -89,6 +92,24 @@ namespace MyAIAsisstent
                     t.Start();
                 }
             }
+            if (Settings.Default.NoteCount > 0)
+            {
+                NoteLabel0.Text = Settings.Default.Notes[0];
+                NoteLabel0.BackColor = Color.FromArgb(60, 60, 60);
+                //MessageBox.Show("Shit " + NoteLabel0.Size.ToString());
+                NoteLabel0.Tag = NoteLabel0.Location.Y + NoteLabel0.Size.Height;
+                /*
+                materialFlatButton9.Location = new Point(7,
+                        NoteLabel0.Size.Height == 40 ? NoteLabel0.Location.Y + 2 : NoteLabel0.Location.Y + 12);
+                materialFlatButton10.Location = new Point(237,
+                        NoteLabel0.Size.Height == 40 ? NoteLabel0.Location.Y + 2 : NoteLabel0.Location.Y + 12);
+                */
+                for (int i = 1; i < Settings.Default.NoteCount; i++)
+                {
+                    newNoteLabel(i);
+                }
+            }
+            else NoteLabel0.Hide();
         }
 
         private void Main_Shown(object sender, EventArgs e)
@@ -105,10 +126,41 @@ namespace MyAIAsisstent
             {
                 materialSingleLineTextField1.Enabled = true;
             };
+            HandCursor = new Cursor(LoadCursor(IntPtr.Zero, idCursor.HAND));
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (materialTabControl1.SelectedIndex == 1 && lastNoteLabelClick != null)
+            {
+                if (noteEditing)
+                {
+                    answer = MetroMessageBox.Show(this, "You have not saved Note. Are you sure to discard changes?",
+                                                                "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 140);
+                    if (answer == DialogResult.No)
+                    {
+                        materialSingleLineTextField1.SelectAll();
+                        return;
+                    }
+                    else
+                    {
+                        noteEditing = false;
+                        if (lastNoteLabelClick == null)
+                        {
+                            throw new Exception("lastNoteLabelClick is null");
+                        }
+                        int.TryParse(lastNoteLabelClick.Name.Remove(0, 9), out noteLabelID);
+                        lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
+                        materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Clear();
+                        NoteLabel0.Focus();
+                    }
+                }
+                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick = null;
+                materialFlatButton10.Hide();
+                materialFlatButton9.Hide();
+            }
             this.Hide();
             e.Cancel = true;
         }
@@ -179,12 +231,20 @@ namespace MyAIAsisstent
 
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
+            if (materialTabControl1.SelectedIndex == 1 && !noteEditing)
+            {
+                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick = null;
+                speed = 2;
+                timer3.Start();
+            }
             materialFlatButton_Click(sender, e);
             if (_login._setting.Visible == true)
                 _login._setting.Hide();
             _login._setting.materialCheckBox3.Enabled = false;
             _login._setting.ShowDialog();
             _login._setting.materialCheckBox3.Enabled = true;
+            if (noteEditing) materialSingleLineTextField1.SelectAll();
             materialFlatButton1.UseCustomBackColor = true;
             materialFlatButton1.Refresh();
             lastActive.UseCustomBackColor = false;
@@ -202,6 +262,36 @@ namespace MyAIAsisstent
 
         private void materialFlatButton3_Click(object sender, EventArgs e)
         {
+            if (materialTabControl1.SelectedIndex == 1 && lastNoteLabelClick != null)
+            {
+                if (noteEditing)
+                {
+                    answer = MetroMessageBox.Show(this, "You have not saved Note. Are you sure to discard changes?",
+                                                                "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 140);
+                    if (answer == DialogResult.No)
+                    {
+                        materialSingleLineTextField1.SelectAll();
+                        return;
+                    }
+                    else
+                    {
+                        noteEditing = false;
+                        if (lastNoteLabelClick == null)
+                        {
+                            throw new Exception("lastNoteLabelClick is null");
+                        }
+                        int.TryParse(lastNoteLabelClick.Name.Remove(0, 9), out noteLabelID);
+                        lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
+                        materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Clear();
+                        NoteLabel0.Focus();
+                    }
+                }
+                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick = null;
+                materialFlatButton10.Hide();
+                materialFlatButton9.Hide();
+            }
             materialFlatButton_Click(sender, e);
             materialTabSelector1.Hide();
             materialTabControl1.Hide();
@@ -210,14 +300,14 @@ namespace MyAIAsisstent
 
         #endregion
 
-
         private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (materialTabControl1.SelectedIndex == 1)
             {
+                materialFlatButton6.BackColor = Color.FromArgb(103, 103, 242);
                 if (remindCreating)
                 {
-                    DialogResult answer = MetroMessageBox.Show(this, "You have not saved reminder. Are you sure to discard?",
+                    answer = MetroMessageBox.Show(this, "You have not saved reminder. Are you sure to discard?",
                                                                 "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 150);
                     if (answer == DialogResult.Yes)
                     {
@@ -234,7 +324,7 @@ namespace MyAIAsisstent
                         materialListView2.Items[0].Text = "Day";
                         materialListView3.Items[0].Text = "Time";
                         remindCreating = false;
-                        messageInputed = false;
+                        remindMessageInputed = false;
                         remindAtTime = new DateTime();
                         materialFlatButton4.Icon = Properties.Resources.alarm_blue;
                         materialFlatButton5.Hide();
@@ -246,8 +336,17 @@ namespace MyAIAsisstent
                     }
                 }
             }
+            else
+            {
+                if (lastNoteLabelClick != null)
+                {
+                    ((MaterialLabel)lastNoteLabelClick).BackColor = Color.FromArgb(60, 60, 60);
+                    lastNoteLabelClick = null;
+                    materialFlatButton10.Hide();
+                    materialFlatButton9.Hide();
+                }
+            }
         }
-
 
         #region Reminder Module
 
@@ -290,12 +389,13 @@ namespace MyAIAsisstent
                 materialListView3.Show();
                 materialFlatButton4.Icon = Properties.Resources.done_blue;
                 materialFlatButton5.Show();
+                materialSingleLineTextField1.Clear();
                 materialSingleLineTextField1.TextChanged += materialSingleLineTextField1_TextChanged;
                 materialSingleLineTextField1.Focus();
             }
             else
             {
-                if (messageInputed == false)
+                if (remindMessageInputed == false)
                 {
                     MetroMessageBox.Show(this, "You didn't enter the reminder.", "",
                                           MessageBoxButtons.OK, MessageBoxIcon.Asterisk, 120);
@@ -360,7 +460,7 @@ namespace MyAIAsisstent
                 materialListView2.Items[0].Text = "Day";
                 materialListView3.Items[0].Text = "Time";
                 remindCreating = false;
-                messageInputed = false;
+                remindMessageInputed = false;
                 remindAtTime = new DateTime();
                 materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
                 materialSingleLineTextField1.Clear();
@@ -386,8 +486,8 @@ namespace MyAIAsisstent
 
         private void materialFlatButton5_Click(object sender, EventArgs e)
         {
-            DialogResult answer = MetroMessageBox.Show(this, "Are you sure to cancel this reminder?", "",
-                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 150);
+            answer = MetroMessageBox.Show(this, "Are you sure to cancel this reminder?", "",
+                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 140);
             if (answer == DialogResult.No) return;
             materialLabel1.Hide();
             materialListView1.Hide();
@@ -402,7 +502,7 @@ namespace MyAIAsisstent
             materialListView2.Items[0].Text = "Day";
             materialListView3.Items[0].Text = "Time";
             remindCreating = false;
-            messageInputed = false;
+            remindMessageInputed = false;
             remindAtTime = new DateTime();
             materialFlatButton4.Icon = Properties.Resources.alarm_blue;
             materialFlatButton5.Hide();
@@ -414,7 +514,7 @@ namespace MyAIAsisstent
             else if (timePickerPanel1.timePicker.ClockMenu.Visible)
                 timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
             materialLabel1.Text = "WHAT do you want me to remind?";
-            if (messageInputed) materialSingleLineTextField1.Text = materialListView1.Items[0].Text;
+            if (remindMessageInputed) materialSingleLineTextField1.Text = materialListView1.Items[0].Text;
             materialSingleLineTextField1.Focus();
         }
 
@@ -456,17 +556,261 @@ namespace MyAIAsisstent
             materialSingleLineTextField1.Enabled = false;
         }
 
-        private void materialSingleLineTextField1_TextChanged(object sender, EventArgs e)
+        #endregion
+
+        #region Note Module
+
+        private void materialFlatButton6_Click(object sender, EventArgs e)
         {
-            if (remindCreating) messageInputed = true;
-            materialListView1.Items[0].Text = materialSingleLineTextField1.Text;
+            tabPage2_Click(tabPage2, new EventArgs());
+            _login.newNote();
+        }
+
+        public void newNoteLabel(int i)
+        {
+            MaterialLabel mlabel = new MaterialLabel();
+            mlabel.Name = "NoteLabel" + i.ToString();
+            mlabel.AutoEllipsis = true;
+            mlabel.AutoSize = true;
+            mlabel.Font = new System.Drawing.Font("Roboto", 11F);
+            mlabel.MaximumSize = new Size(270, 60);
+            mlabel.MinimumSize = new Size(270, 40);
+            mlabel.TextAlign = ContentAlignment.MiddleCenter;
+            mlabel.Text = Settings.Default.Notes[i];
+            mlabel.BackColor = Color.FromArgb(60, 60, 60);
+            mlabel.Location = new Point(5,
+                   (int)((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i - 1).ToString()])).Tag + 8);
+            mlabel.Size = new System.Drawing.Size(270, 40);
+            mlabel.MouseEnter += NoteLabel_MouseEnter;
+            mlabel.MouseLeave += NoteLabel_MouseLeave;
+            mlabel.Click += NoteLabel_Click;
+            tabPage2.Controls.Add(mlabel);      
+            mlabel.Tag = mlabel.Location.Y + mlabel.Size.Height;
+        }
+
+        private void NoteLabel_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = HandCursor;
+            if (((MaterialLabel)sender) != lastNoteLabelClick)
+                ((MaterialLabel)sender).BackColor = SkinManager.GetFlatButtonHoverBackgroundColor();
+        }
+
+        private void NoteLabel_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+            if (((MaterialLabel)sender) != lastNoteLabelClick)
+                ((MaterialLabel)sender).BackColor = Color.FromArgb(60, 60, 60);
+        }
+
+        private void NoteLabel_Click(object sender, EventArgs e)
+        {
+            if (lastNoteLabelClick != null)
+                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+            ((MaterialLabel)sender).BackColor = Color.FromArgb(100, 100, 100);
+            speed = 8;
+            timer2.Start();
+            lastNoteLabelClick = ((MaterialLabel)sender);
+        }
+
+        int noteLabelID;
+
+        private void materialFlatButton9_Click(object sender, EventArgs e)
+        {
+            if (!noteEditing)
+            {
+                noteEditing = true;
+                speed = 2;
+                timer3.Start();
+                materialSingleLineTextField1.Text = lastNoteLabelClick.Text;
+                materialSingleLineTextField1.SelectAll();
+                materialSingleLineTextField1.TextChanged += materialSingleLineTextField1_TextChanged;
+            }
+            else
+            {
+                if (lastNoteLabelClick == null)
+                {
+                    throw new Exception("lastNoteLabelClick is null");
+                }
+                int.TryParse(lastNoteLabelClick.Name.Remove(0, 9), out noteLabelID);
+                _login.notes[noteLabelID].materialLabel1.Text = lastNoteLabelClick.Text;
+                Settings.Default.Notes[noteLabelID] = lastNoteLabelClick.Text;
+                Settings.Default.Save();
+                materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                materialSingleLineTextField1.Clear();
+                NoteLabel0.Focus();
+                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick = null;
+                noteEditing = false;
+                speed = 2;
+                timer3.Start();
+            }
+        }
+
+        private void materialFlatButton10_Click(object sender, EventArgs e)
+        {
+            if (lastNoteLabelClick == null)
+            {
+                throw new Exception("lastNoteLabelClick is null");
+            }
+            int.TryParse(lastNoteLabelClick.Name.Remove(0, 9), out noteLabelID);
+            if (noteEditing)
+            {
+                lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
+                materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                materialSingleLineTextField1.Clear();
+                NoteLabel0.Focus();
+                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick = null;
+                noteEditing = false;
+                speed = 2;
+                timer3.Start();
+            }
+            else
+            {
+                answer = MetroMessageBox.Show(this, Settings.Default.Notes[noteLabelID],
+                                 string.Format("Are you sure to delete Note{0}", noteLabelID + 1),
+                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 125);
+                if (answer == DialogResult.Yes)
+                {
+                    _login.notes[noteLabelID].close = true;
+                    _login.notes[noteLabelID].Close();
+                }
+            }
+        }
+
+        public void deleteNoteLabel(int i)
+        {
+            if (i >= Settings.Default.NoteCount)
+            {
+                MessageBox.Show(string.Format("Found an error! deleteNoteLabel({0})", i));
+                return;
+            }
+            else
+            {
+                ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i).ToString()])).Hide();
+                ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i).ToString()])).Name = "NoteLabelDeleting";
+                if (i + 1 < Settings.Default.NoteCount)
+                {
+                    var mlabel = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i + 1).ToString()]));
+                    mlabel.Location = ((MaterialLabel)(tabPage2.Controls["NoteLabelDeleting"])).Location;
+                    mlabel.Tag = mlabel.Location.Y + mlabel.Size.Height;
+                    mlabel.Name = "NoteLabel" + (i).ToString();
+                    for (int j = i + 2; j < Settings.Default.NoteCount; j++)
+                    {
+                        var mlabelAfter = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (j).ToString()]));
+                        mlabelAfter.Location = new Point(5, 
+                                       (int)((MaterialLabel)(tabPage2.Controls["NoteLabel" + (j - 2).ToString()])).Tag + 8);
+                        mlabelAfter.Tag = mlabelAfter.Location.Y + mlabelAfter.Height;
+                        mlabelAfter.Name = "NoteLabel" + (j - 1).ToString();
+                    }
+                }
+                ((MaterialLabel)(tabPage2.Controls["NoteLabelDeleting"])).Dispose();
+            }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+            if (noteEditing) return;
+            if (lastNoteLabelClick != null)
+            {
+                object objectTemp = lastNoteLabelClick as object;
+                lastNoteLabelClick = null;
+                NoteLabel_MouseLeave(objectTemp, new EventArgs());
+                //((MaterialLabel)lastNoteLabelClick).BackColor = BackColor = Color.FromArgb(60, 60, 60);
+                //lastNoteLabelClick.BackColor = BackColor = Color.FromArgb(60, 60, 60);
+            }
+            speed = 2;
+            timer3.Start();
+        }
+
+        int speed;
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (!materialFlatButton10.Visible)
+            {
+                materialFlatButton9.Location = new Point(200, 335);
+                materialFlatButton10.Location = new Point(162, 335);
+                if (!noteEditing)
+                {
+                    materialFlatButton9.Icon = Resources.edit_blue;
+                    materialFlatButton10.Icon = Resources.delete_blue;
+                }
+                materialFlatButton9.Show();
+                materialFlatButton10.Show();
+            }
+            if (materialFlatButton10.Location.Y <= 299)
+            {
+                timer2.Enabled = false;
+                materialFlatButton10.Enabled = true;
+                materialFlatButton9.Enabled = true;
+                return;
+            }
+            materialFlatButton10.Location = new Point(materialFlatButton10.Location.X, materialFlatButton10.Location.Y - speed);
+            materialFlatButton9.Location = new Point(materialFlatButton9.Location.X, materialFlatButton9.Location.Y - speed);
+            speed--;
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            if (!materialFlatButton10.Visible)
+            {
+                timer3.Enabled = false;
+                return;
+            }
+            if (materialFlatButton10.Location.Y >= 335)
+            {
+                timer3.Enabled = false;
+                materialFlatButton10.Hide();
+                materialFlatButton9.Hide();
+                if (noteEditing)
+                {
+                    materialFlatButton9.Icon = Resources.done_blue;
+                    materialFlatButton10.Icon = Resources.clear_blue;
+                    speed = 8;
+                    timer2.Start();
+                    return;
+                }
+                materialFlatButton10.Enabled = false;
+                materialFlatButton9.Enabled = false;
+                return;
+            }
+            materialFlatButton10.Location = new Point(materialFlatButton10.Location.X, materialFlatButton10.Location.Y + speed);
+            materialFlatButton9.Location = new Point(materialFlatButton9.Location.X, materialFlatButton9.Location.Y + speed);
+            speed++;
+        }
+
+        public void UpdateNoteLabel(int i)
+        {
+            var mlabel = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i).ToString()]));
+            mlabel.Tag = mlabel.Location.Y + mlabel.Size.Height;
+            for (int j = i + 1; j < Settings.Default.NoteCount; j++)
+            {
+                var mlabelAfter = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (j).ToString()]));
+                mlabelAfter.Location = new Point(5,
+                            (int)((MaterialLabel)(tabPage2.Controls["NoteLabel" + (j - 1).ToString()])).Tag + 8);
+                mlabelAfter.Tag = mlabelAfter.Location.Y + mlabelAfter.Size.Height;
+            }
         }
 
         #endregion
 
-        private void materialFlatButton6_Click(object sender, EventArgs e)
+        private void materialSingleLineTextField1_TextChanged(object sender, EventArgs e)
         {
-            _login.newNote(_login.noteCount);
+            if (remindCreating)
+            {
+                remindMessageInputed = true;
+                materialListView1.Items[0].Text = materialSingleLineTextField1.Text;
+            }
+            else if (noteEditing)
+            {
+                if (lastNoteLabelClick == null)
+                {
+                    throw new Exception("lastNoteLabelClick is null");
+                    return;
+                }
+                lastNoteLabelClick.Text = materialSingleLineTextField1.Text;
+            }
         }
 
         private void materialSingleLineTextField1_KeyPress(object sender, KeyPressEventArgs e)
@@ -480,7 +824,7 @@ namespace MyAIAsisstent
                 }
             }
         }
-
+        
 
         private const int SWP_NOSIZE = 0x0001;
         private const int SWP_NOACTIVATE = 0x0010;
@@ -489,5 +833,13 @@ namespace MyAIAsisstent
         [DllImport("user32.dll", SetLastError = true)]
         private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, 
                                                  int X, int Y, int cx, int cy, uint uFlags);
+
+        enum idCursor
+        {
+            HAND = 32649,
+        }
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern IntPtr LoadCursor(IntPtr hInstance, idCursor cursor);
     }
 }
