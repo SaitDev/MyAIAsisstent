@@ -86,7 +86,7 @@
             this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRadioButton2.Name = "materialRadioButton2";
-            this.materialRadioButton2.Ripple = false;
+            this.materialRadioButton2.Ripple = true;
             this.materialRadioButton2.Size = new System.Drawing.Size(52, 20);
             this.materialRadioButton2.TabIndex = 1;
             this.materialRadioButton2.Text = "Dark";
@@ -110,6 +110,7 @@
             // 
             this.materialCheckBox1.AutoSize = true;
             this.materialCheckBox1.Checked = global::MyAIAsisstent.Properties.Settings.Default.AutoStart;
+            this.materialCheckBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.materialCheckBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::MyAIAsisstent.Properties.Settings.Default, "AutoStart", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.materialCheckBox1.Depth = 0;
             this.materialCheckBox1.Font = new System.Drawing.Font("Roboto", 10F);
@@ -199,7 +200,7 @@
             this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRadioButton1.Name = "materialRadioButton1";
-            this.materialRadioButton1.Ripple = false;
+            this.materialRadioButton1.Ripple = true;
             this.materialRadioButton1.Size = new System.Drawing.Size(55, 20);
             this.materialRadioButton1.TabIndex = 0;
             this.materialRadioButton1.Text = "Light";
