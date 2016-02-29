@@ -11,6 +11,14 @@ namespace MaterialSkin.Controls
 {
     public class MaterialForm : Form, IMaterialControl
     {
+        private bool titleDisplay = true;
+        [Category("Window Style")]
+        public bool TitleDisplay
+        {
+            get { return titleDisplay; }
+            set { titleDisplay = value; }
+        }
+
         [Browsable(false)]
         public int Depth { get; set; }
         [Browsable(false)]
@@ -587,6 +595,7 @@ namespace MaterialSkin.Controls
             */
             
             //Form title
+            if (titleDisplay)
             g.DrawString(Text, SkinManager.ROBOTO_MEDIUM_12, SkinManager.ColorScheme.TextBrush, new Rectangle(SkinManager.FORM_PADDING, STATUS_BAR_HEIGHT, Width, ACTION_BAR_HEIGHT), new StringFormat { LineAlignment = StringAlignment.Center });
 
             //Control buttons

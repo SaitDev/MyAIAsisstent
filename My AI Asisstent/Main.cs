@@ -24,7 +24,7 @@ namespace MyAIAsisstent
         private Login _login;
         private MaterialFlatButton lastActive;
         private DateTime remindAtTime;
-        private bool remindCreating = false, remindMessageInputed, noteEditing = false;
+        private bool remindCreating = false, remindMessageInputed, noteEditing = false, finishLoad = false;
         private DialogResult answer;
         private Cursor HandCursor;
         private MaterialLabel lastNoteLabelClick;
@@ -59,6 +59,7 @@ namespace MyAIAsisstent
             if (m.Msg == NativeMethods.WM_SHOWME)
             {
                 this.Show();
+                this.Activate();
             }
         }
 
@@ -95,8 +96,9 @@ namespace MyAIAsisstent
             if (Settings.Default.NoteCount > 0)
             {
                 NoteLabel0.Text = Settings.Default.Notes[0];
-                NoteLabel0.BackColor = Color.FromArgb(60, 60, 60);
-                //MessageBox.Show("Shit " + NoteLabel0.Size.ToString());
+                NoteLabel0.BackColor = NoteLabelColor(0);
+                //MessageBox.Show(SkinManager.GetFlatButtonHoverBackgroundColor().RemoveAlpha().ToString());
+                //MessageBox.Show(NoteLabel0.BackColor.ToString());
                 NoteLabel0.Tag = NoteLabel0.Location.Y + NoteLabel0.Size.Height;
                 /*
                 materialFlatButton9.Location = new Point(7,
@@ -114,7 +116,8 @@ namespace MyAIAsisstent
 
         private void Main_Shown(object sender, EventArgs e)
         {
-            lastActive = materialFlatButton3; 
+            lastActive = materialFlatButton3;
+            lastActive.Focus();
             materialLabel1.Font = SkinManager.ROBOTO_MEDIUM_12;
             timePickerPanel1.timePicker.ClockMenu.SnapWindow(this.Handle, this.Handle, new SnapPoint
             {
@@ -127,6 +130,7 @@ namespace MyAIAsisstent
                 materialSingleLineTextField1.Enabled = true;
             };
             HandCursor = new Cursor(LoadCursor(IntPtr.Zero, idCursor.HAND));
+            finishLoad = true;
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -156,7 +160,7 @@ namespace MyAIAsisstent
                         NoteLabel0.Focus();
                     }
                 }
-                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick.BackColor = NoteLabelColor(0);
                 lastNoteLabelClick = null;
                 materialFlatButton10.Hide();
                 materialFlatButton9.Hide();
@@ -168,17 +172,21 @@ namespace MyAIAsisstent
         private void Main_BackColorChanged(object sender, EventArgs e)
         {
             UpdateMenuButton();
+            if (finishLoad)
+            UpdateNoteLabelColor();
             materialContextMenuStrip1.BackColor = this.BackColor;
         }
 
         private void notifyIcon1_DoubleClick(object sender, EventArgs e)
         {
             this.Show();
+            this.Activate();
         }
 
         private void materialToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             this.Show();
+            this.Activate();
         }
 
         private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -202,15 +210,15 @@ namespace MyAIAsisstent
         {
             if (SkinManager.Theme == MaterialSkinManager.Themes.DARK)
             {
-                materialFlatButton1.BackColor = Color.FromArgb(75, 75, 75);
-                materialFlatButton2.BackColor = Color.FromArgb(75, 75, 75);
-                materialFlatButton3.BackColor = Color.FromArgb(75, 75, 75);
+                materialFlatButton1.BackColor = Color.FromArgb(71, 71, 71);
+                materialFlatButton2.BackColor = Color.FromArgb(71, 71, 71);
+                materialFlatButton3.BackColor = Color.FromArgb(71, 71, 71);
             }
             else
             {
-                materialFlatButton1.BackColor = Color.FromArgb(224, 224, 224);
-                materialFlatButton2.BackColor = Color.FromArgb(224, 224, 224);
-                materialFlatButton3.BackColor = Color.FromArgb(224, 224, 224);
+                materialFlatButton1.BackColor = Color.FromArgb(211, 211, 211);
+                materialFlatButton2.BackColor = Color.FromArgb(211, 211, 211);
+                materialFlatButton3.BackColor = Color.FromArgb(211, 211, 211);
             }
             materialFlatButton1.UseCustomBackColor = true;
             materialFlatButton2.UseCustomBackColor = true;
@@ -219,13 +227,19 @@ namespace MyAIAsisstent
             else materialFlatButton3.UseCustomBackColor = false;
         }
 
+        int animateProgress, animateStep;
+
         private void materialFlatButton_Click(object sender, EventArgs e)
         {
+            if (lastActive == ((MaterialFlatButton)sender)) return;
             lastActive.UseCustomBackColor = true;
             lastActive.Refresh();
             ((MaterialFlatButton)sender).UseCustomBackColor = false;
             ((MaterialFlatButton)sender).Refresh();
-            panel1.Location = ((MaterialFlatButton)sender).Location;
+            //panel1.Location = ((MaterialFlatButton)sender).Location;
+            animateProgress = 10;
+            animateStep = (((MaterialFlatButton)sender).Location.Y - lastActive.Location.Y) / 54;
+            timer1.Start();
             if ((MaterialFlatButton)sender != materialFlatButton1) lastActive = (MaterialFlatButton)sender;
         }
 
@@ -233,23 +247,30 @@ namespace MyAIAsisstent
         {
             if (materialTabControl1.SelectedIndex == 1 && !noteEditing)
             {
-                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
-                lastNoteLabelClick = null;
+                if (lastNoteLabelClick != null)
+                {
+                    lastNoteLabelClick.BackColor = NoteLabelColor(0);
+                    lastNoteLabelClick = null;
+                }
                 speed = 2;
                 timer3.Start();
             }
             materialFlatButton_Click(sender, e);
             if (_login._setting.Visible == true)
                 _login._setting.Hide();
+            _login._setting.materialCheckBox3.Checked = false;
             _login._setting.materialCheckBox3.Enabled = false;
             _login._setting.ShowDialog();
             _login._setting.materialCheckBox3.Enabled = true;
-            if (noteEditing) materialSingleLineTextField1.SelectAll();
             materialFlatButton1.UseCustomBackColor = true;
             materialFlatButton1.Refresh();
             lastActive.UseCustomBackColor = false;
             lastActive.Refresh();
-            panel1.Location = lastActive.Location;
+            animateProgress = 10;
+            animateStep = (lastActive.Location.Y - materialFlatButton1.Location.Y) / 54;
+            timer1.Start();
+            if (noteEditing) materialSingleLineTextField1.SelectAll();
+            //panel1.Location = lastActive.Location;
         }
 
         private void materialFlatButton2_Click(object sender, EventArgs e)
@@ -287,7 +308,7 @@ namespace MyAIAsisstent
                         NoteLabel0.Focus();
                     }
                 }
-                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick.BackColor = NoteLabelColor(0);
                 lastNoteLabelClick = null;
                 materialFlatButton10.Hide();
                 materialFlatButton9.Hide();
@@ -298,13 +319,24 @@ namespace MyAIAsisstent
             materialFlatButton4.Hide();
         }
 
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (animateProgress == 1)
+            {
+                timer1.Enabled = false;
+                return;
+            }
+            panel1.Location = new Point(panel1.Location.X, panel1.Location.Y + animateStep * animateProgress);
+            animateProgress--;
+        }
+
         #endregion
 
         private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (materialTabControl1.SelectedIndex == 1)
             {
-                materialFlatButton6.BackColor = Color.FromArgb(103, 103, 242);
                 if (remindCreating)
                 {
                     answer = MetroMessageBox.Show(this, "You have not saved reminder. Are you sure to discard?",
@@ -340,7 +372,7 @@ namespace MyAIAsisstent
             {
                 if (lastNoteLabelClick != null)
                 {
-                    ((MaterialLabel)lastNoteLabelClick).BackColor = Color.FromArgb(60, 60, 60);
+                    ((MaterialLabel)lastNoteLabelClick).BackColor = NoteLabelColor(0);
                     lastNoteLabelClick = null;
                     materialFlatButton10.Hide();
                     materialFlatButton9.Hide();
@@ -566,6 +598,29 @@ namespace MyAIAsisstent
             _login.newNote();
         }
 
+        private Color NoteLabelColor(NoteLabelStatus status)
+        {
+            switch (status)
+            {
+                case NoteLabelStatus.Default:
+                    {
+                        return SkinManager.Theme == MaterialSkinManager.Themes.DARK ? Color.FromArgb(60, 60, 60) 
+                                                                       : SkinManager.GetFlatButtonHoverBackgroundColor();
+                    }
+                case NoteLabelStatus.Hover:
+                    {
+                        return SkinManager.Theme == MaterialSkinManager.Themes.DARK ?
+                                             SkinManager.GetFlatButtonHoverBackgroundColor() : Color.FromArgb(205, 205, 205);
+                    }
+                case NoteLabelStatus.Clicked:
+                    {
+                        return SkinManager.Theme == MaterialSkinManager.Themes.DARK ? Color.FromArgb(100, 100, 100)
+                                                                                    : Color.FromArgb(170, 170, 170);
+                    }
+                default: return Color.Transparent;
+            }
+        }
+
         public void newNoteLabel(int i)
         {
             MaterialLabel mlabel = new MaterialLabel();
@@ -577,7 +632,7 @@ namespace MyAIAsisstent
             mlabel.MinimumSize = new Size(270, 40);
             mlabel.TextAlign = ContentAlignment.MiddleCenter;
             mlabel.Text = Settings.Default.Notes[i];
-            mlabel.BackColor = Color.FromArgb(60, 60, 60);
+            mlabel.BackColor = NoteLabelColor(0);
             mlabel.Location = new Point(5,
                    (int)((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i - 1).ToString()])).Tag + 8);
             mlabel.Size = new System.Drawing.Size(270, 40);
@@ -592,24 +647,34 @@ namespace MyAIAsisstent
         {
             Cursor = HandCursor;
             if (((MaterialLabel)sender) != lastNoteLabelClick)
-                ((MaterialLabel)sender).BackColor = SkinManager.GetFlatButtonHoverBackgroundColor();
+                ((MaterialLabel)sender).BackColor = NoteLabelColor(NoteLabelStatus.Hover);
         }
 
         private void NoteLabel_MouseLeave(object sender, EventArgs e)
         {
             Cursor = Cursors.Default;
             if (((MaterialLabel)sender) != lastNoteLabelClick)
-                ((MaterialLabel)sender).BackColor = Color.FromArgb(60, 60, 60);
+                ((MaterialLabel)sender).BackColor = NoteLabelColor(0);
         }
 
         private void NoteLabel_Click(object sender, EventArgs e)
         {
             if (lastNoteLabelClick != null)
-                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
-            ((MaterialLabel)sender).BackColor = Color.FromArgb(100, 100, 100);
+                lastNoteLabelClick.BackColor = NoteLabelColor(0);
+            ((MaterialLabel)sender).BackColor = NoteLabelColor(NoteLabelStatus.Clicked);
             speed = 8;
             timer2.Start();
             lastNoteLabelClick = ((MaterialLabel)sender);
+        }
+
+        private void UpdateNoteLabelColor()
+        {
+            for (int i = 0; i < Settings.Default.NoteCount; i++)
+            {
+                ((MaterialLabel)tabPage2.Controls["NoteLabel" + i.ToString()]).BackColor = NoteLabelColor(0);
+            }
+            if (lastNoteLabelClick != null)
+                lastNoteLabelClick.BackColor = NoteLabelColor(NoteLabelStatus.Clicked);
         }
 
         int noteLabelID;
@@ -638,7 +703,7 @@ namespace MyAIAsisstent
                 materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
                 materialSingleLineTextField1.Clear();
                 NoteLabel0.Focus();
-                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick.BackColor = NoteLabelColor(0);
                 lastNoteLabelClick = null;
                 noteEditing = false;
                 speed = 2;
@@ -659,7 +724,7 @@ namespace MyAIAsisstent
                 materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
                 materialSingleLineTextField1.Clear();
                 NoteLabel0.Focus();
-                lastNoteLabelClick.BackColor = Color.FromArgb(60, 60, 60);
+                lastNoteLabelClick.BackColor = NoteLabelColor(0);
                 lastNoteLabelClick = null;
                 noteEditing = false;
                 speed = 2;
@@ -687,17 +752,17 @@ namespace MyAIAsisstent
             }
             else
             {
-                ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i).ToString()])).Hide();
-                ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i).ToString()])).Name = "NoteLabelDeleting";
+                ((MaterialLabel)(tabPage2.Controls["NoteLabel" + i.ToString()])).Hide();
+                ((MaterialLabel)(tabPage2.Controls["NoteLabel" + i.ToString()])).Name = "NoteLabelDeleting";
                 if (i + 1 < Settings.Default.NoteCount)
                 {
                     var mlabel = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i + 1).ToString()]));
                     mlabel.Location = ((MaterialLabel)(tabPage2.Controls["NoteLabelDeleting"])).Location;
                     mlabel.Tag = mlabel.Location.Y + mlabel.Size.Height;
-                    mlabel.Name = "NoteLabel" + (i).ToString();
+                    mlabel.Name = "NoteLabel" + i.ToString();
                     for (int j = i + 2; j < Settings.Default.NoteCount; j++)
                     {
-                        var mlabelAfter = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (j).ToString()]));
+                        var mlabelAfter = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + j.ToString()]));
                         mlabelAfter.Location = new Point(5, 
                                        (int)((MaterialLabel)(tabPage2.Controls["NoteLabel" + (j - 2).ToString()])).Tag + 8);
                         mlabelAfter.Tag = mlabelAfter.Location.Y + mlabelAfter.Height;
@@ -716,7 +781,6 @@ namespace MyAIAsisstent
                 object objectTemp = lastNoteLabelClick as object;
                 lastNoteLabelClick = null;
                 NoteLabel_MouseLeave(objectTemp, new EventArgs());
-                //((MaterialLabel)lastNoteLabelClick).BackColor = BackColor = Color.FromArgb(60, 60, 60);
                 //lastNoteLabelClick.BackColor = BackColor = Color.FromArgb(60, 60, 60);
             }
             speed = 2;
@@ -782,15 +846,22 @@ namespace MyAIAsisstent
 
         public void UpdateNoteLabel(int i)
         {
-            var mlabel = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (i).ToString()]));
+            var mlabel = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + i.ToString()]));
             mlabel.Tag = mlabel.Location.Y + mlabel.Size.Height;
             for (int j = i + 1; j < Settings.Default.NoteCount; j++)
             {
-                var mlabelAfter = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + (j).ToString()]));
+                var mlabelAfter = ((MaterialLabel)(tabPage2.Controls["NoteLabel" + j.ToString()]));
                 mlabelAfter.Location = new Point(5,
                             (int)((MaterialLabel)(tabPage2.Controls["NoteLabel" + (j - 1).ToString()])).Tag + 8);
                 mlabelAfter.Tag = mlabelAfter.Location.Y + mlabelAfter.Size.Height;
             }
+        }
+
+        enum NoteLabelStatus
+        {
+            Default,
+            Hover,
+            Clicked
         }
 
         #endregion
@@ -807,7 +878,6 @@ namespace MyAIAsisstent
                 if (lastNoteLabelClick == null)
                 {
                     throw new Exception("lastNoteLabelClick is null");
-                    return;
                 }
                 lastNoteLabelClick.Text = materialSingleLineTextField1.Text;
             }

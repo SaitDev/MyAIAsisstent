@@ -63,7 +63,7 @@ namespace MaterialSkin
         public static Brush SECONDARY_TEXT_WHITE_BRUSH = new SolidBrush(SECONDARY_TEXT_WHITE);
         private static readonly Color DISABLED_OR_HINT_TEXT_WHITE = Color.FromArgb(77, 255, 255, 255);
         private static readonly Brush DISABLED_OR_HINT_TEXT_WHITE_BRUSH = new SolidBrush(DISABLED_OR_HINT_TEXT_WHITE);
-        private static readonly Color DIVIDERS_WHITE = Color.FromArgb(31, 255, 255, 255);
+        private static readonly Color DIVIDERS_WHITE = Color.FromArgb(25, 255, 255, 255);
         private static readonly Brush DIVIDERS_WHITE_BRUSH = new SolidBrush(DIVIDERS_WHITE);
 
         // Checkbox colors
@@ -108,7 +108,7 @@ namespace MaterialSkin
         private static readonly Brush CMS_BACKGROUND_HOVER_DARK_BRUSH = new SolidBrush(CMS_BACKGROUND_DARK_HOVER);
 
         //Application background
-        private static readonly Color BACKGROUND_LIGHT = Color.FromArgb(255, 255, 255, 255);
+        private static readonly Color BACKGROUND_LIGHT = Color.FromArgb(255, 240, 240, 240);
         private static Brush BACKGROUND_LIGHT_BRUSH = new SolidBrush(BACKGROUND_LIGHT);
 
         private static readonly Color BACKGROUND_DARK = Color.FromArgb(255, 51, 51, 51);

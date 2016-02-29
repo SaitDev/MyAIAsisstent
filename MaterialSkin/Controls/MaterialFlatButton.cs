@@ -26,6 +26,7 @@ namespace MaterialSkin.Controls
             set { useCustomBackColor = value; }
         }
 
+
         [Browsable(false)]
         public int Depth { get; set; }
         [Browsable(false)]
@@ -112,13 +113,17 @@ namespace MaterialSkin.Controls
             //Hover
             if (useCustomBackColor)
             {
-                Color c = SkinManager.GetFlatButtonHoverBackgroundColor();
+                Color c = SkinManager.Theme == MaterialSkinManager.Themes.LIGHT ?
+                      Color.FromArgb(30.PercentageToColorComponent(), SkinManager.GetFlatButtonHoverBackgroundColor())
+                    : Color.FromArgb(10.PercentageToColorComponent(), SkinManager.GetFlatButtonHoverBackgroundColor());
                 using (Brush b = new SolidBrush(Color.FromArgb((int)(hoverAnimationManager.GetProgress() * c.A), c.RemoveAlpha())))
                     g.FillRectangle(b, ClientRectangle);
             }
             else
             {
-                Color cc = Color.FromArgb(10.PercentageToColorComponent(), SkinManager.GetFlatButtonHoverBackgroundColor());
+                Color cc = SkinManager.Theme == MaterialSkinManager.Themes.LIGHT ?
+                      Color.FromArgb(46.PercentageToColorComponent(), SkinManager.GetFlatButtonHoverBackgroundColor()) 
+                    : Color.FromArgb(7.PercentageToColorComponent(), SkinManager.GetFlatButtonHoverBackgroundColor());
                 using (Brush b = new SolidBrush(Color.FromArgb((int)(hoverAnimationManager.GetProgress() * cc.A), cc.RemoveAlpha())))
                     g.FillRectangle(b, ClientRectangle);
             }

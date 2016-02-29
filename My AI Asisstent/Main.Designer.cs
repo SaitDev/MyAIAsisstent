@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Time");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Day");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Message to remind");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Time");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Day");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Message to remind");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
@@ -122,6 +122,7 @@
             this.materialTabControl1.SelectedIndex = 0;
             this.materialTabControl1.Size = new System.Drawing.Size(280, 337);
             this.materialTabControl1.TabIndex = 0;
+            this.materialTabControl1.TabStop = false;
             this.materialTabControl1.Visible = false;
             this.materialTabControl1.SelectedIndexChanged += new System.EventHandler(this.materialTabControl1_SelectedIndexChanged);
             // 
@@ -152,9 +153,10 @@
             this.materialFlatButton5.Location = new System.Drawing.Point(198, 299);
             this.materialFlatButton5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton5.Name = "materialFlatButton5";
-            this.materialFlatButton5.Primary = false;
+            this.materialFlatButton5.Primary = true;
             this.materialFlatButton5.Size = new System.Drawing.Size(40, 35);
             this.materialFlatButton5.TabIndex = 9;
+            this.materialFlatButton5.TabStop = false;
             this.materialFlatButton5.UseCustomBackColor = false;
             this.materialFlatButton5.UseVisualStyleBackColor = true;
             this.materialFlatButton5.Visible = false;
@@ -164,7 +166,7 @@
             // 
             this.monthCalendar1.AllowDrop = true;
             this.monthCalendar1.CausesValidation = false;
-            this.monthCalendar1.Location = new System.Drawing.Point(4, 159);
+            this.monthCalendar1.Location = new System.Drawing.Point(4, 160);
             this.monthCalendar1.MaxDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 8;
@@ -178,11 +180,12 @@
             // timePickerPanel1
             // 
             this.timePickerPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.timePickerPanel1.Location = new System.Drawing.Point(171, 167);
+            this.timePickerPanel1.Location = new System.Drawing.Point(171, 164);
             this.timePickerPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.timePickerPanel1.Name = "timePickerPanel1";
             this.timePickerPanel1.Size = new System.Drawing.Size(100, 38);
             this.timePickerPanel1.TabIndex = 4;
+            this.timePickerPanel1.TabStop = false;
             this.timePickerPanel1.Visible = false;
             // 
             // materialListView3
@@ -196,13 +199,13 @@
             this.materialListView3.FullRowSelect = true;
             this.materialListView3.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.materialListView3.Location = new System.Drawing.Point(140, 115);
+            listViewItem7});
+            this.materialListView3.Location = new System.Drawing.Point(140, 110);
             this.materialListView3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView3.MouseState = MaterialSkin.MouseState.OUT;
             this.materialListView3.Name = "materialListView3";
             this.materialListView3.OwnerDraw = true;
-            this.materialListView3.Size = new System.Drawing.Size(136, 50);
+            this.materialListView3.Size = new System.Drawing.Size(136, 45);
             this.materialListView3.TabIndex = 6;
             this.materialListView3.UseCompatibleStateImageBehavior = false;
             this.materialListView3.View = System.Windows.Forms.View.Details;
@@ -226,16 +229,16 @@
             this.materialListView2.FullRowSelect = true;
             this.materialListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView2.ImeMode = System.Windows.Forms.ImeMode.On;
-            listViewItem2.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
             this.materialListView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
-            this.materialListView2.Location = new System.Drawing.Point(4, 115);
+            listViewItem8});
+            this.materialListView2.Location = new System.Drawing.Point(4, 110);
             this.materialListView2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView2.MouseState = MaterialSkin.MouseState.OUT;
             this.materialListView2.MultiSelect = false;
             this.materialListView2.Name = "materialListView2";
             this.materialListView2.OwnerDraw = true;
-            this.materialListView2.Size = new System.Drawing.Size(136, 50);
+            this.materialListView2.Size = new System.Drawing.Size(136, 45);
             this.materialListView2.TabIndex = 5;
             this.materialListView2.UseCompatibleStateImageBehavior = false;
             this.materialListView2.View = System.Windows.Forms.View.Details;
@@ -253,7 +256,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(15, 16);
+            this.materialLabel1.Location = new System.Drawing.Point(15, 15);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Padding = new System.Windows.Forms.Padding(8);
@@ -273,8 +276,8 @@
             this.materialListView1.FullRowSelect = true;
             this.materialListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
-            this.materialListView1.Location = new System.Drawing.Point(4, 70);
+            listViewItem9});
+            this.materialListView1.Location = new System.Drawing.Point(4, 65);
             this.materialListView1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView1.MouseState = MaterialSkin.MouseState.OUT;
             this.materialListView1.MultiSelect = false;
@@ -302,9 +305,10 @@
             this.materialFlatButton4.Location = new System.Drawing.Point(239, 299);
             this.materialFlatButton4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFlatButton4.Name = "materialFlatButton4";
-            this.materialFlatButton4.Primary = false;
+            this.materialFlatButton4.Primary = true;
             this.materialFlatButton4.Size = new System.Drawing.Size(40, 35);
             this.materialFlatButton4.TabIndex = 0;
+            this.materialFlatButton4.TabStop = false;
             this.materialFlatButton4.UseCustomBackColor = false;
             this.materialFlatButton4.UseVisualStyleBackColor = true;
             this.materialFlatButton4.Visible = false;
@@ -338,6 +342,7 @@
             this.materialFlatButton9.Primary = false;
             this.materialFlatButton9.Size = new System.Drawing.Size(36, 36);
             this.materialFlatButton9.TabIndex = 4;
+            this.materialFlatButton9.TabStop = false;
             this.materialFlatButton9.UseCustomBackColor = false;
             this.materialFlatButton9.UseVisualStyleBackColor = true;
             this.materialFlatButton9.Visible = false;
@@ -356,6 +361,7 @@
             this.materialFlatButton10.Primary = false;
             this.materialFlatButton10.Size = new System.Drawing.Size(36, 36);
             this.materialFlatButton10.TabIndex = 5;
+            this.materialFlatButton10.TabStop = false;
             this.materialFlatButton10.UseCustomBackColor = false;
             this.materialFlatButton10.UseVisualStyleBackColor = true;
             this.materialFlatButton10.Visible = false;
@@ -393,6 +399,7 @@
             this.materialFlatButton6.Primary = false;
             this.materialFlatButton6.Size = new System.Drawing.Size(40, 36);
             this.materialFlatButton6.TabIndex = 2;
+            this.materialFlatButton6.TabStop = false;
             this.materialFlatButton6.UseCustomBackColor = false;
             this.materialFlatButton6.UseVisualStyleBackColor = true;
             this.materialFlatButton6.Click += new System.EventHandler(this.materialFlatButton6_Click);
@@ -445,6 +452,11 @@
             this.materialToolStripMenuItem1.Text = "Exit";
             this.materialToolStripMenuItem1.Click += new System.EventHandler(this.materialToolStripMenuItem1_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // materialFlatButton3
             // 
             this.materialFlatButton3.AutoUpper = true;
@@ -457,6 +469,7 @@
             this.materialFlatButton3.Primary = false;
             this.materialFlatButton3.Size = new System.Drawing.Size(49, 46);
             this.materialFlatButton3.TabIndex = 6;
+            this.materialFlatButton3.TabStop = false;
             this.materialFlatButton3.UseCustomBackColor = false;
             this.materialFlatButton3.UseVisualStyleBackColor = false;
             this.materialFlatButton3.Click += new System.EventHandler(this.materialFlatButton3_Click);
@@ -473,6 +486,7 @@
             this.materialFlatButton2.Primary = false;
             this.materialFlatButton2.Size = new System.Drawing.Size(49, 46);
             this.materialFlatButton2.TabIndex = 4;
+            this.materialFlatButton2.TabStop = false;
             this.materialFlatButton2.UseCustomBackColor = false;
             this.materialFlatButton2.UseVisualStyleBackColor = false;
             this.materialFlatButton2.Click += new System.EventHandler(this.materialFlatButton2_Click);
@@ -488,6 +502,7 @@
             this.materialRaisedButton1.Primary = true;
             this.materialRaisedButton1.Size = new System.Drawing.Size(49, 46);
             this.materialRaisedButton1.TabIndex = 3;
+            this.materialRaisedButton1.TabStop = false;
             this.materialRaisedButton1.UseCustomBackColor = false;
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
             this.materialRaisedButton1.Visible = false;
@@ -504,6 +519,7 @@
             this.materialFlatButton1.Primary = false;
             this.materialFlatButton1.Size = new System.Drawing.Size(49, 46);
             this.materialFlatButton1.TabIndex = 1;
+            this.materialFlatButton1.TabStop = false;
             this.materialFlatButton1.UseCustomBackColor = false;
             this.materialFlatButton1.UseVisualStyleBackColor = false;
             this.materialFlatButton1.Click += new System.EventHandler(this.materialFlatButton1_Click);
@@ -539,7 +555,8 @@
             this.Name = "Main";
             this.Sizable = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Main";
+            this.Text = "AI Asisstent";
+            this.TitleDisplay = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.Shown += new System.EventHandler(this.Main_Shown);
@@ -555,6 +572,7 @@
         }
 
         #endregion
+
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton1;
