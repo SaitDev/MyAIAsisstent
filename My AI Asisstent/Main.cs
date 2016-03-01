@@ -15,18 +15,20 @@ using Opulos.Core.UI;
 using System.Runtime.InteropServices;
 using MetroFramework;
 using MyAIAsisstent.Properties;
+using MyAIAsisstent.Controls;
 
 namespace MyAIAsisstent
 {
     public partial class Main : MaterialForm
     {
         public MaterialSkinManager materialSkinManager;
+        public static bool Stop_AI_Asisstent = false;
         private Login _login;
         private MaterialFlatButton lastActive;
         private DateTime remindAtTime;
         private bool remindCreating = false, remindMessageInputed, noteEditing = false, finishLoad = false;
         private DialogResult answer;
-        private Cursor HandCursor;
+        public Cursor HandCursor;
         private MaterialLabel lastNoteLabelClick;
 
         #region Form Managament
@@ -48,7 +50,7 @@ namespace MyAIAsisstent
             materialSkinManager.AddFormToManage(this);
             _login = new Login(this);
             Show();
-            
+
             //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
             //MessageBox.Show(config.FilePath);
         }
@@ -116,15 +118,17 @@ namespace MyAIAsisstent
 
         private void Main_Shown(object sender, EventArgs e)
         {
+            materialFlatButton3.Focus();
             lastActive = materialFlatButton3;
-            lastActive.Focus();
+            materialSingleLineTextField1.Enabled = true;
             materialLabel1.Font = SkinManager.ROBOTO_MEDIUM_12;
             timePickerPanel1.timePicker.ClockMenu.SnapWindow(this.Handle, this.Handle, new SnapPoint
             {
                 OffsetConstantX = this.Location.X + 180,
                 OffsetConstantY = materialListView1.Location.Y + 104
             });
-            timePickerPanel1.timePicker.ValueChanged += TimePicker_ValueChanged;
+            //timePickerPanel1.timePicker.ValueChanged += TimePicker_ValueChanged;
+            timePickerPanel1.timePicker.ClockMenu.ClockButtonOK.Click += TimePicker_Choosed;
             timePickerPanel1.timePicker.ClockMenu.Closed += delegate (object o, ToolStripDropDownClosedEventArgs evnt)
             {
                 materialSingleLineTextField1.Enabled = true;
@@ -143,6 +147,8 @@ namespace MyAIAsisstent
                                                                 "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 140);
                     if (answer == DialogResult.No)
                     {
+                        Stop_AI_Asisstent = false;
+                        e.Cancel = true;
                         materialSingleLineTextField1.SelectAll();
                         return;
                     }
@@ -165,8 +171,11 @@ namespace MyAIAsisstent
                 materialFlatButton10.Hide();
                 materialFlatButton9.Hide();
             }
-            this.Hide();
-            e.Cancel = true;
+            if (!Stop_AI_Asisstent)
+            {
+                this.Hide();
+                e.Cancel = true;
+            }
         }
 
         private void Main_BackColorChanged(object sender, EventArgs e)
@@ -191,6 +200,9 @@ namespace MyAIAsisstent
 
         private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Stop_AI_Asisstent = true;
+            this.Close();
+            /*
             try
             {
                 Environment.Exit(0);
@@ -200,6 +212,7 @@ namespace MyAIAsisstent
                 string mess = string.Format("Exception error: {0}", exc.Message);
                 MessageBox.Show(mess);
             }
+            */
         }
 
         #endregion
@@ -305,7 +318,7 @@ namespace MyAIAsisstent
                         lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
                         materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
                         materialSingleLineTextField1.Clear();
-                        NoteLabel0.Focus();
+                        materialFlatButton3.Focus();
                     }
                 }
                 lastNoteLabelClick.BackColor = NoteLabelColor(0);
@@ -333,7 +346,7 @@ namespace MyAIAsisstent
 
         #endregion
 
-        private void materialTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void materialTabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (materialTabControl1.SelectedIndex == 1)
             {
@@ -363,8 +376,10 @@ namespace MyAIAsisstent
                     }
                     else
                     {
-                        materialTabControl1.SelectedIndex = 0;
-                        tabPage1.Show();
+                        e.Cancel = true;
+                        //materialTabControl1.SelectTab(0);
+                        //tabPage2.Hide();
+                        //tabPage1.Show();
                     }
                 }
             }
@@ -372,6 +387,33 @@ namespace MyAIAsisstent
             {
                 if (lastNoteLabelClick != null)
                 {
+                    if (noteEditing)
+                    {
+                        answer = MetroMessageBox.Show(this, "You have not saved Note. Are you sure to discard changes?",
+                                                                "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 140);
+                        if (answer == DialogResult.No)
+                        {
+                            e.Cancel = true;
+                            //materialTabControl1.SelectedIndex = 1;
+                            //tabPage1.Hide();
+                            //tabPage2.Show();
+                            materialSingleLineTextField1.SelectAll();
+                            return;
+                        }
+                        else
+                        {
+                            noteEditing = false;
+                            if (lastNoteLabelClick == null)
+                            {
+                                throw new Exception("lastNoteLabelClick is null");
+                            }
+                            int.TryParse(lastNoteLabelClick.Name.Remove(0, 9), out noteLabelID);
+                            lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
+                            materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                            materialSingleLineTextField1.Clear();
+                            materialLabel1.Focus();
+                        }
+                    }
                     ((MaterialLabel)lastNoteLabelClick).BackColor = NoteLabelColor(0);
                     lastNoteLabelClick = null;
                     materialFlatButton10.Hide();
@@ -382,7 +424,12 @@ namespace MyAIAsisstent
 
         #region Reminder Module
 
-        private void TimePicker_ValueChanged(object sender, ValueChangedEventArgs<DateTime> e)
+        private void newReminderControl(int i)
+        {
+
+        }
+
+        private void TimePicker_Choosed(object sender, EventArgs e)
         {
             DateTime temp = DateTime.Now;
             if (remindAtTime.Date < temp.Date)
@@ -403,12 +450,13 @@ namespace MyAIAsisstent
             materialListView3.Items[0].Text = timePickerPanel1.timePicker.Value.ToShortTimeString();
             materialSingleLineTextField1.Enabled = true;
         }
-
+        
         private void materialFlatButton4_Click(object sender, EventArgs e)
         {
             if (!remindCreating)
             {
                 remindCreating = true;
+                panel3.Location = panel2.Location;
                 materialLabel1.Text = "WHAT do you want me to remind?";
                 materialLabel1.Show();
                 materialLabel1.BackColor = SkinManager.GetFlatButtonHoverBackgroundColor();
@@ -471,7 +519,7 @@ namespace MyAIAsisstent
                        rmd.FinishTime = DateTime.Now;
                        rmd.Completed = true;
                        Settings.Default.Save();
-
+                       //rmd.Dispose();
                        ((System.Timers.Timer)o).Stop();
                        ((System.Timers.Timer)o).Enabled = false;
                        ((System.Timers.Timer)o).Dispose();
@@ -483,11 +531,13 @@ namespace MyAIAsisstent
                 reminder.Message = materialListView1.Items[0].Text;
                 reminder.Time = remindAtTime;
                 Settings.Default.Save();
-                //rmd.Dispose();
+                panel3.Location = new Point(272, 0);
+                /*
                 materialLabel1.Hide();
                 materialListView1.Hide();
                 materialListView2.Hide();
                 materialListView3.Hide();
+                */
                 materialListView1.Items[0].Text = "Message to remind";
                 materialListView2.Items[0].Text = "Day";
                 materialListView3.Items[0].Text = "Time";
@@ -521,11 +571,14 @@ namespace MyAIAsisstent
             answer = MetroMessageBox.Show(this, "Are you sure to cancel this reminder?", "",
                                                              MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 140);
             if (answer == DialogResult.No) return;
+            panel3.Location = new Point(272, 0);
+            /*
             materialLabel1.Hide();
             materialListView1.Hide();
             materialListView2.Hide();
             materialListView3.Hide();
             monthCalendar1.Hide();
+            */
             if (timePickerPanel1.timePicker.ClockMenu.Visible)
                 timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
             materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
@@ -564,9 +617,9 @@ namespace MyAIAsisstent
         {
             DateTime temp = DateTime.Now;
             remindAtTime = monthCalendar1.SelectionRange.Start.Date + remindAtTime.TimeOfDay;
-            if ((remindAtTime.Day - temp.Day) == 0)
+            if (remindAtTime.Date == temp.Date)
                 materialListView2.Items[0].Text = "Today";
-            else if ((remindAtTime.Day - temp.Day) == 1)
+            else if (remindAtTime.AddDays(1).Date == temp.Date)
                 materialListView2.Items[0].Text = "Tomorrow";
             else materialListView2.Items[0].Text = monthCalendar1.SelectionRange.Start.ToShortDateString();
             monthCalendar1.Hide();
@@ -894,7 +947,8 @@ namespace MyAIAsisstent
                 }
             }
         }
-        
+
+        #region Extension user32.dll function
 
         private const int SWP_NOSIZE = 0x0001;
         private const int SWP_NOACTIVATE = 0x0010;
@@ -911,5 +965,8 @@ namespace MyAIAsisstent
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr LoadCursor(IntPtr hInstance, idCursor cursor);
+
+        #endregion
+
     }
 }

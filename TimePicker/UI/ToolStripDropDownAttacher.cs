@@ -128,6 +128,7 @@ public class ToolStripDropDownAttacher : IMessageFilter {
 		// seems like PreFilterMessage is the only way to prevent the focus from transferring to the next control
 		// on the same main window. The TAB key is never fired in the c.KeyDown event, and trying to use
 		// PreviewKeyDown doesn't give an option to block the key (unlike overriding the ProcessCmdKey method).
+        if (!Menu.IsDisposed)
 		if (m.HWnd == Control.Handle && m.Msg == WM_KEYDOWN && m.WParam.ToInt32() == VK_TAB && Menu.Visible && Menu.TabStop) {
 			isFocusing = true;
 			Menu.Focus();

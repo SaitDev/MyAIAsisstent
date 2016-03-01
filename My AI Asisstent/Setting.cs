@@ -19,7 +19,7 @@ namespace MyAIAsisstent
         private Login _login;
         private MaterialSkinManager materialSkinManager;
         RegistryKey regApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-        private string bindadress;
+        //private string bindadress;
         private int noteIndex;
         public bool fromMain = false;
 
@@ -31,7 +31,6 @@ namespace MyAIAsisstent
             materialSkinManager.AddFormToManage(this);
         }
 
-
         private void Setting_Load(object sender, EventArgs e)
         {
             this.Opacity = 1;
@@ -40,7 +39,6 @@ namespace MyAIAsisstent
                 materialRadioButton2.Checked = true;
             }
         }
-
 
         private void Setting_Shown(object sender, EventArgs e)
         {
@@ -128,6 +126,9 @@ namespace MyAIAsisstent
         private async void DelayExit()
         {
             await Task.Delay(300);
+            Main.Stop_AI_Asisstent = true;
+            _login._main.Close();
+            /*
             try
             {
                 Environment.Exit(0);
@@ -137,6 +138,7 @@ namespace MyAIAsisstent
                 string mess = string.Format("Exception error: {0}", exc.Message);
                 MessageBox.Show(mess);
             }
+            */
         }
 
         public void bindSetting (int index)

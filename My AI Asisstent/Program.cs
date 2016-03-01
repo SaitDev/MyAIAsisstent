@@ -21,7 +21,7 @@ namespace MyAIAsisstent
         [STAThread]
         static void Main()
         {
-            if (mutex.WaitOne(TimeSpan.Zero, true))
+            if (mutex.WaitOne(500, true))
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -32,7 +32,7 @@ namespace MyAIAsisstent
                     Properties.Settings.Default.Save();
                 }
                 _main = new Main();
-                Application.Run();
+                Application.Run(_main);
                 mutex.ReleaseMutex();
             }
             else
