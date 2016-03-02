@@ -17,29 +17,49 @@ namespace MyAIAsisstent
         /// 
 
         public static Main _main;
-        static Mutex mutex = new Mutex(true, "MyAIAsisstent");
+        static bool NoMutexException;
+        static Mutex mutex = new Mutex(false, "MyAIAsisstent");
+        static int timeRetry = 3;
+        
+
         [STAThread]
         static void Main()
         {
-            if (mutex.WaitOne(500, true))
+            do
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                if (Properties.Settings.Default.UpdateSettingsRequired)
+                Debug.WriteLine("  " + timeRetry.ToString());
+                try
                 {
-                    Properties.Settings.Default.Upgrade();
-                    Properties.Settings.Default.UpdateSettingsRequired = false;
-                    Properties.Settings.Default.Save();
+                    if (mutex.WaitOne(TimeSpan.Zero, true))
+                    {
+                        NoMutexException = false;
+                        Application.EnableVisualStyles();
+                        Application.SetCompatibleTextRenderingDefault(false);
+                        if (Properties.Settings.Default.UpdateSettingsRequired)
+                        {
+                            Properties.Settings.Default.Upgrade();
+                            Properties.Settings.Default.UpdateSettingsRequired = false;
+                            Properties.Settings.Default.Save();
+                        }
+                        _main = new Main();
+                        Application.Run(_main);
+                        mutex.ReleaseMutex();
+                    }
+                    else
+                    {
+                        NativeMethods.PostMessage((IntPtr)NativeMethods.HWND_BROADCAST, NativeMethods.WM_SHOWME,
+                            IntPtr.Zero, IntPtr.Zero);
+                    }
                 }
-                _main = new Main();
-                Application.Run(_main);
-                mutex.ReleaseMutex();
+                catch (AbandonedMutexException exc)
+                {
+                    NoMutexException = true;
+                    Debug.WriteLine("\n*****   *****  ***** Found an AbandonedMutexException. Retry now... \n");
+                    mutex.ReleaseMutex();
+                    timeRetry--;
+                }
             }
-            else
-            {
-                NativeMethods.PostMessage((IntPtr)NativeMethods.HWND_BROADCAST, NativeMethods.WM_SHOWME,
-                    IntPtr.Zero, IntPtr.Zero);
-            }
+            while (NoMutexException && timeRetry > 0);
         }
     }
 }
