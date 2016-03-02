@@ -125,7 +125,7 @@ namespace MyAIAsisstent
 
         private async void DelayExit()
         {
-            await Task.Delay(300);
+            await Task.Delay(400);
             Main.Stop_AI_Asisstent = true;
             _login._main.Close();
             /*

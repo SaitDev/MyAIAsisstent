@@ -133,6 +133,26 @@ namespace MyAIAsisstent.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap home_blue {
+            get {
+                object obj = ResourceManager.GetObject("home_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap note_blue {
+            get {
+                object obj = ResourceManager.GetObject("note_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ok_blue {
             get {
                 object obj = ResourceManager.GetObject("ok_blue", resourceCulture);
@@ -146,6 +166,16 @@ namespace MyAIAsisstent.Properties {
         internal static System.Drawing.Bitmap quit_blue {
             get {
                 object obj = ResourceManager.GetObject("quit_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap reminder_blue {
+            get {
+                object obj = ResourceManager.GetObject("reminder_blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

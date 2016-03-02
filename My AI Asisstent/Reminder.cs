@@ -14,7 +14,7 @@ namespace MyAIAsisstent
     //[SettingsSerializeAs(SettingsSerializeAs.String)]
     //[SettingsSerializeAs(SettingsSerializeAs.Xml)]
     //[DefaultSettingValue("")]
-    [Serializable]
+    //[Serializable]
     public class Reminder : IDisposable
     {
         private int index;

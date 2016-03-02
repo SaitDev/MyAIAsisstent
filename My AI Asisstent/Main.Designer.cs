@@ -62,15 +62,20 @@
             this.materialToolStripMenuItem2 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.materialToolStripMenuItem1 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer5 = new System.Windows.Forms.Timer(this.components);
+            this.timer6 = new System.Windows.Forms.Timer(this.components);
             this.materialFlatButton3 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialFlatButton2 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -148,6 +153,7 @@
             // 
             this.materialFlatButton5.AutoUpper = true;
             this.materialFlatButton5.Depth = 0;
+            this.materialFlatButton5.Enabled = false;
             this.materialFlatButton5.Icon = global::MyAIAsisstent.Properties.Resources.clear_blue;
             this.materialFlatButton5.IconSize = new System.Drawing.Size(25, 25);
             this.materialFlatButton5.Location = new System.Drawing.Point(198, 299);
@@ -188,7 +194,7 @@
             this.panel3.Controls.Add(this.materialListView1);
             this.panel3.Controls.Add(this.monthCalendar1);
             this.panel3.Controls.Add(this.timePickerPanel1);
-            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Location = new System.Drawing.Point(272, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(272, 311);
             this.panel3.TabIndex = 11;
@@ -329,10 +335,12 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.ReminderControl0);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(272, 311);
             this.panel2.TabIndex = 10;
+            this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
             // tabPage2
             // 
@@ -411,7 +419,7 @@
             // 
             this.materialFlatButton6.AutoUpper = true;
             this.materialFlatButton6.Depth = 0;
-            this.materialFlatButton6.Icon = ((System.Drawing.Image)(resources.GetObject("materialFlatButton6.Icon")));
+            this.materialFlatButton6.Icon = global::MyAIAsisstent.Properties.Resources.note_blue;
             this.materialFlatButton6.IconSize = new System.Drawing.Size(28, 26);
             this.materialFlatButton6.Location = new System.Drawing.Point(238, 299);
             this.materialFlatButton6.MouseState = MaterialSkin.MouseState.HOVER;
@@ -477,11 +485,21 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer5
+            // 
+            this.timer5.Interval = 10;
+            this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
+            // 
+            // timer6
+            // 
+            this.timer6.Interval = 10;
+            this.timer6.Tick += new System.EventHandler(this.timer6_Tick);
+            // 
             // materialFlatButton3
             // 
             this.materialFlatButton3.AutoUpper = true;
             this.materialFlatButton3.Depth = 0;
-            this.materialFlatButton3.Icon = ((System.Drawing.Image)(resources.GetObject("materialFlatButton3.Icon")));
+            this.materialFlatButton3.Icon = global::MyAIAsisstent.Properties.Resources.home_blue;
             this.materialFlatButton3.IconSize = new System.Drawing.Size(36, 36);
             this.materialFlatButton3.Location = new System.Drawing.Point(1, 66);
             this.materialFlatButton3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -498,7 +516,7 @@
             // 
             this.materialFlatButton2.AutoUpper = true;
             this.materialFlatButton2.Depth = 0;
-            this.materialFlatButton2.Icon = ((System.Drawing.Image)(resources.GetObject("materialFlatButton2.Icon")));
+            this.materialFlatButton2.Icon = global::MyAIAsisstent.Properties.Resources.reminder_blue;
             this.materialFlatButton2.IconSize = new System.Drawing.Size(36, 36);
             this.materialFlatButton2.Location = new System.Drawing.Point(1, 120);
             this.materialFlatButton2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -544,6 +562,11 @@
             this.materialFlatButton1.UseVisualStyleBackColor = false;
             this.materialFlatButton1.Click += new System.EventHandler(this.materialFlatButton1_Click);
             // 
+            // timer4
+            // 
+            this.timer4.Interval = 10;
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
+            // 
             // timer2
             // 
             this.timer2.Interval = 10;
@@ -553,6 +576,21 @@
             // 
             this.timer3.Interval = 10;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // ReminderControl0
+            // 
+            this.ReminderControl0.AutoSize = true;
+            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.ReminderControl0.Enabled = false;
+            this.ReminderControl0.Icon = null;
+            this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
+            this.ReminderControl0.Message = "Message";
+            this.ReminderControl0.MinimumSize = new System.Drawing.Size(272, 50);
+            this.ReminderControl0.Name = "ReminderControl0";
+            this.ReminderControl0.ParentForm = this;
+            this.ReminderControl0.RemindTime = new System.DateTime(((long)(0)));
+            this.ReminderControl0.Size = new System.Drawing.Size(272, 50);
+            this.ReminderControl0.TabIndex = 3;
             // 
             // Main
             // 
@@ -585,6 +623,8 @@
             this.tabPage1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.materialContextMenuStrip1.ResumeLayout(false);
@@ -623,11 +663,15 @@
         private MaterialSkin.Controls.MaterialLabel NoteLabel0;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton9;
         private MaterialSkin.Controls.MaterialFlatButton materialFlatButton10;
-        private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timer5;
+        private System.Windows.Forms.Timer timer6;
         public MaterialSkin.Controls.MaterialSingleLineTextField materialSingleLineTextField1;
         public System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private Controls.ReminderControl ReminderControl0;
+        private System.Windows.Forms.Timer timer4;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer3;
+        public System.Windows.Forms.Panel panel2;
     }
 }
