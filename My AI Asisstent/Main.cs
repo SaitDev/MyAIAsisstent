@@ -97,12 +97,13 @@ namespace MyAIAsisstent
                     t.Start();
                 }
             }
+            if (Settings.Default.RemindMessage != null)
             if (Settings.Default.RemindMessage.Count > 0)
             {
                 ReminderControl0.ParentForm = this;
                 ReminderControl0.Message = Settings.Default.RemindMessage[0];
                 ReminderControl0.RemindTime = Settings.Default.RemindAt[0];
-                ReminderControl0.Enabled = true;
+                ReminderControl0.Show();
                 ReminderControl0.Tag = ReminderControl0.Location.Y + ReminderControl0.Size.Height;
                 for (int i = 1; i < Settings.Default.RemindMessage.Count; i++)
                 {
@@ -113,8 +114,6 @@ namespace MyAIAsisstent
             {
                 NoteLabel0.Text = Settings.Default.Notes[0];
                 NoteLabel0.BackColor = NoteLabelColor(0);
-                //MessageBox.Show(SkinManager.GetFlatButtonHoverBackgroundColor().RemoveAlpha().ToString());
-                //MessageBox.Show(NoteLabel0.BackColor.ToString());
                 NoteLabel0.Tag = NoteLabel0.Location.Y + NoteLabel0.Size.Height;
                 /*
                 materialFlatButton9.Location = new Point(7,
@@ -180,8 +179,11 @@ namespace MyAIAsisstent
                         NoteLabel0.Focus();
                     }
                 }
-                lastNoteLabelClick.BackColor = NoteLabelColor(0);
-                lastNoteLabelClick = null;
+                if (lastNoteLabelClick != null)
+                {
+                    lastNoteLabelClick.BackColor = NoteLabelColor(0);
+                    lastNoteLabelClick = null;
+                }
                 materialFlatButton10.Hide();
                 materialFlatButton9.Hide();
             }
@@ -985,11 +987,18 @@ namespace MyAIAsisstent
 
         public void newNoteLabel(int i)
         {
+            if (i == 0)
+            {
+                NoteLabel0.Text = Settings.Default.Notes[0];
+                NoteLabel0.Tag = NoteLabel0.Location.Y + NoteLabel0.Size.Height;
+                NoteLabel0.Show();
+                return;
+            }
             MaterialLabel mlabel = new MaterialLabel();
             mlabel.Name = "NoteLabel" + i.ToString();
             mlabel.AutoEllipsis = true;
             mlabel.AutoSize = true;
-            mlabel.Font = new System.Drawing.Font("Roboto", 11F);
+            mlabel.Font = new Font("Roboto", 11F);
             mlabel.MaximumSize = new Size(270, 60);
             mlabel.MinimumSize = new Size(270, 40);
             mlabel.TextAlign = ContentAlignment.MiddleCenter;

@@ -39,17 +39,25 @@ namespace MyAIAsisstent
             }
             else
             {
-                Point[] temp1 = Settings.Default.Locations;
-                Array.Resize<Point>(ref temp1, index + 1);
-                Settings.Default.Locations = temp1;
-                double[] temp2 = Settings.Default.Opacitys;
-                Array.Resize<Double>(ref temp2, index + 1);
-                Settings.Default.Opacitys = temp2;
-                bool[] temp3 = Settings.Default.NoteOnTop;
-                Array.Resize<Boolean>(ref temp3, index + 1);
-                Settings.Default.NoteOnTop = temp3;
-
-                Settings.Default.Locations[index] = new Point(rnd.Next(300), rnd.Next(300));
+                if (Settings.Default.NoteCount == 0)
+                {
+                    Settings.Default.Locations = new Point[1];
+                    Settings.Default.Opacitys = new double[1];
+                    Settings.Default.NoteOnTop = new bool[1];
+                }
+                else
+                {
+                    Point[] temp1 = Settings.Default.Locations;
+                    Array.Resize<Point>(ref temp1, index + 1);
+                    Settings.Default.Locations = temp1;
+                    double[] temp2 = Settings.Default.Opacitys;
+                    Array.Resize<Double>(ref temp2, index + 1);
+                    Settings.Default.Opacitys = temp2;
+                    bool[] temp3 = Settings.Default.NoteOnTop;
+                    Array.Resize<Boolean>(ref temp3, index + 1);
+                    Settings.Default.NoteOnTop = temp3;
+                }
+                Settings.Default.Locations[index] = new Point(rnd.Next(600), rnd.Next(250));
                 Settings.Default.Opacitys[index] = 0.9;
                 Settings.Default.NoteOnTop[index] = false;
                 if (Settings.Default.Notes == null)

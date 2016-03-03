@@ -581,7 +581,6 @@
             // 
             this.ReminderControl0.AutoSize = true;
             this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.ReminderControl0.Enabled = false;
             this.ReminderControl0.Icon = null;
             this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
             this.ReminderControl0.Message = "Message";
@@ -591,6 +590,7 @@
             this.ReminderControl0.RemindTime = new System.DateTime(((long)(0)));
             this.ReminderControl0.Size = new System.Drawing.Size(272, 50);
             this.ReminderControl0.TabIndex = 3;
+            this.ReminderControl0.Visible = false;
             // 
             // Main
             // 
