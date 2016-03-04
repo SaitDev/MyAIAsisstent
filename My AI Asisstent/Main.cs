@@ -528,20 +528,31 @@ namespace MyAIAsisstent
 
         private void newReminderControl(int i)
         {
-            ReminderControl remindctrl = new ReminderControl()
+            if (i == 0)
             {
-                ParentForm = this,
-                Name = "ReminderControl" + i.ToString(),
-                MinimumSize = ReminderControl0.MinimumSize,
-                Location = new Point(5,
-                           (int)((ReminderControl)panel2.Controls["ReminderControl" + (i - 1).ToString()]).Tag + 8),
-                Message = Settings.Default.RemindMessage[i],
-                RemindTime = Settings.Default.RemindAt[i],
-                RemindFinish = !Settings.Default.RemindCompleted[i],
-                
-            };
-            panel2.Controls.Add(remindctrl);
-            remindctrl.Tag = remindctrl.Location.Y + remindctrl.Size.Height;
+                ReminderControl0.Message = Settings.Default.RemindMessage[i];
+                ReminderControl0.RemindTime = Settings.Default.RemindAt[i];
+                ReminderControl0.RemindFinish = !Settings.Default.RemindCompleted[i];
+                ReminderControl0.Show();
+                ReminderControl0.Tag = ReminderControl0.Location.Y + ReminderControl0.Size.Height;
+            }
+            else
+            {
+                ReminderControl remindctrl = new ReminderControl()
+                {
+                    ParentForm = this,
+                    Name = "ReminderControl" + i.ToString(),
+                    MinimumSize = ReminderControl0.MinimumSize,
+                    Location = new Point(5,
+                               (int)((ReminderControl)panel2.Controls["ReminderControl" + (i - 1).ToString()]).Tag + 8),
+                    Message = Settings.Default.RemindMessage[i],
+                    RemindTime = Settings.Default.RemindAt[i],
+                    RemindFinish = !Settings.Default.RemindCompleted[i],
+
+                };
+                panel2.Controls.Add(remindctrl);
+                remindctrl.Tag = remindctrl.Location.Y + remindctrl.Size.Height;
+            }
         }
 
         private void panel2_Click(object sender, EventArgs e)

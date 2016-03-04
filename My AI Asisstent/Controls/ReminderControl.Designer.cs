@@ -43,7 +43,7 @@
             this.MessageLabel.AutoSize = true;
             this.MessageLabel.BackColor = System.Drawing.Color.Transparent;
             this.MessageLabel.Font = new System.Drawing.Font("Sitka Text", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MessageLabel.Location = new System.Drawing.Point(35, 7);
+            this.MessageLabel.Location = new System.Drawing.Point(35, 2);
             this.MessageLabel.Margin = new System.Windows.Forms.Padding(0);
             this.MessageLabel.MaximumSize = new System.Drawing.Size(0, 30);
             this.MessageLabel.Name = "MessageLabel";
@@ -62,7 +62,7 @@
             this.TimeLabel.AutoSize = true;
             this.TimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.TimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.TimeLabel.Location = new System.Drawing.Point(35, 33);
+            this.TimeLabel.Location = new System.Drawing.Point(35, 28);
             this.TimeLabel.MinimumSize = new System.Drawing.Size(0, 15);
             this.TimeLabel.Name = "TimeLabel";
             this.TimeLabel.Size = new System.Drawing.Size(90, 15);
@@ -76,7 +76,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 10);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(28, 30);
             this.pictureBox1.TabIndex = 0;
@@ -93,9 +93,9 @@
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.pictureBox1);
-            this.MinimumSize = new System.Drawing.Size(200, 60);
+            this.MinimumSize = new System.Drawing.Size(200, 50);
             this.Name = "ReminderControl";
-            this.Size = new System.Drawing.Size(200, 60);
+            this.Size = new System.Drawing.Size(200, 50);
             this.Load += new System.EventHandler(this.ReminderControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

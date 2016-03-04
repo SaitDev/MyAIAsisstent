@@ -149,13 +149,13 @@ namespace MyAIAsisstent.Controls
             if (remindFinish)
             {
                 MessageLabel.MaximumSize = new Size(this.Size.Width - 35 - 5, 25);
-                MessageLabel.Location = new Point(35, 5);
+                MessageLabel.Location = new Point(35, 0);
                 TimeLabel.Location = new Point(35, MessageLabel.Location.Y + MessageLabel.Size.Height + 5);
             }
             else
             {
                 MessageLabel.MaximumSize = new Size(this.Size.Width - 10, 25);
-                MessageLabel.Location = new Point(3, 5);
+                MessageLabel.Location = new Point(3, 0);
                 TimeLabel.Location = new Point(3, MessageLabel.Location.Y + MessageLabel.Size.Height + 5);
             }
         }
