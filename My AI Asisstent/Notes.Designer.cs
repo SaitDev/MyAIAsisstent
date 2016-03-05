@@ -131,7 +131,7 @@
             this.materialContextMenuStrip1.Margin = new System.Windows.Forms.Padding(16, 8, 16, 8);
             this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
-            this.materialContextMenuStrip1.Size = new System.Drawing.Size(160, 160);
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(160, 182);
             // 
             // materialToolStripMenuItem1
             // 
@@ -152,6 +152,7 @@
             // materialToolStripMenuItem4
             // 
             this.materialToolStripMenuItem4.AutoSize = false;
+            this.materialToolStripMenuItem4.Image = global::MyAIAsisstent.Properties.Resources.done_blue;
             this.materialToolStripMenuItem4.Name = "materialToolStripMenuItem4";
             this.materialToolStripMenuItem4.Size = new System.Drawing.Size(125, 30);
             this.materialToolStripMenuItem4.Text = "On top most";

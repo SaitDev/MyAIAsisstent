@@ -36,6 +36,8 @@ namespace MyAIAsisstent
                 materialLabel1.Text = Settings.Default.Notes[index];
                 metroTextBox1.Text = materialLabel1.Text;
                 TopMost = Settings.Default.NoteOnTop[index];
+                if (TopMost) materialToolStripMenuItem4.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+                else materialToolStripMenuItem4.DisplayStyle = ToolStripItemDisplayStyle.Text;
             }
             else
             {
@@ -65,11 +67,11 @@ namespace MyAIAsisstent
                 Settings.Default.Notes.Add("Double click to edit");
                 Settings.Default.NoteCount++;
                 Settings.Default.Save();
-
                 Location = Settings.Default.Locations[index];
                 Opacity = Opacity = Settings.Default.Opacitys[index];
                 materialLabel1.Text = Settings.Default.Notes[index];
                 metroTextBox1.Text = materialLabel1.Text;
+                materialToolStripMenuItem4.DisplayStyle = ToolStripItemDisplayStyle.Text;
             }
         }
 
@@ -123,6 +125,16 @@ namespace MyAIAsisstent
             Settings.Default.Notes.RemoveAt(index);
             Settings.Default.Save();
             _login.noteCount = Settings.Default.NoteCount;
+            if (index < _login.noteCount)
+            {
+                for (int i = index; i < _login.noteCount; i++)
+                {
+                    _login.notes[i] = _login.notes[i + 1];
+                    _login.notes[i].index = i;
+                    _login.notes[i].Text = "Note " + (i + 1).ToString();
+                    _login.notes[i].Refresh();
+                }
+            }
         }
 
         private void materialLabel1_DoubleClick(object sender, EventArgs e)
@@ -235,6 +247,8 @@ namespace MyAIAsisstent
             TopMost = !TopMost;
             Settings.Default.NoteOnTop[index] = TopMost;
             Settings.Default.Save();
+            if (TopMost) materialToolStripMenuItem4.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
+            else materialToolStripMenuItem4.DisplayStyle = ToolStripItemDisplayStyle.Text;
         }
 
         private void materialToolStripMenuItem1_Click(object sender, EventArgs e)

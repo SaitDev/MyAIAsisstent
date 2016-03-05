@@ -1041,11 +1041,11 @@ namespace MyAIAsisstent
 
         private void NoteLabel_Click(object sender, EventArgs e)
         {
+            if (noteEditing) return;
             if (lastNoteLabelClick != null)
                 lastNoteLabelClick.BackColor = NoteLabelColor(0);
             ((MaterialLabel)sender).BackColor = NoteLabelColor(NoteLabelStatus.Clicked);
             speedButton = 8;
-            //timer5.Tag = "Started";
             timer5.Start();
             lastNoteLabelClick = ((MaterialLabel)sender);
         }
@@ -1122,6 +1122,9 @@ namespace MyAIAsisstent
                 {
                     _login.notes[noteLabelID].close = true;
                     _login.notes[noteLabelID].Close();
+                    lastNoteLabelClick = null;
+                    speedButton = 2;
+                    timer6.Start();
                 }
             }
         }
@@ -1136,6 +1139,11 @@ namespace MyAIAsisstent
             else
             {
                 ((MaterialLabel)(tabPage2.Controls["NoteLabel" + i.ToString()])).Hide();
+                if (lastNoteLabelClick == ((MaterialLabel)(tabPage2.Controls["NoteLabel" + i.ToString()])))
+                {
+                    speedButton = 2;
+                    timer6.Start();
+                }
                 ((MaterialLabel)(tabPage2.Controls["NoteLabel" + i.ToString()])).Name = "NoteLabelDeleting";
                 if (i + 1 < Settings.Default.NoteCount)
                 {
@@ -1153,6 +1161,7 @@ namespace MyAIAsisstent
                     }
                 }
                 ((MaterialLabel)(tabPage2.Controls["NoteLabelDeleting"])).Dispose();
+                NoteLabel0.Focus();
             }
         }
 
@@ -1222,7 +1231,6 @@ namespace MyAIAsisstent
                 //}
                 if (noteEditing)
                 {
-
                     materialFlatButton9.Icon = Resources.done_blue;
                     materialFlatButton10.Icon = Resources.clear_blue;
                     speedButton = 8;
