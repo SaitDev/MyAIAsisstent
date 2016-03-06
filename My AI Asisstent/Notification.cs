@@ -34,16 +34,8 @@ namespace MyAIAsisstent
             InitializeComponent();
             //MaterialSkinManager SkinMng = Program._login.materialSkinManager;
             //SkinMng.AddFormToManage(this as MaterialSkin.Controls.MaterialForm);
-            this.BackColor = Program._main.BackColor;
-            Program._main.BackColorChanged += Main_BackColorChanged;
-            label1.Text = Environment.OSVersion.VersionString;
-        }
-
-        private void Main_BackColorChanged(object sender, EventArgs e)
-        {
-            base.BackColor = Program._main.BackColor;
-            materialFlatButton1.Invalidate();
-            metroComboBox1.BackColor = base.BackColor;
+            this.TextChanged += new System.EventHandler(this.Notification_TextChanged);
+            //label1.Text = Environment.OSVersion.VersionString;
         }
 
         private void Notification_Load(object sender, EventArgs e)
@@ -51,7 +43,7 @@ namespace MyAIAsisstent
             Point temp = new Point(SystemInformation.VirtualScreen.Width - Size.Width,
                                    SystemInformation.VirtualScreen.Height - Size.Height - 10);
             base.Location = temp;
-            
+            base.BackColor = Program._main.BackColor;
             if (Program._main.materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
             {
                 metroComboBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -60,11 +52,24 @@ namespace MyAIAsisstent
             }
             else metroComboBox1.Theme = MetroFramework.MetroThemeStyle.Light;
             metroComboBox1.SelectedIndex = 0;
+            this.TextChanged += new System.EventHandler(this.Notification_TextChanged);
+        }
+
+        private void Notification_Shown(object sender, EventArgs e)
+        {
+            Program._main.BackColorChanged += Main_BackColorChanged;
         }
 
         private void Notification_FormClosing(object sender, FormClosingEventArgs e)
         {
             Program._main.BackColorChanged -= Main_BackColorChanged;
+        }
+
+        private void Main_BackColorChanged(object sender, EventArgs e)
+        {
+            base.BackColor = Program._main.BackColor;
+            materialFlatButton1.Invalidate();
+            metroComboBox1.BackColor = base.BackColor;
         }
 
         private void materialRaisedButton1_Click(object sender, EventArgs e)

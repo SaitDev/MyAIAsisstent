@@ -52,7 +52,8 @@ namespace MyAIAsisstent
             materialSkinManager.AddFormToManage(this);
             _login = new Login(this);
             Show();
-
+            //Notification sdf = new Notification();
+            //sdf.Show();
             //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
             //MessageBox.Show(config.FilePath);
         }
@@ -74,39 +75,40 @@ namespace MyAIAsisstent
                 for (int i = 0; i < Settings.Default.RemindMessage.Count; i++)
                 {
                     if (Settings.Default.RemindCompleted[i] || Settings.Default.RemindDismiss[i]) continue;
-                    System.Timers.Timer t = new System.Timers.Timer();
-                    t.AutoReset = false;
+                    Timer t = new Timer();
+                    //t.AutoReset = false;
                     DateTime temp = DateTime.Now;
                     if (Settings.Default.RemindAt[i] <= temp)
                         t.Interval = 10;
-                    else t.Interval = (Settings.Default.RemindAt[i] - temp).TotalMilliseconds
-                                      + Settings.Default.RemindAfter[i].TotalMilliseconds;
+                    else t.Interval = (int)((Settings.Default.RemindAt[i] - temp).TotalMilliseconds
+                                            + Settings.Default.RemindAfter[i].TotalMilliseconds);
                     string message = Settings.Default.RemindMessage[i];
                     int remindIndex = i;
-                    t.Elapsed += delegate (object o, System.Timers.ElapsedEventArgs evnt)
+                    t.Tick += delegate (object o, EventArgs evnt)
                     {
+                        if (!finishLoad) return;
+                        ((Timer)o).Stop();                       
                         Reminder rmd = new Reminder(remindIndex);
                         //MessageBox.Show(message);
                         Notification noti = new Notification();
+                        noti.Text = message;
                         noti.Dismiss += delegate (Notification nt)
                         {
-                            ((System.Timers.Timer)o).Stop();
                             rmd.Dismiss = true;
                             Settings.Default.Save();
                         };
                         noti.OnRemindNotify += delegate (object obj, NotificationEventArgs ev)
                         {
-                            ((System.Timers.Timer)o).Stop();
-                            ((System.Timers.Timer)o).Interval = ev.RemindAfter.TotalMilliseconds;
-                            ((System.Timers.Timer)o).Start();
+                            ((Timer)o).Interval = (int)ev.RemindAfter.TotalMilliseconds;
+                            ((Timer)o).Start();
                             rmd.RemindAfter = ev.RemindAfter;
                             Settings.Default.Save();
                         };
                         noti.Done += delegate (Notification nt)
                         {
-                            ((System.Timers.Timer)o).Stop();
+                            //((System.Timers.Timer)o).Stop();
                             //((System.Timers.Timer)o).Enabled = false;
-                            ((System.Timers.Timer)o).Dispose();
+                            ((Timer)o).Dispose();
                             rmd.FinishTime = DateTime.Now;
                             rmd.Completed = true;
                             Settings.Default.Save();
@@ -672,36 +674,36 @@ namespace MyAIAsisstent
                 if (Settings.Default.RemindMessage == null)
                     ReminderIndex = 0;
                 else ReminderIndex = Settings.Default.RemindMessage.Count;
-                System.Timers.Timer t = new System.Timers.Timer();
-                t.AutoReset = false;
+                Timer t = new Timer();
+                //t.AutoReset = false;
                 if (remindAtTime <= DateTime.Now)
                     t.Interval = 10;
-                else t.Interval = (remindAtTime - DateTime.Now).TotalMilliseconds; 
+                else t.Interval = (int)(remindAtTime - DateTime.Now).TotalMilliseconds; 
                 string s = materialListView1.Items[0].Text; 
-                t.Elapsed += delegate (object o, System.Timers.ElapsedEventArgs evnt)
+                t.Tick += delegate (object o, EventArgs evnt)
                    {
+                       ((Timer)o).Stop();
                        Reminder rmd = new Reminder(ReminderIndex);
                        //MessageBox.Show(s);
                        Notification noti = new Notification();
+                       noti.Text = s;
                        noti.Dismiss += delegate (Notification nt)
                        {
-                           ((System.Timers.Timer)o).Stop();
                            rmd.Dismiss = true;
                            Settings.Default.Save();
                        };
                        noti.OnRemindNotify += delegate (object obj, NotificationEventArgs ev)
                        {
-                           ((System.Timers.Timer)o).Stop();
-                           ((System.Timers.Timer)o).Interval = ev.RemindAfter.TotalMilliseconds;
-                           ((System.Timers.Timer)o).Start();
+                           ((Timer)o).Interval = (int)ev.RemindAfter.TotalMilliseconds;
+                           ((Timer)o).Start();
                            rmd.RemindAfter = ev.RemindAfter;
                            Settings.Default.Save();
                        };
                        noti.Done += delegate (Notification nt)
                        {
-                           ((System.Timers.Timer)o).Stop();
+                           //((System.Timers.Timer)o).Stop();
                            //((System.Timers.Timer)o).Enabled = false;
-                           ((System.Timers.Timer)o).Dispose();
+                           ((Timer)o).Dispose();
                            rmd.FinishTime = DateTime.Now;
                            rmd.Completed = true;
                            Settings.Default.Save();

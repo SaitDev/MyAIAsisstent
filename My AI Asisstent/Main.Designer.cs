@@ -51,7 +51,6 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.timePickerPanel1 = new Opulos.Core.UI.TimePickerPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.materialFlatButton9 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialFlatButton10 = new MaterialSkin.Controls.MaterialFlatButton();
@@ -72,6 +71,7 @@
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -342,21 +342,6 @@
             this.panel2.TabIndex = 10;
             this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
-            // ReminderControl0
-            // 
-            this.ReminderControl0.AutoSize = true;
-            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.ReminderControl0.Icon = null;
-            this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
-            this.ReminderControl0.Message = "Message";
-            this.ReminderControl0.MinimumSize = new System.Drawing.Size(272, 50);
-            this.ReminderControl0.Name = "ReminderControl0";
-            this.ReminderControl0.ParentForm = this;
-            this.ReminderControl0.RemindTime = new System.DateTime(((long)(0)));
-            this.ReminderControl0.Size = new System.Drawing.Size(272, 50);
-            this.ReminderControl0.TabIndex = 3;
-            this.ReminderControl0.Visible = false;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.materialFlatButton9);
@@ -591,6 +576,21 @@
             // 
             this.timer3.Interval = 10;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // ReminderControl0
+            // 
+            this.ReminderControl0.AutoSize = true;
+            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.ReminderControl0.Icon = null;
+            this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
+            this.ReminderControl0.Message = "Message";
+            this.ReminderControl0.MinimumSize = new System.Drawing.Size(272, 50);
+            this.ReminderControl0.Name = "ReminderControl0";
+            this.ReminderControl0.ParentForm = this;
+            this.ReminderControl0.RemindTime = new System.DateTime(((long)(0)));
+            this.ReminderControl0.Size = new System.Drawing.Size(272, 50);
+            this.ReminderControl0.TabIndex = 3;
+            this.ReminderControl0.Visible = false;
             // 
             // Main
             // 
