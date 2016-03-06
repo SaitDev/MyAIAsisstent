@@ -44,5 +44,8 @@
     <Setting Name="RemindAfter" Type="System.TimeSpan[]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="RemindDismiss" Type="System.Boolean[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

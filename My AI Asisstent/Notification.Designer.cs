@@ -108,29 +108,22 @@
             // metroComboBox1
             // 
             this.metroComboBox1.AutoCompleteCustomSource.AddRange(new string[] {
-            "10 minutes",
-            "30 minutes",
-            "1 hour",
-            "2 hours",
-            "3 hours",
-            "6 hours",
-            "12 hours",
-            "1 day"});
-            this.metroComboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            "10 minutes"});
             this.metroComboBox1.FormattingEnabled = true;
             this.metroComboBox1.ItemHeight = 23;
             this.metroComboBox1.Items.AddRange(new object[] {
-            "10 minutes",
+            "5 minutes",
+            "15 minutes",
             "30 minutes",
             "1 hour",
             "2 hours",
-            "3 hours",
             "6 hours",
             "12 hours",
             "1 day"});
             this.metroComboBox1.Location = new System.Drawing.Point(200, 77);
             this.metroComboBox1.Name = "metroComboBox1";
             this.metroComboBox1.Size = new System.Drawing.Size(121, 29);
+            this.metroComboBox1.Style = MetroFramework.MetroColorStyle.Green;
             this.metroComboBox1.TabIndex = 6;
             this.metroComboBox1.UseSelectable = true;
             // 
@@ -153,7 +146,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Notification";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Notification_FormClosing);
             this.Load += new System.EventHandler(this.Notification_Load);
+            this.TextChanged += new System.EventHandler(this.Notification_TextChanged);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

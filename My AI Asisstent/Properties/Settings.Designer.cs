@@ -181,5 +181,16 @@ namespace MyAIAsisstent.Properties {
                 this["RemindAfter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool[] RemindDismiss {
+            get {
+                return ((bool[])(this["RemindDismiss"]));
+            }
+            set {
+                this["RemindDismiss"] = value;
+            }
+        }
     }
 }

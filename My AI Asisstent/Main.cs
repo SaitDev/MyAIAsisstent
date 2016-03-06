@@ -73,26 +73,45 @@ namespace MyAIAsisstent
             {
                 for (int i = 0; i < Settings.Default.RemindMessage.Count; i++)
                 {
-                    if (Settings.Default.RemindCompleted[i]) continue;
+                    if (Settings.Default.RemindCompleted[i] || Settings.Default.RemindDismiss[i]) continue;
                     System.Timers.Timer t = new System.Timers.Timer();
                     t.AutoReset = false;
                     DateTime temp = DateTime.Now;
                     if (Settings.Default.RemindAt[i] <= temp)
                         t.Interval = 10;
-                    else t.Interval = (Settings.Default.RemindAt[i] - temp).TotalMilliseconds;
+                    else t.Interval = (Settings.Default.RemindAt[i] - temp).TotalMilliseconds
+                                      + Settings.Default.RemindAfter[i].TotalMilliseconds;
                     string message = Settings.Default.RemindMessage[i];
                     int remindIndex = i;
                     t.Elapsed += delegate (object o, System.Timers.ElapsedEventArgs evnt)
                     {
                         Reminder rmd = new Reminder(remindIndex);
-                        MessageBox.Show(message);
-                        rmd.FinishTime = DateTime.Now;
-                        rmd.Completed = true;
-                        Settings.Default.Save();
-
-                        ((System.Timers.Timer)o).Stop();
-                        ((System.Timers.Timer)o).Enabled = false;
-                        ((System.Timers.Timer)o).Dispose();
+                        //MessageBox.Show(message);
+                        Notification noti = new Notification();
+                        noti.Dismiss += delegate (Notification nt)
+                        {
+                            ((System.Timers.Timer)o).Stop();
+                            rmd.Dismiss = true;
+                            Settings.Default.Save();
+                        };
+                        noti.OnRemindNotify += delegate (object obj, NotificationEventArgs ev)
+                        {
+                            ((System.Timers.Timer)o).Stop();
+                            ((System.Timers.Timer)o).Interval = ev.RemindAfter.TotalMilliseconds;
+                            ((System.Timers.Timer)o).Start();
+                            rmd.RemindAfter = ev.RemindAfter;
+                            Settings.Default.Save();
+                        };
+                        noti.Done += delegate (Notification nt)
+                        {
+                            ((System.Timers.Timer)o).Stop();
+                            //((System.Timers.Timer)o).Enabled = false;
+                            ((System.Timers.Timer)o).Dispose();
+                            rmd.FinishTime = DateTime.Now;
+                            rmd.Completed = true;
+                            Settings.Default.Save();
+                        };
+                        noti.Show();
                     };
                     t.Start();
                 }
@@ -662,20 +681,33 @@ namespace MyAIAsisstent
                 t.Elapsed += delegate (object o, System.Timers.ElapsedEventArgs evnt)
                    {
                        Reminder rmd = new Reminder(ReminderIndex);
-                       MessageBox.Show(s);
-                       /*       
+                       //MessageBox.Show(s);
                        Notification noti = new Notification();
-                       noti.Dismiss += DismissNotification;
-                       noti.Remind += RemindNotification;
-                       noti.Done += DoneNotification;
-                       noti.Show(); */
-                       rmd.FinishTime = DateTime.Now;
-                       rmd.Completed = true;
-                       Settings.Default.Save();
+                       noti.Dismiss += delegate (Notification nt)
+                       {
+                           ((System.Timers.Timer)o).Stop();
+                           rmd.Dismiss = true;
+                           Settings.Default.Save();
+                       };
+                       noti.OnRemindNotify += delegate (object obj, NotificationEventArgs ev)
+                       {
+                           ((System.Timers.Timer)o).Stop();
+                           ((System.Timers.Timer)o).Interval = ev.RemindAfter.TotalMilliseconds;
+                           ((System.Timers.Timer)o).Start();
+                           rmd.RemindAfter = ev.RemindAfter;
+                           Settings.Default.Save();
+                       };
+                       noti.Done += delegate (Notification nt)
+                       {
+                           ((System.Timers.Timer)o).Stop();
+                           //((System.Timers.Timer)o).Enabled = false;
+                           ((System.Timers.Timer)o).Dispose();
+                           rmd.FinishTime = DateTime.Now;
+                           rmd.Completed = true;
+                           Settings.Default.Save();
+                       };
+                       noti.Show();
                        //rmd.Dispose();
-                       ((System.Timers.Timer)o).Stop();
-                       ((System.Timers.Timer)o).Enabled = false;
-                       ((System.Timers.Timer)o).Dispose();
                    };
                 t.Start();
                 //MessageBox.Show(remindAtTime.ToString());
