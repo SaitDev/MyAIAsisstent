@@ -85,7 +85,7 @@ namespace MyAIAsisstent.Controls
             {
                 if (value == ReminderMouseState.LostFocus)
                 {
-                    lastState = ReminderMouseState.Hover;
+                    this.lastState = ReminderMouseState.Hover;
                     this.OnMouseLeave(new EventArgs());
                     lastReminderClick = null;
                     return;
@@ -165,9 +165,7 @@ namespace MyAIAsisstent.Controls
             base.OnClick(e);
             if (lastReminderClick != this )
             {
-                if (lastReminderClick != null)
-                lastReminderClick.lastState = ReminderMouseState.LostFocus;
-                lastReminderClick = this;
+                if (lastReminderClick != null) lastReminderClick.LastState = ReminderMouseState.LostFocus;
                 if (lastState != ReminderMouseState.Clicked)
                 {
                     if (ParentForm.SkinManager.Theme == MaterialSkinManager.Themes.DARK)
@@ -177,6 +175,7 @@ namespace MyAIAsisstent.Controls
                     else base.BackColor = Color.FromArgb(170, 170, 170);
                     lastState = ReminderMouseState.Clicked;
                 }
+                lastReminderClick = this;
             }
         }
 
@@ -249,13 +248,13 @@ namespace MyAIAsisstent.Controls
         {
             this.OnMouseLeave(e);
         }
+    }
 
-        public enum ReminderMouseState
-        {
-            Hover,
-            Default,
-            Clicked,
-            LostFocus
-        }
+    public enum ReminderMouseState
+    {
+        Hover,
+        Default,
+        Clicked,
+        LostFocus
     }
 }

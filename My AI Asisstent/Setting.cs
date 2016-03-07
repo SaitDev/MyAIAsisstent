@@ -45,6 +45,16 @@ namespace MyAIAsisstent
             //_login.Hide();
         }
 
+        private void Setting_VisibleChanged(object sender, EventArgs e)
+        {
+            if (Visible)
+            {
+                materialCheckBox1.Checked = Properties.Settings.Default.AutoStart;
+                materialCheckBox2.Checked = Properties.Settings.Default.RequiredPassword;
+                materialRadioButton1.Checked = Properties.Settings.Default.LightTheme;
+            }
+        }
+
         private void Setting_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
@@ -92,7 +102,7 @@ namespace MyAIAsisstent
             }
             if (Properties.Settings.Default.AutoStart)
             {
-                regApp.SetValue("MyAIAsisstent", Application.ExecutablePath.ToString());
+                regApp.SetValue("MyAIAsisstent", string.Format("\"{0}\" -SilentStart",Application.ExecutablePath.ToString()));
             }
             else regApp.DeleteValue("MyAIAsisstent", false);
             if (!fromMain)
@@ -148,6 +158,6 @@ namespace MyAIAsisstent
             //bindadress = "NoteOnTop[" + noteIndex.ToString() + "]";
             //materialCheckBox3.DataBindings.Add(new Binding("Checked", Properties.Settings.Default, bindadress, true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             //this.materialCheckBox3.DataBindings.Add(new Binding())
-        }      
+        }
     }
 }

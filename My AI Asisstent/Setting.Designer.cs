@@ -45,6 +45,7 @@
             // materialRaisedButton1
             // 
             this.materialRaisedButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialRaisedButton1.AutoUpper = true;
             this.materialRaisedButton1.Depth = 0;
             this.materialRaisedButton1.Icon = null;
             this.materialRaisedButton1.Location = new System.Drawing.Point(70, 346);
@@ -61,6 +62,7 @@
             // materialRaisedButton2
             // 
             this.materialRaisedButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialRaisedButton2.AutoUpper = true;
             this.materialRaisedButton2.Depth = 0;
             this.materialRaisedButton2.Icon = null;
             this.materialRaisedButton2.Location = new System.Drawing.Point(228, 346);
@@ -87,7 +89,7 @@
             this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRadioButton2.Name = "materialRadioButton2";
             this.materialRadioButton2.Ripple = true;
-            this.materialRadioButton2.Size = new System.Drawing.Size(52, 20);
+            this.materialRadioButton2.Size = new System.Drawing.Size(57, 30);
             this.materialRadioButton2.TabIndex = 1;
             this.materialRadioButton2.Text = "Dark";
             this.materialRadioButton2.UseVisualStyleBackColor = true;
@@ -141,6 +143,7 @@
             // materialRaisedButton3
             // 
             this.materialRaisedButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialRaisedButton3.AutoUpper = true;
             this.materialRaisedButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(67)))), ((int)(((byte)(54)))));
             this.materialRaisedButton3.Depth = 0;
             this.materialRaisedButton3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(67)))), ((int)(((byte)(54)))));
@@ -201,7 +204,7 @@
             this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRadioButton1.Name = "materialRadioButton1";
             this.materialRadioButton1.Ripple = true;
-            this.materialRadioButton1.Size = new System.Drawing.Size(55, 20);
+            this.materialRadioButton1.Size = new System.Drawing.Size(60, 30);
             this.materialRadioButton1.TabIndex = 0;
             this.materialRadioButton1.Text = "Light";
             this.materialRadioButton1.UseVisualStyleBackColor = true;
@@ -262,6 +265,7 @@
             this.Load += new System.EventHandler(this.Setting_Load);
             this.Shown += new System.EventHandler(this.Setting_Shown);
             this.ResizeEnd += new System.EventHandler(this.Setting_ResizeEnd);
+            this.VisibleChanged += new System.EventHandler(this.Setting_VisibleChanged);
             this.Layout += new System.Windows.Forms.LayoutEventHandler(this.Setting_Layout);
             this.Move += new System.EventHandler(this.Setting_Move);
             this.ResumeLayout(false);

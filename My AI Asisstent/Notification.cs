@@ -22,29 +22,45 @@ namespace MyAIAsisstent
         protected virtual void Remind(NotificationEventArgs e)
         {
             if (OnRemindNotify != null)
-            OnRemindNotify(this, e);
+                OnRemindNotify(this, e);
         }
 
         public delegate void RemindNotificationHandler(Notification sender,
                                                        NotificationEventArgs e);
         //public event RemindNotificationHandler ReminNotify;
 
-        public Notification()
+        private MaterialSkinManager mSkin = MaterialSkinManager.Instance;
+        private Mode NotifiMode;
+        private Rectangle screenSize;
+        private double speed = 25;
+
+        public Notification(Mode mode = Mode.Reminder)
         {
             InitializeComponent();
-            //MaterialSkinManager SkinMng = Program._login.materialSkinManager;
-            //SkinMng.AddFormToManage(this as MaterialSkin.Controls.MaterialForm);
             this.TextChanged += new System.EventHandler(this.Notification_TextChanged);
             //label1.Text = Environment.OSVersion.VersionString;
+            if (mode == Mode.Message)
+            {
+                materialFlatButton1.Location = new Point(25, 75);
+                materialFlatButton1.Text = "OK, Thanks.";
+                materialRaisedButton1.Location = new Point(140, 75);
+                materialRaisedButton1.Size = new Size(150, 30);
+                materialRaisedButton1.Text = "Hi. Open AI Asisstent";
+                metroComboBox1.Hide();
+            }
+            NotifiMode = mode;
         }
 
         private void Notification_Load(object sender, EventArgs e)
         {
-            Point temp = new Point(SystemInformation.VirtualScreen.Width - Size.Width,
-                                   SystemInformation.VirtualScreen.Height - Size.Height - 10);
-            base.Location = temp;
-            base.BackColor = Program._main.BackColor;
-            if (Program._main.materialSkinManager.Theme == MaterialSkinManager.Themes.DARK)
+            //Point temp = new Point(SystemInformation.VirtualScreen.Width - Size.Width,
+            //                       SystemInformation.VirtualScreen.Height - Size.Height - 10);
+            screenSize = SystemInformation.VirtualScreen;
+            base.Location = new Point(screenSize.Width + 100, screenSize.Height - Size.Height - 30);
+            //base.BackColor = Program._main.BackColor Program._main.materialSkinManager.Theme
+            base.BackColor = mSkin.GetApplicationBackgroundColor();
+            MessageLabel.ForeColor = mSkin.GetPrimaryTextColor();
+            if (mSkin.Theme == MaterialSkinManager.Themes.DARK)
             {
                 metroComboBox1.Theme = MetroFramework.MetroThemeStyle.Dark;
                 metroComboBox1.BackColor = Color.FromArgb(51, 51, 51);
@@ -58,11 +74,18 @@ namespace MyAIAsisstent
         private void Notification_Shown(object sender, EventArgs e)
         {
             Program._main.BackColorChanged += Main_BackColorChanged;
+            timer1.Start();
         }
 
         private void Notification_FormClosing(object sender, FormClosingEventArgs e)
         {
             Program._main.BackColorChanged -= Main_BackColorChanged;
+            if (Location.X < screenSize.Width)
+            {
+                speed = 5;
+                timer2.Start();
+                e.Cancel = true;
+            }
         }
 
         private void Main_BackColorChanged(object sender, EventArgs e)
@@ -78,7 +101,7 @@ namespace MyAIAsisstent
             try
             {
                 if (Done != null)
-                Done(this);
+                    Done(this);
             }
             catch (Exception exc)
             { MessageBox.Show(exc.Message, "Error"); }
@@ -91,7 +114,7 @@ namespace MyAIAsisstent
             try
             {
                 if (OnRemindNotify != null)
-                Remind(new NotificationEventArgs((TimeRemind)metroComboBox1.SelectedIndex));
+                    Remind(new NotificationEventArgs((TimeRemind)metroComboBox1.SelectedIndex));
             }
             catch (Exception exc)
             { MessageBox.Show(exc.Message, "Error"); }
@@ -104,7 +127,7 @@ namespace MyAIAsisstent
             try
             {
                 if (Dismiss != null)
-                Dismiss(this);
+                    Dismiss(this);
             }
             catch (Exception exc)
             { MessageBox.Show(exc.Message); }
@@ -113,7 +136,34 @@ namespace MyAIAsisstent
 
         private void Notification_TextChanged(object sender, EventArgs e)
         {
-            label1.Text = Text;
+            MessageLabel.Text = Text;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Location.X > screenSize.Width - 230) speed -= 0.4;
+            else if (Location.X > screenSize.Width - 300) speed -= 2.4;
+            else if (Location.X > screenSize.Width - 320) speed -= 0.1;
+            if (Location.X - speed <= screenSize.Width - 330)
+            {
+                timer1.Stop();
+                Location = new Point(screenSize.Width - 330, Location.Y);
+            }
+            else Location = new Point((int)(Location.X - speed), Location.Y);
+            
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (Location.X > screenSize.Width) speed -= 0.2;
+            else if (Location.X < screenSize.Width - 100) speed += 2;
+            else if (Location.X < screenSize.Width - 250) speed += 0.5;
+            Location = new Point((int)(Location.X + speed), Location.Y);
+            if (Location.X + speed >= screenSize.Width - 330)
+            {
+                timer2.Stop();
+                Close();
+            }
         }
     }
 
@@ -127,6 +177,12 @@ namespace MyAIAsisstent
         hour6,
         hour12,
         day1
+    }
+
+    public enum Mode
+    {
+        Message,
+        Reminder
     }
 
     public class NotificationEventArgs : EventArgs
@@ -158,3 +214,4 @@ namespace MyAIAsisstent
         }
     }
 }
+

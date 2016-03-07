@@ -16,6 +16,8 @@ using System.Runtime.InteropServices;
 using MetroFramework;
 using MyAIAsisstent.Properties;
 using MyAIAsisstent.Controls;
+using System.IO;
+using System.Media;
 
 namespace MyAIAsisstent
 {
@@ -31,7 +33,6 @@ namespace MyAIAsisstent
         private DialogResult answer;
         public static Cursor HandCursor;
         private MaterialLabel lastNoteLabelClick;
-        private ReminderControl lastReminderHover;
 
         #region Form Managament
 
@@ -51,9 +52,6 @@ namespace MyAIAsisstent
             }
             materialSkinManager.AddFormToManage(this);
             _login = new Login(this);
-            Show();
-            //Notification sdf = new Notification();
-            //sdf.Show();
             //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
             //MessageBox.Show(config.FilePath);
         }
@@ -152,6 +150,35 @@ namespace MyAIAsisstent
 
         private void Main_Shown(object sender, EventArgs e)
         {
+            if (Program.silentStart)
+            {
+                Hide();
+                Notification welcome = new Notification(Mode.Message);
+                welcome.Text = "Welcome back Sait. Have a nice day!";
+                welcome.Done += (o) => { this.Show(); this.Activate(); };
+                welcome.Show();
+                if (File.Exists(@"C:\Windows\Media\Windows Logon.wav"))
+                {
+                    SoundPlayer welcomeSound = new SoundPlayer(@"C:\Windows\Media\Windows Logon.wav");
+                    welcomeSound.Play();
+                    welcomeSound.Dispose();
+                }
+                //PlaySound("Notification", UIntPtr.Zero, (uint)sndFlags.SND_SYNC);
+            }
+            if (Program.silentStart) 
+            {
+                Hide();
+                Notification welcome = new Notification(Mode.Message);
+                welcome.Text = "Welcome back Sait. Have a nice day!";
+                welcome.Show();
+                if (File.Exists(@"C:\Windows\Media\Windows Logon.wav"))
+                {
+                    SoundPlayer welcomeSound = new SoundPlayer(@"C:\Windows\Media\Windows Logon.wav");
+                    welcomeSound.Play();
+                    welcomeSound.Dispose();
+                }
+                //PlaySound("Notification", UIntPtr.Zero, (uint)sndFlags.SND_SYNC);
+            }
             materialFlatButton3.Focus();
             lastActive = materialFlatButton3;
             materialSingleLineTextField1.Enabled = true;
@@ -230,6 +257,7 @@ namespace MyAIAsisstent
                         remindAtTime = new DateTime();
                         materialFlatButton4.Icon = Properties.Resources.alarm_blue;
                         materialFlatButton5.Hide();
+                        ReminderControl0.Focus();
                     }
                     else
                     {
@@ -241,7 +269,7 @@ namespace MyAIAsisstent
                 }
                 else if (ReminderControl.lastReminderClick != null)
                 {
-                    ReminderControl.lastReminderClick.LastState = ReminderControl.ReminderMouseState.LostFocus;
+                    ReminderControl.lastReminderClick.LastState = ReminderMouseState.LostFocus;
                 }
             }
             if (!Stop_AI_Asisstent)
@@ -265,10 +293,15 @@ namespace MyAIAsisstent
             this.Activate();
         }
 
-        private void materialToolStripMenuItem2_Click(object sender, EventArgs e)
+        private void materialToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             this.Show();
             this.Activate();
+        }
+
+        private void materialToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            materialFlatButton1_Click(materialFlatButton1, new EventArgs());
         }
 
         private void materialToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -331,39 +364,45 @@ namespace MyAIAsisstent
 
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
-            if (materialTabControl1.SelectedIndex == 1)
+            if (Visible)
             {
-                if (!noteEditing && lastNoteLabelClick != null )
+                if (materialTabControl1.SelectedIndex == 1)
                 {
-                    lastNoteLabelClick.BackColor = NoteLabelColor(0);
-                    lastNoteLabelClick = null;
-                    speedButton = 2;
-                    timer6.Start();
+                    if (!noteEditing && lastNoteLabelClick != null)
+                    {
+                        lastNoteLabelClick.BackColor = NoteLabelColor(0);
+                        lastNoteLabelClick = null;
+                        speedButton = 2;
+                        timer6.Start();
+                    }
                 }
-            }
-            else
-            {
-                if (ReminderControl.lastReminderClick != null)
+                else
                 {
-                    ReminderControl.lastReminderClick.LastState = ReminderControl.ReminderMouseState.LostFocus;
+                    if (ReminderControl.lastReminderClick != null)
+                    {
+                        ReminderControl.lastReminderClick.LastState = ReminderMouseState.LostFocus;
+                    }
                 }
+                materialFlatButton_Click(sender, e);
             }
-            materialFlatButton_Click(sender, e);
             if (_login._setting.Visible == true)
                 _login._setting.Hide();
             _login._setting.materialCheckBox3.Checked = false;
             _login._setting.materialCheckBox3.Enabled = false;
             _login._setting.ShowDialog();
             _login._setting.materialCheckBox3.Enabled = true;
-            materialFlatButton1.UseCustomBackColor = true;
-            materialFlatButton1.Refresh();
-            lastActive.UseCustomBackColor = false;
-            lastActive.Refresh();
-            animateProgress = 10;
-            animateStep = (lastActive.Location.Y - materialFlatButton1.Location.Y) / 54;
-            timer1.Start();
-            if (remindMessageInputed || noteEditing) materialSingleLineTextField1.SelectAll();
-            //panel1.Location = lastActive.Location;
+            if (Visible)
+            {
+                materialFlatButton1.UseCustomBackColor = true;
+                materialFlatButton1.Refresh();
+                lastActive.UseCustomBackColor = false;
+                lastActive.Refresh();
+                animateProgress = 10;
+                animateStep = (lastActive.Location.Y - materialFlatButton1.Location.Y) / 54;
+                timer1.Start();
+                if (remindMessageInputed || noteEditing) materialSingleLineTextField1.SelectAll();
+                //panel1.Location = lastActive.Location;
+            }
         }
 
         private void materialFlatButton2_Click(object sender, EventArgs e)
@@ -440,7 +479,7 @@ namespace MyAIAsisstent
                 }
                 else if (ReminderControl.lastReminderClick != null)
                 {
-                    ReminderControl.lastReminderClick.LastState = ReminderControl.ReminderMouseState.LostFocus;
+                    ReminderControl.lastReminderClick.LastState = ReminderMouseState.LostFocus;
                 }
             }
             materialFlatButton_Click(sender, e);
@@ -503,7 +542,7 @@ namespace MyAIAsisstent
                 }
                 else if (ReminderControl.lastReminderClick != null)
                 {
-                    ReminderControl.lastReminderClick.LastState = ReminderControl.ReminderMouseState.LostFocus;
+                    ReminderControl.lastReminderClick.LastState = ReminderMouseState.LostFocus;
                 }
             }
             else
@@ -580,7 +619,7 @@ namespace MyAIAsisstent
         {
             if (ReminderControl.lastReminderClick != null)
             {
-                ReminderControl.lastReminderClick.LastState = ReminderControl.ReminderMouseState.LostFocus;
+                ReminderControl.lastReminderClick.LastState = ReminderMouseState.LostFocus;
             }
         }
 
@@ -642,7 +681,7 @@ namespace MyAIAsisstent
                 //materialFlatButton5.Show();
                 if (ReminderControl.lastReminderClick != null)
                 {
-                    ReminderControl.lastReminderClick.LastState = ReminderControl.ReminderMouseState.LostFocus;
+                    ReminderControl.lastReminderClick.LastState = ReminderMouseState.LostFocus;
                 }
                 materialSingleLineTextField1.Clear();
                 materialSingleLineTextField1.TextChanged += materialSingleLineTextField1_TextChanged;
@@ -793,8 +832,9 @@ namespace MyAIAsisstent
             else if (timePickerPanel1.timePicker.ClockMenu.Visible)
                 timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
             materialLabel1.Text = "WHAT do you want me to remind?";
+            materialSingleLineTextField1.Enabled = true;
             if (remindMessageInputed) materialSingleLineTextField1.Text = materialListView1.Items[0].Text;
-            materialSingleLineTextField1.Focus();
+            materialSingleLineTextField1.Focus(); 
         }
 
         private void materialListView2_Click(object sender, EventArgs e)
@@ -1332,6 +1372,9 @@ namespace MyAIAsisstent
                     materialListView1.Items[0].Text = materialSingleLineTextField1.Text;
                     materialLabel1.Focus();
                 }
+                TimeSpan ts = new TimeSpan();
+                TimeSpan.TryParse(materialSingleLineTextField1.Text, out ts);
+                MessageBox.Show(ts.ToString());
             }
         }
 
@@ -1352,6 +1395,21 @@ namespace MyAIAsisstent
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr LoadCursor(IntPtr hInstance, idCursor cursor);
+
+        [DllImport("winmm.dll", SetLastError = true)]
+        static extern bool PlaySound(string pszSound, UIntPtr hmod, uint fdwSound);
+        [Flags]
+        public enum sndFlags
+        {
+            SND_SYNC = 0x0000,
+            SND_ASYNC = 0x0001,
+            SND_NODEFAULT = 0x0002,
+            SND_LOOP = 0x0008,
+            SND_NOSTOP = 0x0010,
+            SND_NOWAIT = 0x00002000,
+            SND_FILENAME = 0x00020000,
+            SND_RESOURCE = 0x00040004
+        }
 
         #endregion
 

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Media;
 
 namespace MyAIAsisstent
 {
@@ -17,13 +18,14 @@ namespace MyAIAsisstent
         /// 
 
         public static Main _main;
-        static bool NoMutexException;
+        static bool NoMutexException = false;
+        public static bool silentStart = false;
         static Mutex mutex = new Mutex(false, "MyAIAsisstent");
         static int timeRetry = 3;
         
 
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             do
             {
@@ -42,6 +44,10 @@ namespace MyAIAsisstent
                             Properties.Settings.Default.Save();
                         }
                         _main = new Main();
+                        foreach (string arg in args)
+                        {
+                            if (arg.ToUpper() == "-SILENTSTART") silentStart = true;
+                        }
                         Application.Run(_main);
                         mutex.ReleaseMutex();
                     }

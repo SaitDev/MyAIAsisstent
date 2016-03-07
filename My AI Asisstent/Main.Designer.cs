@@ -51,6 +51,7 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.timePickerPanel1 = new Opulos.Core.UI.TimePickerPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.materialFlatButton9 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialFlatButton10 = new MaterialSkin.Controls.MaterialFlatButton();
@@ -59,6 +60,7 @@
             this.materialTabSelector1 = new MaterialSkin.Controls.MaterialTabSelector();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
+            this.materialToolStripMenuItem3 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.materialToolStripMenuItem2 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.materialToolStripMenuItem1 = new MaterialSkin.Controls.MaterialToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -71,7 +73,6 @@
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -311,7 +312,7 @@
             // 
             this.monthCalendar1.AllowDrop = true;
             this.monthCalendar1.CausesValidation = false;
-            this.monthCalendar1.Location = new System.Drawing.Point(4, 160);
+            this.monthCalendar1.Location = new System.Drawing.Point(4, 155);
             this.monthCalendar1.MaxDate = new System.DateTime(2020, 12, 31, 0, 0, 0, 0);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 8;
@@ -341,6 +342,21 @@
             this.panel2.Size = new System.Drawing.Size(272, 311);
             this.panel2.TabIndex = 10;
             this.panel2.Click += new System.EventHandler(this.panel2_Click);
+            // 
+            // ReminderControl0
+            // 
+            this.ReminderControl0.AutoSize = true;
+            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.ReminderControl0.Icon = null;
+            this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
+            this.ReminderControl0.Message = "Message";
+            this.ReminderControl0.MinimumSize = new System.Drawing.Size(272, 50);
+            this.ReminderControl0.Name = "ReminderControl0";
+            this.ReminderControl0.ParentForm = this;
+            this.ReminderControl0.RemindTime = new System.DateTime(((long)(0)));
+            this.ReminderControl0.Size = new System.Drawing.Size(272, 50);
+            this.ReminderControl0.TabIndex = 3;
+            this.ReminderControl0.Visible = false;
             // 
             // tabPage2
             // 
@@ -458,18 +474,27 @@
             this.materialContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.materialContextMenuStrip1.Depth = 0;
             this.materialContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.materialToolStripMenuItem3,
             this.materialToolStripMenuItem2,
             this.materialToolStripMenuItem1});
             this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
-            this.materialContextMenuStrip1.Size = new System.Drawing.Size(104, 64);
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(117, 94);
+            // 
+            // materialToolStripMenuItem3
+            // 
+            this.materialToolStripMenuItem3.AutoSize = false;
+            this.materialToolStripMenuItem3.Name = "materialToolStripMenuItem3";
+            this.materialToolStripMenuItem3.Size = new System.Drawing.Size(120, 30);
+            this.materialToolStripMenuItem3.Text = "Show";
+            this.materialToolStripMenuItem3.Click += new System.EventHandler(this.materialToolStripMenuItem3_Click);
             // 
             // materialToolStripMenuItem2
             // 
             this.materialToolStripMenuItem2.AutoSize = false;
             this.materialToolStripMenuItem2.Name = "materialToolStripMenuItem2";
             this.materialToolStripMenuItem2.Size = new System.Drawing.Size(120, 30);
-            this.materialToolStripMenuItem2.Text = "Show";
+            this.materialToolStripMenuItem2.Text = "Settings";
             this.materialToolStripMenuItem2.Click += new System.EventHandler(this.materialToolStripMenuItem2_Click);
             // 
             // materialToolStripMenuItem1
@@ -532,6 +557,7 @@
             // materialRaisedButton1
             // 
             this.materialRaisedButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialRaisedButton1.AutoUpper = true;
             this.materialRaisedButton1.Depth = 0;
             this.materialRaisedButton1.Icon = global::MyAIAsisstent.Properties.Resources.setting_blue;
             this.materialRaisedButton1.Location = new System.Drawing.Point(0, 270);
@@ -576,21 +602,6 @@
             // 
             this.timer3.Interval = 10;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
-            // 
-            // ReminderControl0
-            // 
-            this.ReminderControl0.AutoSize = true;
-            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.ReminderControl0.Icon = null;
-            this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
-            this.ReminderControl0.Message = "Message";
-            this.ReminderControl0.MinimumSize = new System.Drawing.Size(272, 50);
-            this.ReminderControl0.Name = "ReminderControl0";
-            this.ReminderControl0.ParentForm = this;
-            this.ReminderControl0.RemindTime = new System.DateTime(((long)(0)));
-            this.ReminderControl0.Size = new System.Drawing.Size(272, 50);
-            this.ReminderControl0.TabIndex = 3;
-            this.ReminderControl0.Visible = false;
             // 
             // Main
             // 
@@ -648,7 +659,7 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
         private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem1;
-        private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem2;
+        private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem3;
         private System.Windows.Forms.Timer timer1;
         private MaterialSkin.Controls.MaterialListView materialListView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -673,5 +684,6 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer3;
         public System.Windows.Forms.Panel panel2;
+        private MaterialSkin.Controls.MaterialToolStripMenuItem materialToolStripMenuItem2;
     }
 }

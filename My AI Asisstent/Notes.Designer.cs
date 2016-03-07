@@ -131,7 +131,7 @@
             this.materialContextMenuStrip1.Margin = new System.Windows.Forms.Padding(16, 8, 16, 8);
             this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
-            this.materialContextMenuStrip1.Size = new System.Drawing.Size(160, 182);
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(160, 160);
             // 
             // materialToolStripMenuItem1
             // 
@@ -283,6 +283,7 @@
         }
 
         #endregion
+
         private MetroFramework.Controls.MetroTextBox metroTextBox1;
         private MetroFramework.Controls.MetroLink metroLink1;
         private MetroFramework.Controls.MetroLink metroLink2;
