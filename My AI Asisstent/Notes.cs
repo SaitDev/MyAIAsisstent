@@ -26,7 +26,19 @@ namespace MyAIAsisstent
             //metroLink1.BackColor = ColorTranslator.FromHtml("#42a5f5");
             metroLink1.Enabled = false;
         }
-
+        /*
+        private static int WM_QUERYENDSESSION = 0x11;
+        protected override void WndProc(ref System.Windows.Forms.Message m)
+        {
+            if (m.Msg == WM_QUERYENDSESSION)
+            {
+                close = true;
+            }
+            // If this is WM_QUERYENDSESSION, the closing event should be
+            // raised in the base WndProc.
+            base.WndProc(ref m);
+        }
+        */
         private void Notes_Load(object sender, EventArgs e)
         {
             if ((index < Settings.Default.NoteCount) && (Settings.Default.NoteCount != 0))
@@ -75,6 +87,13 @@ namespace MyAIAsisstent
             }
         }
 
+        private void Notes_Shown(object sender, EventArgs e)
+        {
+            this.materialContextMenuStrip1.AutoSize = false;
+            this.materialContextMenuStrip1.Size = new Size(127, this.materialContextMenuStrip1.Size.Height);
+            //Microsoft.Win32.SystemEvents.SessionEnding += (o, evnt) => { close = true; Close(); };
+        }
+
         private void Notes_Move(object sender, EventArgs e)
         {
             Opacity = 0.5;
@@ -95,9 +114,15 @@ namespace MyAIAsisstent
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+            {
+                e.Cancel = false;
+                return;
+            }
             if (close)
             {
                 DeleteNote();
+                e.Cancel = false;
                 return;
             }
             string t = this.Text;
@@ -234,12 +259,6 @@ namespace MyAIAsisstent
             _login.notes[i].Text = "Note " + _login.noteCount.ToString();
             _login.notes[i].Show();
             */
-        }
-
-        private void Notes_Shown(object sender, EventArgs e)
-        {
-            this.materialContextMenuStrip1.AutoSize = false;
-            this.materialContextMenuStrip1.Size = new Size(127, this.materialContextMenuStrip1.Size.Height);
         }
 
         private void materialToolStripMenuItem4_Click(object sender, EventArgs e)
