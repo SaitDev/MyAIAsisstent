@@ -223,8 +223,9 @@ namespace MyAIAsisstent
                         int.TryParse(lastNoteLabelClick.Name.Remove(0, 9), out noteLabelID);
                         lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
                         materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Hint = " What can I do for you?";
                         materialSingleLineTextField1.Clear();
-                        NoteLabel0.Focus();
+                        ((MaterialLabel)(tabPage2.Controls["NoteLabel0"])).Focus();
                     }
                 }
                 if (lastNoteLabelClick != null)
@@ -248,6 +249,7 @@ namespace MyAIAsisstent
                         if (timePickerPanel1.timePicker.ClockMenu.Visible)
                             timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
                         materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Hint = " What can I do for you?";
                         materialSingleLineTextField1.Clear();
                         materialListView1.Items[0].Text = "Message to remind";
                         materialListView2.Items[0].Text = "Day";
@@ -436,6 +438,7 @@ namespace MyAIAsisstent
                         int.TryParse(lastNoteLabelClick.Name.Remove(0, 9), out noteLabelID);
                         lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
                         materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Hint = " What can I do for you?";
                         materialSingleLineTextField1.Clear();
                         materialFlatButton3.Focus();
                     }
@@ -461,6 +464,7 @@ namespace MyAIAsisstent
                         if (timePickerPanel1.timePicker.ClockMenu.Visible)
                             timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
                         materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Hint = " What can I do for you?";
                         materialSingleLineTextField1.Clear();
                         materialListView1.Items[0].Text = "Message to remind";
                         materialListView2.Items[0].Text = "Day";
@@ -521,6 +525,7 @@ namespace MyAIAsisstent
                         if (timePickerPanel1.timePicker.ClockMenu.Visible)
                             timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
                         materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                        materialSingleLineTextField1.Hint = " What can I do for you?";
                         materialSingleLineTextField1.Clear();
                         materialListView1.Items[0].Text = "Message to remind";
                         materialListView2.Items[0].Text = "Day";
@@ -572,6 +577,7 @@ namespace MyAIAsisstent
                             int.TryParse(lastNoteLabelClick.Name.Remove(0, 9), out noteLabelID);
                             lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
                             materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                            materialSingleLineTextField1.Hint = " What can I do for you?";
                             materialSingleLineTextField1.Clear();
                             materialLabel1.Focus();
                         }
@@ -685,6 +691,7 @@ namespace MyAIAsisstent
                 }
                 materialSingleLineTextField1.Clear();
                 materialSingleLineTextField1.TextChanged += materialSingleLineTextField1_TextChanged;
+                materialSingleLineTextField1.Hint = " Enter the message I will remind you";
                 //materialSingleLineTextField1.Focus();
             }
             else
@@ -774,6 +781,7 @@ namespace MyAIAsisstent
                 
                 remindAtTime = new DateTime();
                 materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                materialSingleLineTextField1.Hint = " What can I do for you?";
                 materialSingleLineTextField1.Clear();
                 materialFlatButton4.Icon = Properties.Resources.alarm_blue;
                 materialFlatButton5.Hide();
@@ -817,6 +825,7 @@ namespace MyAIAsisstent
             if (timePickerPanel1.timePicker.ClockMenu.Visible)
                 timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
             materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+            materialSingleLineTextField1.Hint = " What can I do for you?";
             materialSingleLineTextField1.Clear();
             //materialListView1.Items[0].Text = "Message to remind";
             //materialListView2.Items[0].Text = "Day";
@@ -1074,9 +1083,10 @@ namespace MyAIAsisstent
         {
             if (i == 0)
             {
-                NoteLabel0.Text = Settings.Default.Notes[0];
-                NoteLabel0.Tag = NoteLabel0.Location.Y + NoteLabel0.Size.Height;
-                NoteLabel0.Show();
+                var defaultNote = (MaterialLabel)(tabPage2.Controls["NoteLabel0"]);
+                defaultNote.Text = Settings.Default.Notes[0];
+                defaultNote.Tag = defaultNote.Location.Y + defaultNote.Size.Height;
+                defaultNote.Show();
                 return;
             }
             MaterialLabel mlabel = new MaterialLabel();
@@ -1158,8 +1168,9 @@ namespace MyAIAsisstent
                 Settings.Default.Notes[noteLabelID] = lastNoteLabelClick.Text;
                 Settings.Default.Save();
                 materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                materialSingleLineTextField1.Hint = " What can I do for you?";
                 materialSingleLineTextField1.Clear();
-                NoteLabel0.Focus();
+                ((MaterialLabel)(tabPage2.Controls["NoteLabel0"])).Focus();
                 lastNoteLabelClick.BackColor = NoteLabelColor(0);
                 lastNoteLabelClick = null;
                 noteEditing = false;
@@ -1180,7 +1191,7 @@ namespace MyAIAsisstent
                 lastNoteLabelClick.Text = Settings.Default.Notes[noteLabelID];
                 materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
                 materialSingleLineTextField1.Clear();
-                NoteLabel0.Focus();
+                ((MaterialLabel)(tabPage2.Controls["NoteLabel0"])).Focus();
                 lastNoteLabelClick.BackColor = NoteLabelColor(0);
                 lastNoteLabelClick = null;
                 noteEditing = false;
@@ -1218,6 +1229,11 @@ namespace MyAIAsisstent
                     speedButton = 2;
                     timer6.Start();
                 }
+                if (Settings.Default.NoteCount == 1)
+                {
+                    ((MaterialLabel)(tabPage2.Controls["NoteLabel0"])).Hide();
+                    return;
+                }
                 ((MaterialLabel)(tabPage2.Controls["NoteLabel" + i.ToString()])).Name = "NoteLabelDeleting";
                 if (i + 1 < Settings.Default.NoteCount)
                 {
@@ -1235,7 +1251,7 @@ namespace MyAIAsisstent
                     }
                 }
                 ((MaterialLabel)(tabPage2.Controls["NoteLabelDeleting"])).Dispose();
-                NoteLabel0.Focus();
+                ((MaterialLabel)(tabPage2.Controls["NoteLabel0"])).Focus();
             }
         }
 
@@ -1372,9 +1388,6 @@ namespace MyAIAsisstent
                     materialListView1.Items[0].Text = materialSingleLineTextField1.Text;
                     materialLabel1.Focus();
                 }
-                TimeSpan ts = new TimeSpan();
-                TimeSpan.TryParse(materialSingleLineTextField1.Text, out ts);
-                MessageBox.Show(ts.ToString());
             }
         }
 
