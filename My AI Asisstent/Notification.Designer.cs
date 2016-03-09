@@ -143,11 +143,9 @@
             // 
             // Notification
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(330, 109);
-            this.ControlBox = false;
             this.Controls.Add(this.metroComboBox1);
             this.Controls.Add(this.materialRaisedButton1);
             this.Controls.Add(this.materialFlatButton1);
@@ -158,7 +156,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Notification";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Notification";

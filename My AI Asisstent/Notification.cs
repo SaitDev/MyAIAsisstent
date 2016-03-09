@@ -97,7 +97,7 @@ namespace MyAIAsisstent
 
         private void materialRaisedButton1_Click(object sender, EventArgs e)
         {
-            Hide();
+            //DelayHide(300);
             try
             {
                 if (Done != null)
@@ -105,12 +105,13 @@ namespace MyAIAsisstent
             }
             catch (Exception exc)
             { MessageBox.Show(exc.Message, "Error"); }
-            Close();
+            //Close();
+            DelayClose(200);
         }
 
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
-            Hide();
+            //DelayHide(300);
             try
             {
                 if (OnRemindNotify != null)
@@ -118,6 +119,13 @@ namespace MyAIAsisstent
             }
             catch (Exception exc)
             { MessageBox.Show(exc.Message, "Error"); }
+            //Close();
+            DelayClose(200);
+        }
+
+        private async void DelayClose(int i)
+        {
+            await Task.Delay(i);
             Close();
         }
 
@@ -141,9 +149,9 @@ namespace MyAIAsisstent
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Location.X > screenSize.Width - 230) speed -= 0.4;
-            else if (Location.X > screenSize.Width - 300) speed -= 2.4;
-            else if (Location.X > screenSize.Width - 320) speed -= 0.1;
+            if (Location.X > screenSize.Width - 220) speed -= 0.4;
+            else if (Location.X > screenSize.Width - 300) speed -= 2.5;
+            else if (Location.X > screenSize.Width - 340) speed -= 0.1;
             if (Location.X - speed <= screenSize.Width - 330)
             {
                 timer1.Stop();
@@ -155,9 +163,9 @@ namespace MyAIAsisstent
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (Location.X > screenSize.Width) speed -= 0.2;
-            else if (Location.X < screenSize.Width - 100) speed += 2;
-            else if (Location.X < screenSize.Width - 250) speed += 0.5;
+            if (Location.X < screenSize.Width - 320) speed += 2;
+            else if (Location.X < screenSize.Width - 70) speed += 8;
+            else if (Location.X < screenSize.Width) speed -= 1;
             Location = new Point((int)(Location.X + speed), Location.Y);
             if (Location.X + speed >= screenSize.Width - 330)
             {

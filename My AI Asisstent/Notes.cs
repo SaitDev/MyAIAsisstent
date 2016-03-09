@@ -15,7 +15,7 @@ namespace MyAIAsisstent
         private Login _login;
         public int index;
         private bool moved;
-        public bool close = false;
+        public bool close = false, systemEndSession = false;
         Random rnd = new Random();
 
         public Notes(Login login)
@@ -26,19 +26,26 @@ namespace MyAIAsisstent
             //metroLink1.BackColor = ColorTranslator.FromHtml("#42a5f5");
             metroLink1.Enabled = false;
         }
-        /*
+
         private static int WM_QUERYENDSESSION = 0x11;
-        protected override void WndProc(ref System.Windows.Forms.Message m)
+        private static int ENDSESSION_CLOSEAPP = 0x1;
+        private static uint ENDSESSION_CRITICAL = 0x40000000;
+        private static uint ENDSESSION_LOGOFF = 0x80000000;
+        protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_QUERYENDSESSION)
             {
-                close = true;
+                if (m.LParam == (IntPtr)ENDSESSION_LOGOFF)
+                {
+                    systemEndSession = true;
+                    Close();
+                }
             }
             // If this is WM_QUERYENDSESSION, the closing event should be
             // raised in the base WndProc.
             base.WndProc(ref m);
         }
-        */
+
         private void Notes_Load(object sender, EventArgs e)
         {
             if ((index < Settings.Default.NoteCount) && (Settings.Default.NoteCount != 0))
@@ -114,14 +121,17 @@ namespace MyAIAsisstent
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /*
             if (e.CloseReason == CloseReason.WindowsShutDown)
             {
                 e.Cancel = false;
+                //Close();
                 return;
             }
-            if (close)
+            */
+            if (close || systemEndSession)
             {
-                DeleteNote();
+                if (close) DeleteNote();
                 e.Cancel = false;
                 return;
             }
@@ -130,6 +140,7 @@ namespace MyAIAsisstent
             if ((MessageBox.Show(this, s, t, MessageBoxButtons.YesNo, MessageBoxIcon.Warning)) == DialogResult.Yes)
             {
                 DeleteNote();
+                e.Cancel = false;
             }
             else e.Cancel = true;
         }

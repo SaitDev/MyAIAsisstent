@@ -56,8 +56,20 @@ namespace MyAIAsisstent
             //MessageBox.Show(config.FilePath);
         }
 
+        private static int WM_QUERYENDSESSION = 0x11;
+        private static int ENDSESSION_CLOSEAPP = 0x1;
+        private static uint ENDSESSION_CRITICAL = 0x40000000;
+        private static uint ENDSESSION_LOGOFF = 0x80000000;
         protected override void WndProc(ref Message m)
         {
+            if (m.Msg == WM_QUERYENDSESSION)
+            {
+                if (m.LParam == (IntPtr)ENDSESSION_LOGOFF)
+                {
+                    Stop_AI_Asisstent = true;
+                    //Close();
+                }
+            }
             base.WndProc(ref m);
             if (m.Msg == NativeMethods.WM_SHOWME)
             {
@@ -157,20 +169,7 @@ namespace MyAIAsisstent
                 welcome.Text = "Welcome back Sait. Have a nice day!";
                 welcome.Done += (o) => { this.Show(); this.Activate(); };
                 welcome.Show();
-                if (File.Exists(@"C:\Windows\Media\Windows Logon.wav"))
-                {
-                    SoundPlayer welcomeSound = new SoundPlayer(@"C:\Windows\Media\Windows Logon.wav");
-                    welcomeSound.Play();
-                    welcomeSound.Dispose();
-                }
-                //PlaySound("Notification", UIntPtr.Zero, (uint)sndFlags.SND_SYNC);
-            }
-            if (Program.silentStart) 
-            {
-                Hide();
-                Notification welcome = new Notification(Mode.Message);
-                welcome.Text = "Welcome back Sait. Have a nice day!";
-                welcome.Show();
+                welcome.Activate();
                 if (File.Exists(@"C:\Windows\Media\Windows Logon.wav"))
                 {
                     SoundPlayer welcomeSound = new SoundPlayer(@"C:\Windows\Media\Windows Logon.wav");
@@ -200,6 +199,19 @@ namespace MyAIAsisstent
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /*
+            if (e.CloseReason.Equals(CloseReason.WindowsShutDown) || e.CloseReason == CloseReason.WindowsShutDown)
+            {
+                e.Cancel = false;
+                //Close();
+                return;
+            }
+            */
+            if (Stop_AI_Asisstent && !noteEditing && !remindCreating)
+            {
+                e.Cancel = false;
+                return;
+            }
             if (materialTabControl1.SelectedIndex == 1)
             {
                 if (noteEditing)
@@ -232,9 +244,10 @@ namespace MyAIAsisstent
                 {
                     lastNoteLabelClick.BackColor = NoteLabelColor(0);
                     lastNoteLabelClick = null;
+                    materialFlatButton10.Hide();
+                    materialFlatButton9.Hide();
                 }
-                materialFlatButton10.Hide();
-                materialFlatButton9.Hide();
+                
             }
             else
             {

@@ -10,6 +10,14 @@ namespace MaterialSkin.Controls
 {
     public class MaterialRaisedButton : Button, IMaterialControl
     {
+        private bool autoUpper = true;
+        [Category("Appearance")]
+        public bool AutoUpper
+        {
+            get { return autoUpper; }
+            set { autoUpper = value; }
+        }
+
         [Browsable(false)]
         public int Depth { get; set; }
         [Browsable(false)]
@@ -144,8 +152,9 @@ namespace MaterialSkin.Controls
                 textRect.X += 4 + 24 + 4;
             }
 
+            string temp = autoUpper ? Text.ToUpper() : Text;
             g.DrawString(
-                Text.ToUpper(),
+                temp,
                 SkinManager.ROBOTO_MEDIUM_10, 
                 SkinManager.GetRaisedButtonTextBrush(Primary),
                 textRect,
