@@ -32,7 +32,7 @@ namespace MyAIAsisstent
         private MaterialSkinManager mSkin = MaterialSkinManager.Instance;
         private Mode NotifiMode;
         private Rectangle screenSize;
-        private double speed = 25;
+        private double speed = 10;
 
         public Notification(Mode mode = Mode.Reminder)
         {
@@ -56,7 +56,7 @@ namespace MyAIAsisstent
             //Point temp = new Point(SystemInformation.VirtualScreen.Width - Size.Width,
             //                       SystemInformation.VirtualScreen.Height - Size.Height - 10);
             screenSize = SystemInformation.VirtualScreen;
-            base.Location = new Point(screenSize.Width + 100, screenSize.Height - Size.Height - 30);
+            base.Location = new Point(screenSize.Width, screenSize.Height - Size.Height - 30);
             //base.BackColor = Program._main.BackColor Program._main.materialSkinManager.Theme
             base.BackColor = mSkin.GetApplicationBackgroundColor();
             MessageLabel.ForeColor = mSkin.GetPrimaryTextColor();
@@ -149,9 +149,9 @@ namespace MyAIAsisstent
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Location.X > screenSize.Width - 220) speed -= 0.4;
-            else if (Location.X > screenSize.Width - 300) speed -= 2.5;
-            else if (Location.X > screenSize.Width - 340) speed -= 0.1;
+            if (Location.X > screenSize.Width - 100) speed += 5;
+            else if (Location.X > screenSize.Width - 280) speed -= 3.5;
+            else if (Location.X > screenSize.Width - 330) speed -= .5;
             if (Location.X - speed <= screenSize.Width - 330)
             {
                 timer1.Stop();
@@ -163,7 +163,7 @@ namespace MyAIAsisstent
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (Location.X < screenSize.Width - 320) speed += 2;
+            if (Location.X < screenSize.Width - 320) speed += 4;
             else if (Location.X < screenSize.Width - 70) speed += 8;
             else if (Location.X < screenSize.Width) speed -= 1;
             Location = new Point((int)(Location.X + speed), Location.Y);

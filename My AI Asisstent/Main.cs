@@ -38,7 +38,7 @@ namespace MyAIAsisstent
 
         public Main()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Blue400, Primary.LightBlue800, Primary.BlueGrey400,
                                                                Accent.LightBlue400, TextShade.WHITE);
@@ -57,18 +57,28 @@ namespace MyAIAsisstent
         }
 
         private static int WM_QUERYENDSESSION = 0x11;
+        private static int WM_ENDSESSION = 0x16;
         private static int ENDSESSION_CLOSEAPP = 0x1;
         private static uint ENDSESSION_CRITICAL = 0x40000000;
         private static uint ENDSESSION_LOGOFF = 0x80000000;
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_QUERYENDSESSION)
+            if (m.Msg == WM_QUERYENDSESSION || m.Msg == WM_ENDSESSION)
             {
+                if (!noteEditing && !remindCreating)
+                {
+                    Stop_AI_Asisstent = true;
+                    m.Result = (IntPtr)1;
+                    Close();
+                }
+                /*
                 if (m.LParam == (IntPtr)ENDSESSION_LOGOFF)
                 {
                     Stop_AI_Asisstent = true;
+                    m.Result = (IntPtr)1;
                     //Close();
                 }
+                */
             }
             base.WndProc(ref m);
             if (m.Msg == NativeMethods.WM_SHOWME)
