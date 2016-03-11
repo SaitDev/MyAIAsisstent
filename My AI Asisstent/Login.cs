@@ -25,8 +25,7 @@ namespace MyAIAsisstent
         public Main _main;
         public Notes[] notes;
         public int noteCount;
-        //public bool noteTopMost = Properties.Settings.Default.NoteOnTop;
-        //public bool appClose = false;
+
         public Login(Main main)
         {
             InitializeComponent();
@@ -39,9 +38,6 @@ namespace MyAIAsisstent
             {
                 if (noteCount == 0)
                 {
-                    //noteCount++;
-                    //Properties.Settings.Default.NoteCount--;
-                    //Properties.Settings.Default.Save();
                     newNote();
                 }
                 else
@@ -54,13 +50,6 @@ namespace MyAIAsisstent
                 }
             }
             else Visible = true;
-            /*
-            Double[] temp = Properties.Settings.Default.Opacitys;
-            Array.Resize<Double>(ref temp, 10);
-            Properties.Settings.Default.Opacitys = temp;
-            Properties.Settings.Default.Save();
-            */
-
         }
 
         private void Login_Shown(object sender, EventArgs e)
@@ -238,7 +227,6 @@ namespace MyAIAsisstent
             notes[i] = new Notes(this);
             notes[i].index = i;
             notes[i].Text = "Note " + (i+1).ToString();
-            //if (noteTopMost) notes[i].TopMost = true;
             notes[i].Show();
         }
 
@@ -249,8 +237,6 @@ namespace MyAIAsisstent
                 MessageBox.Show("Limit exceeded. Can not create new Note. Please update to the newest version.");
                 return;
             }
-            //Properties.Settings.Default.NoteCount++;
-            //Properties.Settings.Default.Save();
             createNote(noteCount);
             _main.newNoteLabel(noteCount);
             noteCount++;

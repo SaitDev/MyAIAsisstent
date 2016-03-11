@@ -266,7 +266,6 @@
             this.Shown += new System.EventHandler(this.Setting_Shown);
             this.ResizeEnd += new System.EventHandler(this.Setting_ResizeEnd);
             this.VisibleChanged += new System.EventHandler(this.Setting_VisibleChanged);
-            this.Layout += new System.Windows.Forms.LayoutEventHandler(this.Setting_Layout);
             this.Move += new System.EventHandler(this.Setting_Move);
             this.ResumeLayout(false);
             this.PerformLayout();

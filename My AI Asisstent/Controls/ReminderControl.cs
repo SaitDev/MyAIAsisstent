@@ -67,8 +67,6 @@ namespace MyAIAsisstent.Controls
         //[Browsable(false)]
         public new MaterialForm ParentForm
         {
-            //get { return (Main)(Program._main); }
-            //set { ParentForm = (Main)(Program._main); }
             get; set;
         }
 

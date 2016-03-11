@@ -116,7 +116,6 @@ namespace MyAIAsisstent
                 Settings.Default.Save();
                 moved = false;
             }
-            //else this.Opacity = Properties.Settings.Default.Opacity1;
         }
 
         private void Notes_FormClosing(object sender, FormClosingEventArgs e)
@@ -194,8 +193,6 @@ namespace MyAIAsisstent
             _login._main.tabPage2.Controls["NoteLabel" + index.ToString()].Text = materialLabel1.Text;
             if (_login._main.tabPage2.Controls["NoteLabel" + index.ToString()].Size != temp)
                 _login._main.UpdateNoteLabel(index);
-            //Properties.Settings.Default.Notes.RemoveAt(index);
-            //Properties.Settings.Default.Notes.Insert(index, materialLabel1.Text);
             Settings.Default.Notes[index] = materialLabel1.Text;
             Settings.Default.Save();
         }
@@ -211,7 +208,6 @@ namespace MyAIAsisstent
             this.Opacity = Convert.ToDouble(1.0);
             Settings.Default.Opacitys[index] = 1;
             Settings.Default.Save();
-            //MessageBox.Show(Properties.Settings.Default.Opacity1.ToString());
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -223,7 +219,6 @@ namespace MyAIAsisstent
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            //Properties.Settings.Default.Opacitys[index] = Convert.ToDouble(0.8);
             Opacity = (double)0.8;
             Settings.Default.Opacitys[index] = 0.8;
             Settings.Default.Save();
@@ -255,21 +250,7 @@ namespace MyAIAsisstent
 
         private void metroLink3_Click(object sender, EventArgs e)
         {
-            /*
-            if (_login.noteCount == 10)
-            {
-                MessageBox.Show("Reached limitation of note");
-            }
-            else */
             _login.newNote();
-            /*
-            _login.noteCount++;
-            var i = _login.noteCount - 1;
-            _login.notes[i] = new Notes(_login);
-            _login.notes[i].index = i;
-            _login.notes[i].Text = "Note " + _login.noteCount.ToString();
-            _login.notes[i].Show();
-            */
         }
 
         private void materialToolStripMenuItem4_Click(object sender, EventArgs e)

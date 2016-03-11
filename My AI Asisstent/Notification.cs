@@ -38,7 +38,6 @@ namespace MyAIAsisstent
         {
             InitializeComponent();
             this.TextChanged += new System.EventHandler(this.Notification_TextChanged);
-            //label1.Text = Environment.OSVersion.VersionString;
             if (mode == Mode.Message)
             {
                 materialFlatButton1.Location = new Point(25, 75);
@@ -53,11 +52,8 @@ namespace MyAIAsisstent
 
         private void Notification_Load(object sender, EventArgs e)
         {
-            //Point temp = new Point(SystemInformation.VirtualScreen.Width - Size.Width,
-            //                       SystemInformation.VirtualScreen.Height - Size.Height - 10);
             screenSize = SystemInformation.VirtualScreen;
             base.Location = new Point(screenSize.Width, screenSize.Height - Size.Height - 30);
-            //base.BackColor = Program._main.BackColor Program._main.materialSkinManager.Theme
             base.BackColor = mSkin.GetApplicationBackgroundColor();
             MessageLabel.ForeColor = mSkin.GetPrimaryTextColor();
             if (mSkin.Theme == MaterialSkinManager.Themes.DARK)
@@ -97,7 +93,6 @@ namespace MyAIAsisstent
 
         private void materialRaisedButton1_Click(object sender, EventArgs e)
         {
-            //DelayHide(300);
             try
             {
                 if (Done != null)
@@ -105,13 +100,11 @@ namespace MyAIAsisstent
             }
             catch (Exception exc)
             { MessageBox.Show(exc.Message, "Error"); }
-            //Close();
             DelayClose(200);
         }
 
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
-            //DelayHide(300);
             try
             {
                 if (OnRemindNotify != null)
@@ -119,7 +112,6 @@ namespace MyAIAsisstent
             }
             catch (Exception exc)
             { MessageBox.Show(exc.Message, "Error"); }
-            //Close();
             DelayClose(200);
         }
 

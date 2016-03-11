@@ -168,9 +168,6 @@ namespace MaterialSkin.Controls
         private Point previousLocation;
         private bool headerMouseDown;
 
-        //private Graphics g;
-        //private PaintEventArgs paintevent;
-        //private ButtonState oldState;
 
         public MaterialForm()
         {
@@ -267,7 +264,6 @@ namespace MaterialSkin.Controls
             {
                 headerMouseDown = false;
             }
-            //RepaintStatusBar();
         }
 
         protected override CreateParams CreateParams
@@ -297,10 +293,7 @@ namespace MaterialSkin.Controls
             base.OnMouseLeave(e);
             if (DesignMode) return;
             buttonState = ButtonState.None;
-            //TODO fix this shit error
             RepaintStatusBar();
-            //Invalidate();
-            //Update();
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -418,11 +411,7 @@ namespace MaterialSkin.Controls
                 }
                 else buttonState = ButtonState.None;
             }
-            //if (oldState != buttonState) oldState = buttonState;
-            //TODO fix this shit error
             if (oldState != buttonState) RepaintStatusBar();
-            //Invalidate();
-            //Update();
         }
 
         private void MaximizeWindow(bool maximize)
@@ -516,91 +505,15 @@ namespace MaterialSkin.Controls
                 g.DrawLine(borderPen, new Point(Width - 1, actionBarBounds.Bottom), new Point(Width - 1, Height - 2));
                 g.DrawLine(borderPen, new Point(0, Height - 1), new Point(Width - 1, Height - 1));
             }
-            //TODO fix this shit error
-            
-            /*
-            // Determine whether or not we even should be drawing the buttons.
-            bool showMin = MinimizeBox && ControlBox;
-            bool showMax = MaximizeBox && ControlBox;
-            var hoverBrush = SkinManager.GetFlatButtonHoverBackgroundBrush();
-            var downBrush = SkinManager.GetFlatButtonPressedBackgroundBrush();
-            
-            // When MaximizeButton == false, the minimize button will be painted in its place
-            if (buttonState == ButtonState.MinOver && showMin)
-                g.FillRectangle(hoverBrush, showMax ? minButtonBounds : maxButtonBounds);
-
-            if (buttonState == ButtonState.MinDown && showMin)
-                g.FillRectangle(downBrush, showMax ? minButtonBounds : maxButtonBounds);
-
-            if (buttonState == ButtonState.MaxOver && showMax)
-                g.FillRectangle(hoverBrush, maxButtonBounds);
-
-            if (buttonState == ButtonState.MaxDown && showMax)
-                g.FillRectangle(downBrush, maxButtonBounds);
-
-            if (buttonState == ButtonState.XOver && ControlBox)
-                g.FillRectangle(hoverBrush, xButtonBounds);
-
-            if (buttonState == ButtonState.XDown && ControlBox)
-                g.FillRectangle(downBrush, xButtonBounds);
-            
-            using (var formButtonsPen = new Pen(SkinManager.ACTION_BAR_TEXT_SECONDARY, 2))
-            {
-                // Minimize button.
-                if (showMin)
-                {
-                    int x = showMax ? minButtonBounds.X : maxButtonBounds.X;
-                    int y = showMax ? minButtonBounds.Y : maxButtonBounds.Y;
-
-                    g.DrawLine(
-                        formButtonsPen,
-                        x + (int)(minButtonBounds.Width * 0.33),
-                        y + (int)(minButtonBounds.Height * 0.66),
-                        x + (int)(minButtonBounds.Width * 0.66),
-                        y + (int)(minButtonBounds.Height * 0.66)
-                   );
-                }
-
-                // Maximize button
-                if (showMax)
-                {
-                    g.DrawRectangle(
-                        formButtonsPen,
-                        maxButtonBounds.X + (int)(maxButtonBounds.Width * 0.33),
-                        maxButtonBounds.Y + (int)(maxButtonBounds.Height * 0.36),
-                        (int)(maxButtonBounds.Width * 0.39),
-                        (int)(maxButtonBounds.Height * 0.31)
-                   );
-                }
-
-                // Close button
-                if (ControlBox)
-                {
-                    g.DrawLine(
-                        formButtonsPen,
-                        xButtonBounds.X + (int)(xButtonBounds.Width * 0.33),
-                        xButtonBounds.Y + (int)(xButtonBounds.Height * 0.33),
-                        xButtonBounds.X + (int)(xButtonBounds.Width * 0.66),
-                        xButtonBounds.Y + (int)(xButtonBounds.Height * 0.66)
-                   );
-
-                    g.DrawLine(
-                        formButtonsPen,
-                        xButtonBounds.X + (int)(xButtonBounds.Width * 0.66),
-                        xButtonBounds.Y + (int)(xButtonBounds.Height * 0.33),
-                        xButtonBounds.X + (int)(xButtonBounds.Width * 0.33),
-                        xButtonBounds.Y + (int)(xButtonBounds.Height * 0.66));
-                }
-            }
-            */
-            
-            //Form title
-            if (titleDisplay)
-            g.DrawString(Text, SkinManager.ROBOTO_MEDIUM_12, SkinManager.ColorScheme.TextBrush, new Rectangle(SkinManager.FORM_PADDING, STATUS_BAR_HEIGHT, Width, ACTION_BAR_HEIGHT), new StringFormat { LineAlignment = StringAlignment.Center });
 
             //Control buttons
             RepaintStatusBar(g);
+
+            //Form title
+            if (titleDisplay)
+            g.DrawString(Text, SkinManager.ROBOTO_MEDIUM_12, SkinManager.ColorScheme.TextBrush, new Rectangle(SkinManager.FORM_PADDING, STATUS_BAR_HEIGHT, Width, ACTION_BAR_HEIGHT), new StringFormat { LineAlignment = StringAlignment.Center });
         }
+
         private void RepaintStatusBar()
         {
             if (!base.IsDisposed) RepaintStatusBar(base.CreateGraphics());
@@ -614,7 +527,6 @@ namespace MaterialSkin.Controls
             var hoverBrush = SkinManager.GetFlatButtonHoverBackgroundBrush();
             var downBrush = SkinManager.GetFlatButtonPressedBackgroundBrush();
             
-            //var g = base.CreateGraphics();
             g.FillRectangle(SkinManager.ColorScheme.DarkPrimaryBrush, statusBarBounds);
             
             // When MaximizeButton == false, the minimize button will be painted in its place

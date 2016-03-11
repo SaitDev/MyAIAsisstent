@@ -62,11 +62,6 @@ namespace MyAIAsisstent
             e.Cancel = true;
         }
 
-        private void Setting_Layout(object sender, LayoutEventArgs e)
-        {
-            //this.Opacity = 1;
-        }
-
         private void Setting_Move(object sender, EventArgs e)
         {
             this.Opacity = .5;
@@ -111,7 +106,6 @@ namespace MyAIAsisstent
                 Properties.Settings.Default.Save();
                 _login.notes[noteIndex].TopMost = materialCheckBox3.Checked;
             }
-            //Application.DoEvents();
             DelayClose(400);
         }
 
@@ -128,8 +122,6 @@ namespace MyAIAsisstent
 
         private void materialRaisedButton3_Click(object sender, EventArgs e)
         {
-            //_login.Close();
-            //_login.appClose = true;
             DelayExit();
         }
 
@@ -138,17 +130,6 @@ namespace MyAIAsisstent
             await Task.Delay(400);
             Main.Stop_AI_Asisstent = true;
             _login._main.Close();
-            /*
-            try
-            {
-                Environment.Exit(0);
-            }
-            catch (Exception exc)
-            {
-                string mess = string.Format("Exception error: {0}", exc.Message);
-                MessageBox.Show(mess);
-            }
-            */
         }
 
         public void bindSetting (int index)

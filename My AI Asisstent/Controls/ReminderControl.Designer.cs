@@ -93,6 +93,7 @@
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.pictureBox1);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.MinimumSize = new System.Drawing.Size(200, 50);
             this.Name = "ReminderControl";
             this.Size = new System.Drawing.Size(200, 50);
