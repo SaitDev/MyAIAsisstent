@@ -51,6 +51,7 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.timePickerPanel1 = new Opulos.Core.UI.TimePickerPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.materialFlatButton9 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialFlatButton10 = new MaterialSkin.Controls.MaterialFlatButton();
@@ -72,7 +73,6 @@
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -152,6 +152,7 @@
             // 
             // materialFlatButton5
             // 
+            this.materialFlatButton5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton5.AutoUpper = true;
             this.materialFlatButton5.Depth = 0;
             this.materialFlatButton5.Enabled = false;
@@ -171,6 +172,7 @@
             // 
             // materialFlatButton4
             // 
+            this.materialFlatButton4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton4.AutoUpper = true;
             this.materialFlatButton4.Depth = 0;
             this.materialFlatButton4.Icon = global::MyAIAsisstent.Properties.Resources.alarm_blue;
@@ -343,6 +345,21 @@
             this.panel2.TabIndex = 10;
             this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
+            // ReminderControl0
+            // 
+            this.ReminderControl0.AutoSize = true;
+            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.ReminderControl0.Icon = null;
+            this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
+            this.ReminderControl0.Margin = new System.Windows.Forms.Padding(0);
+            this.ReminderControl0.Message = "Message";
+            this.ReminderControl0.MinimumSize = new System.Drawing.Size(270, 50);
+            this.ReminderControl0.Name = "ReminderControl0";
+            this.ReminderControl0.ParentForm = this;
+            this.ReminderControl0.Size = new System.Drawing.Size(270, 50);
+            this.ReminderControl0.TabIndex = 3;
+            this.ReminderControl0.Visible = false;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.materialFlatButton9);
@@ -360,6 +377,7 @@
             // 
             // materialFlatButton9
             // 
+            this.materialFlatButton9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton9.AutoUpper = true;
             this.materialFlatButton9.Depth = 0;
             this.materialFlatButton9.Enabled = false;
@@ -379,6 +397,7 @@
             // 
             // materialFlatButton10
             // 
+            this.materialFlatButton10.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton10.AutoUpper = true;
             this.materialFlatButton10.Depth = 0;
             this.materialFlatButton10.Enabled = false;
@@ -418,6 +437,7 @@
             // 
             // materialFlatButton6
             // 
+            this.materialFlatButton6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton6.AutoUpper = true;
             this.materialFlatButton6.Depth = 0;
             this.materialFlatButton6.Icon = global::MyAIAsisstent.Properties.Resources.note_blue;
@@ -507,6 +527,7 @@
             // 
             // materialFlatButton3
             // 
+            this.materialFlatButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton3.AutoUpper = true;
             this.materialFlatButton3.Depth = 0;
             this.materialFlatButton3.Icon = global::MyAIAsisstent.Properties.Resources.home_blue;
@@ -524,6 +545,7 @@
             // 
             // materialFlatButton2
             // 
+            this.materialFlatButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton2.AutoUpper = true;
             this.materialFlatButton2.Depth = 0;
             this.materialFlatButton2.Icon = global::MyAIAsisstent.Properties.Resources.reminder_blue;
@@ -545,6 +567,7 @@
             this.materialRaisedButton1.AutoUpper = true;
             this.materialRaisedButton1.Depth = 0;
             this.materialRaisedButton1.Icon = global::MyAIAsisstent.Properties.Resources.setting_blue;
+            this.materialRaisedButton1.IconSize = new System.Drawing.Size(25, 25);
             this.materialRaisedButton1.Location = new System.Drawing.Point(0, 270);
             this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRaisedButton1.Name = "materialRaisedButton1";
@@ -558,6 +581,7 @@
             // 
             // materialFlatButton1
             // 
+            this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialFlatButton1.AutoUpper = false;
             this.materialFlatButton1.Depth = 0;
             this.materialFlatButton1.Icon = global::MyAIAsisstent.Properties.Resources.setting_blue;
@@ -587,22 +611,6 @@
             // 
             this.timer3.Interval = 10;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
-            // 
-            // ReminderControl0
-            // 
-            this.ReminderControl0.AutoSize = true;
-            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.ReminderControl0.Icon = null;
-            this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
-            this.ReminderControl0.Margin = new System.Windows.Forms.Padding(0);
-            this.ReminderControl0.Message = "Message";
-            this.ReminderControl0.MinimumSize = new System.Drawing.Size(272, 50);
-            this.ReminderControl0.Name = "ReminderControl0";
-            this.ReminderControl0.ParentForm = this;
-            this.ReminderControl0.RemindTime = new System.DateTime(((long)(0)));
-            this.ReminderControl0.Size = new System.Drawing.Size(272, 50);
-            this.ReminderControl0.TabIndex = 3;
-            this.ReminderControl0.Visible = false;
             // 
             // Main
             // 

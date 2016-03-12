@@ -25,6 +25,7 @@ namespace MyAIAsisstent
         public Main _main;
         public Notes[] notes;
         public int noteCount;
+        private bool silentStart = Program.silentStart;
 
         public Login(Main main)
         {
@@ -43,6 +44,7 @@ namespace MyAIAsisstent
                 else
                 {
                     int i;
+                    if (silentStart) System.Threading.Thread.Sleep(3000);
                     for (i = 0; i < noteCount; i++)
                     {
                         createNote(i);

@@ -31,7 +31,8 @@ namespace MyAIAsisstent
         private Login _login;
         private MaterialFlatButton lastActive;
         private DateTime remindAtTime;
-        private bool remindCreating = false, remindMessageInputed, noteEditing = false, finishLoad = false;
+        private bool remindCreating = false, remindMessageInputed, noteEditing = false, finishLoad = false,
+                     silentStart = Program.silentStart;
         private int speedButton, speedPanel, ReminderIndex;
         private DialogResult answer;
         public static Cursor HandCursor;
@@ -56,6 +57,7 @@ namespace MyAIAsisstent
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
             materialSkinManager.AddFormToManage(this);
+            if (silentStart) System.Threading.Thread.Sleep(2000);
             _login = new Login(this);
         }
 
@@ -93,6 +95,7 @@ namespace MyAIAsisstent
 
         private void Main_Load(object sender, EventArgs e)
         {
+            /*
             if (Settings.Default.RemindMessage != null)
             {
                 for (int i = 0; i < Settings.Default.RemindMessage.Count; i++)
@@ -137,12 +140,14 @@ namespace MyAIAsisstent
                     t.Start();
                 }
             }
+            */
             if (Settings.Default.RemindMessage != null)
             if (Settings.Default.RemindMessage.Count > 0)
             {
                 ReminderControl0.ParentForm = this;
                 ReminderControl0.Message = Settings.Default.RemindMessage[0];
                 ReminderControl0.RemindTime = Settings.Default.RemindAt[0];
+                ReminderControl0.RemindFinish = Settings.Default.RemindCompleted[0];
                 ReminderControl0.Show();
                 ReminderControl0.Tag = ReminderControl0.Location.Y + ReminderControl0.Size.Height;
                 for (int i = 1; i < Settings.Default.RemindMessage.Count; i++)
@@ -419,7 +424,7 @@ namespace MyAIAsisstent
             {
                 ReminderControl0.Message = Settings.Default.RemindMessage[i];
                 ReminderControl0.RemindTime = Settings.Default.RemindAt[i];
-                ReminderControl0.RemindFinish = !Settings.Default.RemindCompleted[i];
+                ReminderControl0.RemindFinish = Settings.Default.RemindCompleted[i];
                 ReminderControl0.Show();
                 ReminderControl0.Tag = ReminderControl0.Location.Y + ReminderControl0.Size.Height;
             }
@@ -434,7 +439,7 @@ namespace MyAIAsisstent
                                (int)((ReminderControl)panel2.Controls["ReminderControl" + (i - 1).ToString()]).Tag + 8),
                     Message = Settings.Default.RemindMessage[i],
                     RemindTime = Settings.Default.RemindAt[i],
-                    RemindFinish = !Settings.Default.RemindCompleted[i],
+                    RemindFinish = Settings.Default.RemindCompleted[i],
 
                 };
                 panel2.Controls.Add(remindctrl);
@@ -523,6 +528,7 @@ namespace MyAIAsisstent
                 if (Settings.Default.RemindMessage == null)
                     ReminderIndex = 0;
                 else ReminderIndex = Settings.Default.RemindMessage.Count;
+                /*
                 Timer t = new Timer();
                 if (remindAtTime <= DateTime.Now)
                     t.Interval = 10;
@@ -556,6 +562,7 @@ namespace MyAIAsisstent
                        noti.Show();
                    };
                 t.Start();
+                */
                 Reminder reminder = new Reminder(ReminderIndex);
                 reminder.Message = materialListView1.Items[0].Text;
                 reminder.Time = remindAtTime;
