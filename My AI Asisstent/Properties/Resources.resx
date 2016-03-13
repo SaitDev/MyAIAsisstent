@@ -136,6 +136,12 @@
   <data name="alarm_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\alarm_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="note_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\note_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="right_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\right_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="setting_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\setting_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,6 +157,9 @@
   <data name="ok_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ok_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="right_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\right_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="edit_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,7 +172,10 @@
   <data name="done_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\done_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="note_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\note_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="remind_finished" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\remind_finished.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="message_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\message_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

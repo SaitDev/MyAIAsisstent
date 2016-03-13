@@ -29,6 +29,11 @@ namespace MyAIAsisstent
                                                        NotificationEventArgs e);
         //public event RemindNotificationHandler ReminNotify;
 
+        public new Image NotifyIcon
+        {
+            set { pictureBox1.Image = value; }
+        }
+
         private MaterialSkinManager mSkin = MaterialSkinManager.Instance;
         private Mode NotifiMode;
         private Rectangle screenSize;
@@ -88,6 +93,7 @@ namespace MyAIAsisstent
         {
             base.BackColor = Program._main.BackColor;
             materialFlatButton1.Invalidate();
+            MessageLabel.ForeColor = mSkin.GetPrimaryTextColor();
             metroComboBox1.BackColor = base.BackColor;
         }
 
@@ -123,7 +129,6 @@ namespace MyAIAsisstent
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            Hide();
             try
             {
                 if (Dismiss != null)
@@ -131,7 +136,7 @@ namespace MyAIAsisstent
             }
             catch (Exception exc)
             { MessageBox.Show(exc.Message); }
-            Close();
+            DelayClose(200);
         }
 
         private void Notification_TextChanged(object sender, EventArgs e)
@@ -155,8 +160,8 @@ namespace MyAIAsisstent
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (Location.X < screenSize.Width - 320) speed += 4;
-            else if (Location.X < screenSize.Width - 70) speed += 8;
+            if (Location.X < screenSize.Width - 320) speed += 5;
+            else if (Location.X < screenSize.Width - 70) speed += 10;
             else if (Location.X < screenSize.Width) speed -= 1;
             Location = new Point((int)(Location.X + speed), Location.Y);
             if (Location.X + speed >= screenSize.Width - 330)

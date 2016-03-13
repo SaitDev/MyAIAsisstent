@@ -216,6 +216,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AI-Assistant.ico" />
+    <None Include="Resources\message_blue.png" />
+    <None Include="Resources\remind_finished.png" />
+    <None Include="Resources\right_blue.png" />
+    <None Include="Resources\right_dark.png" />
     <None Include="Resources\note_blue.png" />
     <None Include="Resources\reminder_blue.png" />
     <None Include="Resources\home_blue.png" />

@@ -32,6 +32,7 @@ namespace MyAIAsisstent
             InitializeComponent();
             _main = main;
             _main.materialSkinManager.AddFormToManage(this);
+            if (silentStart) System.Threading.Thread.Sleep(1000);
             _setting = new Setting(this);
             notes = new Notes[10];
             noteCount = Properties.Settings.Default.NoteCount;

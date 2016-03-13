@@ -143,6 +143,16 @@ namespace MyAIAsisstent.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap message_blue {
+            get {
+                object obj = ResourceManager.GetObject("message_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap note_blue {
             get {
                 object obj = ResourceManager.GetObject("note_blue", resourceCulture);
@@ -173,9 +183,39 @@ namespace MyAIAsisstent.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap remind_finished {
+            get {
+                object obj = ResourceManager.GetObject("remind_finished", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap reminder_blue {
             get {
                 object obj = ResourceManager.GetObject("reminder_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap right_blue {
+            get {
+                object obj = ResourceManager.GetObject("right_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap right_dark {
+            get {
+                object obj = ResourceManager.GetObject("right_dark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

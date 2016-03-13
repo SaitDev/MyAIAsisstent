@@ -51,7 +51,6 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.timePickerPanel1 = new Opulos.Core.UI.TimePickerPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.materialFlatButton9 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialFlatButton10 = new MaterialSkin.Controls.MaterialFlatButton();
@@ -73,6 +72,7 @@
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -197,7 +197,7 @@
             this.panel3.Controls.Add(this.materialListView1);
             this.panel3.Controls.Add(this.monthCalendar1);
             this.panel3.Controls.Add(this.timePickerPanel1);
-            this.panel3.Location = new System.Drawing.Point(272, 0);
+            this.panel3.Location = new System.Drawing.Point(277, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(272, 311);
             this.panel3.TabIndex = 11;
@@ -215,7 +215,6 @@
             this.materialLabel1.Size = new System.Drawing.Size(244, 35);
             this.materialLabel1.TabIndex = 2;
             this.materialLabel1.Text = "What do you want me to remind?";
-            this.materialLabel1.Visible = false;
             // 
             // materialListView3
             // 
@@ -238,7 +237,6 @@
             this.materialListView3.TabIndex = 6;
             this.materialListView3.UseCompatibleStateImageBehavior = false;
             this.materialListView3.View = System.Windows.Forms.View.Details;
-            this.materialListView3.Visible = false;
             this.materialListView3.Click += new System.EventHandler(this.materialListView3_Click);
             // 
             // columnHeader3
@@ -271,7 +269,6 @@
             this.materialListView2.TabIndex = 5;
             this.materialListView2.UseCompatibleStateImageBehavior = false;
             this.materialListView2.View = System.Windows.Forms.View.Details;
-            this.materialListView2.Visible = false;
             this.materialListView2.Click += new System.EventHandler(this.materialListView2_Click);
             // 
             // columnHeader2
@@ -302,7 +299,6 @@
             this.materialListView1.TabIndex = 1;
             this.materialListView1.UseCompatibleStateImageBehavior = false;
             this.materialListView1.View = System.Windows.Forms.View.Details;
-            this.materialListView1.Visible = false;
             this.materialListView1.Click += new System.EventHandler(this.materialListView1_Click);
             // 
             // columnHeader1
@@ -338,27 +334,13 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.Controls.Add(this.ReminderControl0);
-            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Location = new System.Drawing.Point(1, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(272, 311);
+            this.panel2.Size = new System.Drawing.Size(277, 311);
             this.panel2.TabIndex = 10;
             this.panel2.Click += new System.EventHandler(this.panel2_Click);
-            // 
-            // ReminderControl0
-            // 
-            this.ReminderControl0.AutoSize = true;
-            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.ReminderControl0.Icon = null;
-            this.ReminderControl0.Location = new System.Drawing.Point(5, 5);
-            this.ReminderControl0.Margin = new System.Windows.Forms.Padding(0);
-            this.ReminderControl0.Message = "Message";
-            this.ReminderControl0.MinimumSize = new System.Drawing.Size(270, 50);
-            this.ReminderControl0.Name = "ReminderControl0";
-            this.ReminderControl0.ParentForm = this;
-            this.ReminderControl0.Size = new System.Drawing.Size(270, 50);
-            this.ReminderControl0.TabIndex = 3;
-            this.ReminderControl0.Visible = false;
             // 
             // tabPage2
             // 
@@ -611,6 +593,22 @@
             // 
             this.timer3.Interval = 10;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // ReminderControl0
+            // 
+            this.ReminderControl0.AutoSize = true;
+            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.ReminderControl0.Icon = null;
+            this.ReminderControl0.Location = new System.Drawing.Point(4, 5);
+            this.ReminderControl0.Margin = new System.Windows.Forms.Padding(0);
+            this.ReminderControl0.Message = "Message";
+            this.ReminderControl0.MinimumSize = new System.Drawing.Size(270, 50);
+            this.ReminderControl0.Name = "ReminderControl0";
+            this.ReminderControl0.ParentForm = this;
+            this.ReminderControl0.RemindFinish = true;
+            this.ReminderControl0.Size = new System.Drawing.Size(270, 50);
+            this.ReminderControl0.TabIndex = 3;
+            this.ReminderControl0.Visible = false;
             // 
             // Main
             // 

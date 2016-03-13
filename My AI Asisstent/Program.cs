@@ -43,11 +43,11 @@ namespace MyAIAsisstent
                             Properties.Settings.Default.UpdateSettingsRequired = false;
                             Properties.Settings.Default.Save();
                         }
-                        _main = new Main();
                         foreach (string arg in args)
                         {
                             if (arg.ToUpper() == "-SILENTSTART") silentStart = true;
                         }
+                        _main = new Main();
                         Application.Run(_main);
                         mutex.ReleaseMutex();
                     }

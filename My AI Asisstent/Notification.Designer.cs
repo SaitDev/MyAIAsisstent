@@ -170,6 +170,7 @@
         }
 
         #endregion
+
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         protected internal System.Windows.Forms.Label MessageLabel;

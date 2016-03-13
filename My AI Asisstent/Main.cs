@@ -32,7 +32,7 @@ namespace MyAIAsisstent
         private MaterialFlatButton lastActive;
         private DateTime remindAtTime;
         private bool remindCreating = false, remindMessageInputed, noteEditing = false, finishLoad = false,
-                     silentStart = Program.silentStart;
+                     silentStart = Program.silentStart, remindEditing = false;
         private int speedButton, speedPanel, ReminderIndex;
         private DialogResult answer;
         public static Cursor HandCursor;
@@ -142,19 +142,20 @@ namespace MyAIAsisstent
             }
             */
             if (Settings.Default.RemindMessage != null)
-            if (Settings.Default.RemindMessage.Count > 0)
-            {
-                ReminderControl0.ParentForm = this;
-                ReminderControl0.Message = Settings.Default.RemindMessage[0];
-                ReminderControl0.RemindTime = Settings.Default.RemindAt[0];
-                ReminderControl0.RemindFinish = Settings.Default.RemindCompleted[0];
-                ReminderControl0.Show();
-                ReminderControl0.Tag = ReminderControl0.Location.Y + ReminderControl0.Size.Height;
-                for (int i = 1; i < Settings.Default.RemindMessage.Count; i++)
+                if (Settings.Default.RemindMessage.Count > 0)
                 {
-                    newReminderControl(i);
+                    ReminderControl0.ParentForm = this;
+                    ReminderControl0.Message = Settings.Default.RemindMessage[0];
+                    ReminderControl0.RemindTime = Settings.Default.RemindAt[0];
+                    ReminderControl0.Index = 0;
+                    ReminderControl0.RemindFinish = Settings.Default.RemindCompleted[0];
+                    ReminderControl0.Show();
+                    ReminderControl0.Tag = ReminderControl0.Location.Y + ReminderControl0.Size.Height;
+                    for (int i = 1; i < Settings.Default.RemindMessage.Count; i++)
+                    {
+                        newReminderControl(i);
+                    }
                 }
-            }
             if (Settings.Default.NoteCount > 0)
             {
                 NoteLabel0.Text = Settings.Default.Notes[0];
@@ -175,6 +176,7 @@ namespace MyAIAsisstent
                 Hide();
                 Notification welcome = new Notification(Mode.Message);
                 welcome.Text = "Welcome back Sait. Have a nice day!";
+                welcome.NotifyIcon = Resources.message_blue;
                 welcome.Done += (o) => { this.Show(); this.Activate(); };
                 welcome.Show();
                 welcome.Activate();
@@ -250,7 +252,7 @@ namespace MyAIAsisstent
         {
             UpdateMenuButton();
             if (finishLoad)
-            UpdateNoteLabelColor();
+                UpdateNoteLabelColor();
             materialContextMenuStrip1.BackColor = this.BackColor;
         }
 
@@ -424,6 +426,7 @@ namespace MyAIAsisstent
             {
                 ReminderControl0.Message = Settings.Default.RemindMessage[i];
                 ReminderControl0.RemindTime = Settings.Default.RemindAt[i];
+                ReminderControl0.Index = 0;
                 ReminderControl0.RemindFinish = Settings.Default.RemindCompleted[i];
                 ReminderControl0.Show();
                 ReminderControl0.Tag = ReminderControl0.Location.Y + ReminderControl0.Size.Height;
@@ -435,12 +438,12 @@ namespace MyAIAsisstent
                     ParentForm = this,
                     Name = "ReminderControl" + i.ToString(),
                     MinimumSize = ReminderControl0.MinimumSize,
-                    Location = new Point(5,
+                    Location = new Point(4,
                                (int)((ReminderControl)panel2.Controls["ReminderControl" + (i - 1).ToString()]).Tag + 8),
                     Message = Settings.Default.RemindMessage[i],
                     RemindTime = Settings.Default.RemindAt[i],
-                    RemindFinish = Settings.Default.RemindCompleted[i],
-
+                    Index = i,
+                    RemindFinish = Settings.Default.RemindCompleted[i]
                 };
                 panel2.Controls.Add(remindctrl);
                 remindctrl.Tag = remindctrl.Location.Y + remindctrl.Size.Height;
@@ -475,21 +478,21 @@ namespace MyAIAsisstent
             materialListView3.Items[0].Text = timePickerPanel1.timePicker.Value.ToShortTimeString();
             materialSingleLineTextField1.Enabled = true;
         }
-        
+
         private void materialFlatButton4_Click(object sender, EventArgs e)
         {
-            if (!remindCreating)
+            if (!remindCreating && !remindEditing)
             {
                 remindCreating = true;
                 materialLabel1.Text = "WHAT do you want me to remind?";
-                materialLabel1.Show();
+                //materialLabel1.Show();
                 materialLabel1.BackColor = SkinManager.GetFlatButtonHoverBackgroundColor();
                 materialLabel1.ForeColor = SkinManager.ColorScheme.PrimaryColor;
                 materialLabel1.Font = SkinManager.ROBOTO_MEDIUM_11;
-                materialListView1.Show();
-                materialListView1.Items[0].ForeColor = SkinManager.GetDividersColor();
-                materialListView2.Show();
-                materialListView3.Show();
+                //materialListView1.Show();
+                //materialListView1.Items[0].ForeColor = SkinManager.GetDividersColor();
+                //materialListView2.Show();
+                //materialListView3.Show();
                 speedPanel = 5;
                 timer4.Start();
                 speedButton = 2;
@@ -502,7 +505,7 @@ namespace MyAIAsisstent
                 materialSingleLineTextField1.TextChanged += materialSingleLineTextField1_TextChanged;
                 materialSingleLineTextField1.Hint = " Enter the message I will remind you";
             }
-            else
+            else if (remindCreating)
             {
                 if (remindMessageInputed == false)
                 {
@@ -569,11 +572,38 @@ namespace MyAIAsisstent
                 Settings.Default.Save();
                 newReminderControl(ReminderIndex);
                 remindCreating = false;
-                remindMessageInputed = false;
                 speedPanel = 2;
                 timer4.Start();
                 speedButton = 2;
                 timer2.Start();
+                remindMessageInputed = false;
+                remindAtTime = new DateTime();
+                monthCalendar1.Hide();
+                if (timePickerPanel1.timePicker.ClockMenu.Visible)
+                    timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
+                materialSingleLineTextField1.TextChanged -= materialSingleLineTextField1_TextChanged;
+                materialSingleLineTextField1.Hint = " What can I do for you?";
+                materialSingleLineTextField1.Clear();
+            }
+            else if (remindEditing)
+            {
+                if (materialListView1.Items[0].Text == "")
+                {
+                    MetroMessageBox.Show(this, "You didn't enter the reminder message.", "",
+                                          MessageBoxButtons.OK, MessageBoxIcon.Asterisk, 120);
+                    materialSingleLineTextField1.Focus();
+                    return;
+                }
+                var rmdctrl = panel2.Controls["ReminderControl" + ReminderIndex.ToString()];
+                ((ReminderControl)rmdctrl).Message = materialListView1.Items[0].Text;
+                ((ReminderControl)rmdctrl).RemindTime = remindAtTime;
+                ((ReminderControl)rmdctrl).RemindFinish = false;
+                remindEditing = false;
+                speedPanel = 2;
+                timer4.Start();
+                speedButton = 2;
+                timer2.Start();
+                remindMessageInputed = false;
                 remindAtTime = new DateTime();
                 monthCalendar1.Hide();
                 if (timePickerPanel1.timePicker.ClockMenu.Visible)
@@ -586,14 +616,18 @@ namespace MyAIAsisstent
 
         private void materialFlatButton5_Click(object sender, EventArgs e)
         {
-            answer = MetroMessageBox.Show(this, "Are you sure to cancel this reminder?", "",
-                                                             MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 140);
-            if (answer == DialogResult.No) 
+            if (remindCreating)
             {
-                if (remindMessageInputed) materialSingleLineTextField1.SelectAll();
-                return;
+                answer = MetroMessageBox.Show(this, "Are you sure to cancel this reminder?", "",
+                                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 140);
+                if (answer == DialogResult.No)
+                {
+                    if (remindMessageInputed) materialSingleLineTextField1.SelectAll();
+                    return;
+                }
             }
             remindCreating = false;
+            remindEditing = false;
             remindMessageInputed = false;
             speedPanel = 2;
             timer4.Start();
@@ -617,7 +651,7 @@ namespace MyAIAsisstent
             materialLabel1.Text = "WHAT do you want me to remind?";
             materialSingleLineTextField1.Enabled = true;
             if (remindMessageInputed) materialSingleLineTextField1.Text = materialListView1.Items[0].Text;
-            materialSingleLineTextField1.Focus(); 
+            materialSingleLineTextField1.Focus();
         }
 
         private void materialListView2_Click(object sender, EventArgs e)
@@ -661,7 +695,7 @@ namespace MyAIAsisstent
         {
             materialFlatButton4.Location = new Point(materialFlatButton4.Location.X,
                                                       materialFlatButton4.Location.Y + speedButton);
-            if (remindCreating)
+            if (remindCreating || remindEditing)
             {
                 if (materialFlatButton4.Location.Y <= 335)
                 {
@@ -702,7 +736,7 @@ namespace MyAIAsisstent
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            if (remindCreating)
+            if (remindCreating || remindEditing)
             {
                 if (materialFlatButton5.Location.Y > 299)
                 {
@@ -718,21 +752,32 @@ namespace MyAIAsisstent
             {
                 timer3.Stop();
                 timer3.Enabled = false;
+                if (remindEditing)
+                {
+                    if (ReminderControl.lastReminderClick != null)
+                    {
+                        ReminderControl.lastReminderClick.LastState = ReminderMouseState.LostFocus;
+                    }
+                    materialSingleLineTextField1.Text = materialListView1.Items[0].Text;
+                    materialSingleLineTextField1.TextChanged += materialSingleLineTextField1_TextChanged;
+                    materialSingleLineTextField1.Hint = " Enter the message I will remind you";
+                    materialSingleLineTextField1.SelectAll();
+                }
             }
             else
             {
                 materialFlatButton4.Location = new Point(materialFlatButton4.Location.X,
                                                          materialFlatButton4.Location.Y - speedButton);
-                
+
                 speedButton--;
             }
         }
 
         private void timer4_Tick(object sender, EventArgs e)
         {
-            if (remindCreating)
+            if (remindCreating || remindEditing)
             {
-                if (panel3.Location.X <= 272)
+                if (panel3.Location.X <= 277)
                 {
                     if (panel3.Location.X <= 220)
                     {
@@ -780,10 +825,10 @@ namespace MyAIAsisstent
                             if (panel3.Location.X >= 220)
                             {
                                 speedPanel -= 1;
-                                if (panel3.Location.X + speedPanel > 272)
-                                    panel3.Location = new Point(272, 0);
+                                if (panel3.Location.X + speedPanel > 277)
+                                    panel3.Location = new Point(277, 0);
                                 else panel3.Location = new Point(panel3.Location.X + speedPanel, 0);
-                                if (panel3.Location.X == 272)
+                                if (panel3.Location.X == 277)
                                 {
                                     timer4.Enabled = false;
                                     materialLabel1.Focus();
@@ -846,6 +891,23 @@ namespace MyAIAsisstent
             {
                 ReminderControl.lastReminderClick.LastState = ReminderMouseState.LostFocus;
             }
+        }
+
+        public void editRemind(int i)
+        {
+            remindEditing = true;
+            ReminderIndex = i;
+            materialLabel1.Text = "WHAT do you want me to remind?";
+            materialLabel1.BackColor = SkinManager.GetFlatButtonHoverBackgroundColor();
+            materialLabel1.ForeColor = SkinManager.ColorScheme.PrimaryColor;
+            var rmdctrl = panel2.Controls["ReminderControl" + ReminderIndex.ToString()];
+            materialListView1.Items[0].Text = ((ReminderControl)rmdctrl).Message;
+            materialListView2.Items[0].Text = ((ReminderControl)rmdctrl).Day;
+            materialListView3.Items[0].Text = ((ReminderControl)rmdctrl).RemindTime.ToShortTimeString();
+            speedPanel = 5;
+            timer4.Start();
+            speedButton = 2;
+            timer2.Start();
         }
 
         #endregion
@@ -1198,7 +1260,7 @@ namespace MyAIAsisstent
 
         private void materialSingleLineTextField1_TextChanged(object sender, EventArgs e)
         {
-            if (remindCreating)
+            if (remindCreating || remindEditing)
             {
                 remindMessageInputed = true;
                 materialListView1.Items[0].Text = materialSingleLineTextField1.Text;

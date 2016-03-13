@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReminderControl));
             this.MessageLabel = new System.Windows.Forms.Label();
             this.TimeLabel = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.RemindWait = new System.Windows.Forms.Timer(this.components);
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // MessageLabel
@@ -46,7 +45,7 @@
             this.MessageLabel.AutoSize = true;
             this.MessageLabel.BackColor = System.Drawing.Color.Transparent;
             this.MessageLabel.Font = new System.Drawing.Font("Sitka Text", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MessageLabel.Location = new System.Drawing.Point(35, 2);
+            this.MessageLabel.Location = new System.Drawing.Point(30, 2);
             this.MessageLabel.Margin = new System.Windows.Forms.Padding(0);
             this.MessageLabel.MaximumSize = new System.Drawing.Size(0, 30);
             this.MessageLabel.Name = "MessageLabel";
@@ -65,7 +64,7 @@
             this.TimeLabel.AutoSize = true;
             this.TimeLabel.BackColor = System.Drawing.Color.Transparent;
             this.TimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.TimeLabel.Location = new System.Drawing.Point(35, 28);
+            this.TimeLabel.Location = new System.Drawing.Point(30, 28);
             this.TimeLabel.MinimumSize = new System.Drawing.Size(0, 15);
             this.TimeLabel.Name = "TimeLabel";
             this.TimeLabel.Size = new System.Drawing.Size(90, 15);
@@ -76,18 +75,6 @@
             this.TimeLabel.MouseEnter += new System.EventHandler(this.TimeLabel_MouseEnter);
             this.TimeLabel.MouseLeave += new System.EventHandler(this.TimeLabel_MouseLeave);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(28, 30);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
-            // 
             // RemindWait
             // 
             this.RemindWait.Interval = 500;
@@ -97,17 +84,29 @@
             // 
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(178, 15);
+            this.pictureBox2.Image = global::MyAIAsisstent.Properties.Resources.right_dark;
+            this.pictureBox2.Location = new System.Drawing.Point(179, 15);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(15, 20);
+            this.pictureBox2.Size = new System.Drawing.Size(13, 20);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             this.pictureBox2.MouseEnter += new System.EventHandler(this.pictureBox2_MouseEnter);
             this.pictureBox2.MouseLeave += new System.EventHandler(this.pictureBox2_MouseLeave);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::MyAIAsisstent.Properties.Resources.remind_finished;
+            this.pictureBox1.Location = new System.Drawing.Point(5, 15);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
             // 
             // ReminderControl
             // 
@@ -118,13 +117,14 @@
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.MinimumSize = new System.Drawing.Size(200, 50);
             this.Name = "ReminderControl";
             this.Size = new System.Drawing.Size(200, 50);
             this.Load += new System.EventHandler(this.ReminderControl_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

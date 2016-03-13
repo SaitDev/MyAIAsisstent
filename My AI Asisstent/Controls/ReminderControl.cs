@@ -35,7 +35,6 @@ namespace MyAIAsisstent.Controls
             set
             {
                 remindTime = value;
-                if (remindFinish || DesignMode) return;
                 RemindWait.Enabled = false;
                 if (value == new DateTime()) return;
                 DateTime temp = DateTime.Now;
@@ -46,14 +45,16 @@ namespace MyAIAsisstent.Controls
                 else if (remindTime.AddDays(1).Date == temp.Date)
                     day = "Tomorrow  ";
                 else day = remindTime.DayOfWeek.ToString() + "  ";
+                //day = DateTime.Now.ToString("ddddddd") + "  ";
                 TimeLabel.Text = day + remindTime.ToShortDateString() + "  At  " + remindTime.ToShortTimeString();
+                if (remindFinish || DesignMode) return;
                 if (remindTime > temp)
                     RemindWait.Interval = (int)(remindTime - temp).TotalMilliseconds;
-                RemindWait.Enabled = true;
+                if (!remindFinish) RemindWait.Enabled = true;
             }
         }
 
-        private bool remindFinish = false;
+        private bool remindFinish = true;
         [Category("Behavior")]
         [DefaultValue(false)]
         public bool RemindFinish
@@ -116,22 +117,46 @@ namespace MyAIAsisstent.Controls
         }
 
         private string day;
+        public string Day
+        {
+            get { return day; }
+        }
+
+        private int index;
+        [Browsable(false)]
+        [ReadOnly(true)]
+        public int Index
+        {
+            get
+            {
+                return index;
+            }
+            set
+            {
+                index = value;
+                if (value >= 0)
+                    reminderSettings = new Reminder(value);
+                else reminderSettings = new Reminder(int.Parse(Name.Remove(0, 15)));
+            }
+        }
+
         public static ReminderControl lastReminderClick;
+        private Reminder reminderSettings;
+        private bool finishLoad = false;
 
         public ReminderControl()
         {
             InitializeComponent();
-            if (remindFinish) pictureBox1.Show();
         }
 
         private void ReminderControl_Load(object sender, EventArgs e)
         {
-            CheckFinish();
             if (!DesignMode)
             {
                 base.BackColor = ((Main)ParentForm).NoteLabelColor(0);
-                UpdateSkin(((Main)Program._main), new EventArgs());
+                UpdateSkin(((Main)ParentForm), new EventArgs());
                 ParentForm.BackColorChanged += UpdateSkin;
+                finishLoad = true;
             }
         }
 
@@ -153,10 +178,11 @@ namespace MyAIAsisstent.Controls
         {
             if (remindFinish)
             {
-                RemindWait.Enabled = false;
-                MessageLabel.MaximumSize = new Size(this.Size.Width - 35 - 22, 25);
-                MessageLabel.Location = new Point(35, 0);
-                TimeLabel.Location = new Point(35, MessageLabel.Location.Y + MessageLabel.Size.Height + 5);
+                if (!DesignMode) RemindWait.Enabled = false;
+                MessageLabel.MaximumSize = new Size(this.Size.Width - 30 - 22, 25);
+                MessageLabel.Location = new Point(30, 0);
+                TimeLabel.Location = new Point(30, MessageLabel.Location.Y + MessageLabel.Size.Height + 5);
+                pictureBox1.Show();
             }
             else
             {
@@ -164,7 +190,9 @@ namespace MyAIAsisstent.Controls
                 MessageLabel.MaximumSize = new Size(this.Size.Width - 5 - 22, 25);
                 MessageLabel.Location = new Point(3, 0);
                 TimeLabel.Location = new Point(3, MessageLabel.Location.Y + MessageLabel.Size.Height + 5);
+                pictureBox1.Hide();
             }
+            if (!DesignMode && finishLoad) reminderSettings.Completed = remindFinish;
         }
 
         protected override void OnClick(EventArgs e)
@@ -204,6 +232,7 @@ namespace MyAIAsisstent.Controls
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             this.OnClick(e);
+            ((Main)ParentForm).editRemind(int.Parse(this.Name.Remove(0, 15)));
         }
 
         protected override void OnMouseEnter(EventArgs e)
@@ -239,6 +268,7 @@ namespace MyAIAsisstent.Controls
         private void pictureBox2_MouseEnter(object sender, EventArgs e)
         {
             this.OnMouseEnter(e);
+            pictureBox2.Image = Resources.right_blue;
         }
 
         protected override void OnMouseLeave(EventArgs e)
@@ -269,32 +299,39 @@ namespace MyAIAsisstent.Controls
         private void pictureBox2_MouseLeave(object sender, EventArgs e)
         {
             this.OnMouseLeave(e);
+            pictureBox2.Image = Resources.right_dark;
         }
 
         private void RemindWait_Tick(object sender, EventArgs e)
         {
             RemindWait.Stop();
-            Reminder rmd = new Reminder(int.Parse(this.Name.Remove(0, 15)));
+            RemindWait.Enabled = false;
             Notification noti = new Notification();
             noti.Text = this.Message;
             noti.Dismiss += delegate (Notification nt)
             {
-                rmd.Dismiss = true;
+                this.reminderSettings.Dismiss = true;
                 Settings.Default.Save();
             };
-            noti.OnRemindNotify += delegate (object obj, NotificationEventArgs ev)
+            noti.OnRemindNotify += delegate (object obj, NotificationEventArgs evnt)
             {
-                RemindWait.Interval = (int)ev.RemindAfter.TotalMilliseconds;
+                RemindWait.Interval = (int)evnt.RemindAfter.TotalMilliseconds;
                 RemindWait.Start();
-                rmd.RemindAfter = ev.RemindAfter;
+                MessageBox.Show("shit");
+                MessageBox.Show(this.reminderSettings.Message);
+                reminderSettings.RemindAfter = evnt.RemindAfter;
                 Settings.Default.Save();
+                MessageBox.Show(remindTime.ToString());
+                MessageBox.Show(remindTime.Add(evnt.RemindAfter).ToString());
+                RemindTime = remindTime.Add(evnt.RemindAfter);
             };
             noti.Done += delegate (Notification nt)
             {
                 RemindWait.Dispose();
-                rmd.FinishTime = DateTime.Now;
-                rmd.Completed = true;
+                reminderSettings.FinishTime = DateTime.Now;
+                reminderSettings.Completed = true;
                 Settings.Default.Save();
+                this.RemindFinish = true;
             };
             noti.Show();
         }
