@@ -51,6 +51,7 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.timePickerPanel1 = new Opulos.Core.UI.TimePickerPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.materialFlatButton9 = new MaterialSkin.Controls.MaterialFlatButton();
             this.materialFlatButton10 = new MaterialSkin.Controls.MaterialFlatButton();
@@ -72,7 +73,6 @@
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.ReminderControl0 = new MyAIAsisstent.Controls.ReminderControl();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -342,6 +342,22 @@
             this.panel2.TabIndex = 10;
             this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
+            // ReminderControl0
+            // 
+            this.ReminderControl0.AutoSize = true;
+            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.ReminderControl0.Icon = null;
+            this.ReminderControl0.Location = new System.Drawing.Point(4, 5);
+            this.ReminderControl0.Margin = new System.Windows.Forms.Padding(0);
+            this.ReminderControl0.Message = "Message";
+            this.ReminderControl0.MinimumSize = new System.Drawing.Size(270, 50);
+            this.ReminderControl0.Name = "ReminderControl0";
+            this.ReminderControl0.ParentForm = this;
+            this.ReminderControl0.RemindFinish = true;
+            this.ReminderControl0.Size = new System.Drawing.Size(270, 50);
+            this.ReminderControl0.TabIndex = 3;
+            this.ReminderControl0.Visible = false;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.materialFlatButton9);
@@ -549,7 +565,7 @@
             this.materialRaisedButton1.AutoUpper = true;
             this.materialRaisedButton1.Depth = 0;
             this.materialRaisedButton1.Icon = global::MyAIAsisstent.Properties.Resources.setting_blue;
-            this.materialRaisedButton1.IconSize = new System.Drawing.Size(25, 25);
+            this.materialRaisedButton1.IconSize = new System.Drawing.Size(30, 30);
             this.materialRaisedButton1.Location = new System.Drawing.Point(0, 270);
             this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRaisedButton1.Name = "materialRaisedButton1";
@@ -593,22 +609,6 @@
             // 
             this.timer3.Interval = 10;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
-            // 
-            // ReminderControl0
-            // 
-            this.ReminderControl0.AutoSize = true;
-            this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.ReminderControl0.Icon = null;
-            this.ReminderControl0.Location = new System.Drawing.Point(4, 5);
-            this.ReminderControl0.Margin = new System.Windows.Forms.Padding(0);
-            this.ReminderControl0.Message = "Message";
-            this.ReminderControl0.MinimumSize = new System.Drawing.Size(270, 50);
-            this.ReminderControl0.Name = "ReminderControl0";
-            this.ReminderControl0.ParentForm = this;
-            this.ReminderControl0.RemindFinish = true;
-            this.ReminderControl0.Size = new System.Drawing.Size(270, 50);
-            this.ReminderControl0.TabIndex = 3;
-            this.ReminderControl0.Visible = false;
             // 
             // Main
             // 

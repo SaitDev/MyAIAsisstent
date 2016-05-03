@@ -31,7 +31,7 @@ namespace MyAIAsisstent
         private Login _login;
         private MaterialFlatButton lastActive;
         private DateTime remindAtTime;
-        private bool remindCreating = false, remindMessageInputed, noteEditing = false, finishLoad = false,
+        private bool remindCreating = false, remindMessageInputed = false, noteEditing = false, finishLoad = false,
                      silentStart = Program.silentStart, remindEditing = false;
         private int speedButton, speedPanel, ReminderIndex;
         private DialogResult answer;
@@ -57,8 +57,11 @@ namespace MyAIAsisstent
                 materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
             }
             materialSkinManager.AddFormToManage(this);
-            if (silentStart) System.Threading.Thread.Sleep(2000);
-            _login = new Login(this);
+            if (!DesignMode)
+            {
+                if (silentStart) System.Threading.Thread.Sleep(2000);
+                _login = new Login(this);
+            }
         }
 
         private static int WM_QUERYENDSESSION = 0x11;
@@ -216,7 +219,7 @@ namespace MyAIAsisstent
                 return;
             }
             */
-            if (Stop_AI_Asisstent && !noteEditing && !remindCreating)
+            if (Stop_AI_Asisstent && !noteEditing && !remindCreating && !remindEditing)
             {
                 e.Cancel = false;
                 return;
@@ -234,7 +237,7 @@ namespace MyAIAsisstent
             else
             {
                 checkReminder();
-                if (remindCreating && answer == DialogResult.No)
+                if ((remindCreating || remindEditing) && answer == DialogResult.No)
                 {
                     Stop_AI_Asisstent = false;
                     e.Cancel = true;
@@ -379,7 +382,7 @@ namespace MyAIAsisstent
             else
             {
                 checkReminder();
-                if (remindCreating && answer == DialogResult.No) return;
+                if ((remindCreating || remindEditing) && answer == DialogResult.No) return;
             }
             materialFlatButton_Click(sender, e);
             materialTabSelector1.Hide();
@@ -406,7 +409,7 @@ namespace MyAIAsisstent
             if (materialTabControl1.SelectedIndex == 1)
             {
                 checkReminder();
-                if (remindCreating && answer == DialogResult.No)
+                if ((remindCreating || remindEditing) && answer == DialogResult.No)
                 {
                     e.Cancel = true;
                 }
@@ -488,7 +491,7 @@ namespace MyAIAsisstent
                 //materialLabel1.Show();
                 materialLabel1.BackColor = SkinManager.GetFlatButtonHoverBackgroundColor();
                 materialLabel1.ForeColor = SkinManager.ColorScheme.PrimaryColor;
-                materialLabel1.Font = SkinManager.ROBOTO_MEDIUM_11;
+                //materialLabel1.Font = SkinManager.ROBOTO_MEDIUM_11;
                 //materialListView1.Show();
                 //materialListView1.Items[0].ForeColor = SkinManager.GetDividersColor();
                 //materialListView2.Show();
@@ -860,13 +863,13 @@ namespace MyAIAsisstent
 
         private void checkReminder()
         {
-            if (remindCreating)
+            if (remindCreating || remindEditing)
             {
                 answer = MetroMessageBox.Show(this, "You have not saved reminder. Are you sure to discard?",
                                                             "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, 150);
                 if (answer == DialogResult.Yes)
                 {
-                    panel3.Location = new Point(272, 0);
+                    panel3.Location = new Point(277, 0);
                     monthCalendar1.Hide();
                     if (timePickerPanel1.timePicker.ClockMenu.Visible)
                         timePickerPanel1.timePicker.ClockMenu.ClockButtonCancel.PerformClick();
@@ -879,12 +882,13 @@ namespace MyAIAsisstent
                     remindCreating = false;
                     remindMessageInputed = false;
                     remindAtTime = new DateTime();
-                    materialFlatButton4.Icon = Properties.Resources.alarm_blue;
+                    materialFlatButton4.Icon = Resources.alarm_blue;
                     materialFlatButton5.Hide();
+                    materialFlatButton2.Focus();
                 }
                 else
                 {
-                    if (remindMessageInputed) materialSingleLineTextField1.SelectAll();
+                    //if (remindMessageInputed) materialSingleLineTextField1.SelectAll();
                 }
             }
             else if (ReminderControl.lastReminderClick != null)

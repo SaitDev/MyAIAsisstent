@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using MyAIAsisstent.Properties;
+using MyAIAsisstent;
 
 namespace MyAIAsisstent.Controls
 {
@@ -198,16 +199,13 @@ namespace MyAIAsisstent.Controls
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
+
             if (lastReminderClick != this )
             {
                 if (lastReminderClick != null) lastReminderClick.LastState = ReminderMouseState.LostFocus;
                 if (lastState != ReminderMouseState.Clicked)
                 {
-                    if (ParentForm.SkinManager.Theme == MaterialSkinManager.Themes.DARK)
-                    {
-                        base.BackColor = Color.FromArgb(110, 110, 110);
-                    }
-                    else base.BackColor = Color.FromArgb(170, 170, 170);
+                    base.BackColor = ((Main)ParentForm).NoteLabelColor(Main.NoteLabelStatus.Clicked);
                     lastState = ReminderMouseState.Clicked;
                 }
                 lastReminderClick = this;
@@ -240,11 +238,7 @@ namespace MyAIAsisstent.Controls
             base.OnMouseEnter(e);
             if (lastState == ReminderMouseState.Default)
             {
-                if (ParentForm.SkinManager.Theme == MaterialSkinManager.Themes.DARK)
-                {
-                    base.BackColor = ParentForm.SkinManager.GetFlatButtonHoverBackgroundColor();
-                }
-                else base.BackColor = Color.FromArgb(205, 205, 205);
+                base.BackColor = ((Main)ParentForm).NoteLabelColor(Main.NoteLabelStatus.Hover);
                 this.Cursor = Main.HandCursor;
                 lastState = ReminderMouseState.Hover;
             }
@@ -276,11 +270,7 @@ namespace MyAIAsisstent.Controls
             base.OnMouseLeave(e);
             if (lastState == ReminderMouseState.Hover)
             {
-                if (ParentForm.SkinManager.Theme == MaterialSkinManager.Themes.DARK)
-                {
-                    base.BackColor = Color.FromArgb(60, 60, 60);
-                }
-                else base.BackColor = (ParentForm).SkinManager.GetFlatButtonHoverBackgroundColor();
+                base.BackColor = ((Main)ParentForm).NoteLabelColor(0);
                 this.Cursor = Cursors.Default;
                 lastState = ReminderMouseState.Default;
             }
@@ -302,6 +292,13 @@ namespace MyAIAsisstent.Controls
             pictureBox2.Image = Resources.right_dark;
         }
 
+        protected override void OnDoubleClick(EventArgs e)
+        {
+            base.OnDoubleClick(e);
+
+            pictureBox2_Click(pictureBox2, null);
+        }
+
         private void RemindWait_Tick(object sender, EventArgs e)
         {
             RemindWait.Stop();
@@ -317,12 +314,12 @@ namespace MyAIAsisstent.Controls
             {
                 RemindWait.Interval = (int)evnt.RemindAfter.TotalMilliseconds;
                 RemindWait.Start();
-                MessageBox.Show("shit");
-                MessageBox.Show(this.reminderSettings.Message);
+                //MessageBox.Show("shit");
+                //MessageBox.Show(this.reminderSettings.Message);
                 reminderSettings.RemindAfter = evnt.RemindAfter;
                 Settings.Default.Save();
-                MessageBox.Show(remindTime.ToString());
-                MessageBox.Show(remindTime.Add(evnt.RemindAfter).ToString());
+                //MessageBox.Show(remindTime.ToString());
+                //MessageBox.Show(remindTime.Add(evnt.RemindAfter).ToString());
                 RemindTime = remindTime.Add(evnt.RemindAfter);
             };
             noti.Done += delegate (Notification nt)

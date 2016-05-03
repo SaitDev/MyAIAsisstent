@@ -113,11 +113,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.MessageLabel);
             this.Controls.Add(this.pictureBox1);
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Margin = new System.Windows.Forms.Padding(0);
             this.MinimumSize = new System.Drawing.Size(200, 50);
             this.Name = "ReminderControl";
