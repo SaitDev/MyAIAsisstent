@@ -430,6 +430,7 @@
             this.NoteLabel0.Text = "materialLabel2";
             this.NoteLabel0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.NoteLabel0.Click += new System.EventHandler(this.NoteLabel_Click);
+            this.NoteLabel0.DoubleClick += new System.EventHandler(this.NoteLabel_DoubleClick);
             this.NoteLabel0.MouseEnter += new System.EventHandler(this.NoteLabel_MouseEnter);
             this.NoteLabel0.MouseLeave += new System.EventHandler(this.NoteLabel_MouseLeave);
             // 

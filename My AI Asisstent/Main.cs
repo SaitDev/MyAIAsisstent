@@ -974,6 +974,7 @@ namespace MyAIAsisstent
             mlabel.MouseEnter += NoteLabel_MouseEnter;
             mlabel.MouseLeave += NoteLabel_MouseLeave;
             mlabel.Click += NoteLabel_Click;
+            mlabel.DoubleClick += NoteLabel_DoubleClick;
             tabPage2.Controls.Add(mlabel);      
             mlabel.Tag = mlabel.Location.Y + mlabel.Size.Height;
         }
@@ -1001,6 +1002,11 @@ namespace MyAIAsisstent
             speedButton = 8;
             timer5.Start();
             lastNoteLabelClick = ((MaterialLabel)sender);
+        }
+
+        private void NoteLabel_DoubleClick(object sender, EventArgs e)
+        {
+            materialFlatButton9.PerformClick();
         }
 
         private void UpdateNoteLabelColor()
