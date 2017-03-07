@@ -1,51 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MyAIAsisstent.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="UpdateSettingsRequired" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="RequiredPassword" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="LightTheme" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="AutoStart" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="NoteCount" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="Notes" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="Locations" Type="System.Drawing.Point[]" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="Opacitys" Type="System.Double[]" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="NoteOnTop" Type="System.Boolean[]" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RemindMessage" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RemindAt" Type="System.DateTime[]" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RemindCompleted" Type="System.Boolean[]" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RemindFinishTime" Type="System.DateTime[]" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RemindAfter" Type="System.TimeSpan[]" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="RemindDismiss" Type="System.Boolean[]" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-  </Settings>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
 </SettingsFile>

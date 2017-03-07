@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My AI Asisstent", "My AI Asisstent\My AI Asisstent.csproj", "{7C060AD5-D0B5-43C5-822B-D88B15FA726F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialSkin", "MaterialSkin\MaterialSkin.csproj", "{8EB7611B-68CD-4B8B-987A-11717E2B250C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimePicker", "TimePicker\TimePicker.csproj", "{076BC68C-1AB7-44CA-8403-1932B4E2FDE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My AI Asisstent", "My AI Asisstent\My AI Asisstent.csproj", "{CA28F5C6-DD68-468B-96B4-F6A118D5D4C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7C060AD5-D0B5-43C5-822B-D88B15FA726F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C060AD5-D0B5-43C5-822B-D88B15FA726F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C060AD5-D0B5-43C5-822B-D88B15FA726F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C060AD5-D0B5-43C5-822B-D88B15FA726F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8EB7611B-68CD-4B8B-987A-11717E2B250C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8EB7611B-68CD-4B8B-987A-11717E2B250C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EB7611B-68CD-4B8B-987A-11717E2B250C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{076BC68C-1AB7-44CA-8403-1932B4E2FDE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{076BC68C-1AB7-44CA-8403-1932B4E2FDE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{076BC68C-1AB7-44CA-8403-1932B4E2FDE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA28F5C6-DD68-468B-96B4-F6A118D5D4C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA28F5C6-DD68-468B-96B4-F6A118D5D4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA28F5C6-DD68-468B-96B4-F6A118D5D4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA28F5C6-DD68-468B-96B4-F6A118D5D4C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
