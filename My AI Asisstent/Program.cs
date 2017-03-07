@@ -12,18 +12,16 @@ namespace MyAIAsisstent
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        /// 
-
         public static Main _main;
         static bool NoMutexException = false;
         public static bool silentStart = false;
         static Mutex mutex = new Mutex(false, "MyAIAsisstent");
         static int timeRetry = 3;
-        
 
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        /// 
         [STAThread]
         static void Main(string[] args)
         {
@@ -47,6 +45,7 @@ namespace MyAIAsisstent
                         {
                             if (arg.ToUpper() == "-SILENTSTART") silentStart = true;
                         }
+                        if (silentStart) Thread.Sleep(2000);
                         _main = new Main();
                         Application.Run(_main);
                         mutex.ReleaseMutex();

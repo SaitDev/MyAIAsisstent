@@ -79,7 +79,7 @@ namespace MaterialSkin.Controls
             animationManager.OnAnimationProgress += sender => Invalidate();
 
             //UNDONE : Remove this function and use Design view Properties
-            //AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
             //AutoSize = true;
             //Margin = new Padding(4, 6, 4, 6);
             //Padding = new Padding(0);

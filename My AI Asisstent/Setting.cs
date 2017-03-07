@@ -64,7 +64,7 @@ namespace MyAIAsisstent
 
         private void Setting_Move(object sender, EventArgs e)
         {
-            this.Opacity = .5;
+            this.Opacity = .8;
         }
 
         private void Setting_ResizeEnd(object sender, EventArgs e)

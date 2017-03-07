@@ -54,6 +54,7 @@
             this.MessageLabel.Text = "Message";
             this.MessageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.MessageLabel.Click += new System.EventHandler(this.MessageLabel_Click);
+            this.MessageLabel.DoubleClick += new System.EventHandler(this.MessageLabel_DoubleClick);
             this.MessageLabel.MouseEnter += new System.EventHandler(this.MessageLabel_MouseEnter);
             this.MessageLabel.MouseLeave += new System.EventHandler(this.MessageLabel_MouseLeave);
             // 
@@ -72,6 +73,7 @@
             this.TimeLabel.Text = "Time to remind";
             this.TimeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.TimeLabel.Click += new System.EventHandler(this.TimeLabel_Click);
+            this.TimeLabel.DoubleClick += new System.EventHandler(this.TimeLabel_DoubleClick);
             this.TimeLabel.MouseEnter += new System.EventHandler(this.TimeLabel_MouseEnter);
             this.TimeLabel.MouseLeave += new System.EventHandler(this.TimeLabel_MouseLeave);
             // 
@@ -106,6 +108,7 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
             // 
             // ReminderControl

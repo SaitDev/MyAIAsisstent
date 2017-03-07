@@ -53,6 +53,13 @@ namespace MaterialSkin.Controls
             }
         }
 
+        private Size _iconsize = new Size(25, 25);
+        public Size IconSize
+        {
+            get { return _iconsize; }
+            set { if (!(value == null)) _iconsize = value; }
+        }
+
         public MaterialRaisedButton()
         {
             Primary = true;
@@ -129,6 +136,12 @@ namespace MaterialSkin.Controls
                 // Center Icon
                 iconRect.X += 2;
 
+            if (!AutoSize)
+            {
+                iconRect.Width = _iconsize.Width;
+                iconRect.Height = _iconsize.Height;
+            }
+
             if (Icon != null)
                 g.DrawImage(Icon, iconRect);
 
@@ -149,7 +162,8 @@ namespace MaterialSkin.Controls
                 // First 4: left padding
                 // 24: icon width
                 // Second 4: space between Icon and Text
-                textRect.X += 4 + 24 + 4;
+                if (AutoSize) textRect.X += 4 + 24 + 4;
+                else textRect.X += 4 + _iconsize.Width + 4;
             }
 
             string temp = autoUpper ? Text.ToUpper() : Text;

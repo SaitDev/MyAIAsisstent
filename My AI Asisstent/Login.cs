@@ -32,27 +32,30 @@ namespace MyAIAsisstent
             InitializeComponent();
             _main = main;
             _main.materialSkinManager.AddFormToManage(this);
-            if (silentStart) System.Threading.Thread.Sleep(1000);
-            _setting = new Setting(this);
-            notes = new Notes[10];
-            noteCount = Properties.Settings.Default.NoteCount;
-            if (Properties.Settings.Default.RequiredPassword == false)
+            if (!DesignMode)
             {
-                if (noteCount == 0)
+                if (silentStart) System.Threading.Thread.Sleep(1000);
+                _setting = new Setting(this);
+                notes = new Notes[10];
+                noteCount = Properties.Settings.Default.NoteCount;
+                if (Properties.Settings.Default.RequiredPassword == false)
                 {
-                    newNote();
-                }
-                else
-                {
-                    int i;
-                    if (silentStart) System.Threading.Thread.Sleep(3000);
-                    for (i = 0; i < noteCount; i++)
+                    if (noteCount == 0)
                     {
-                        createNote(i);
+                        newNote();
+                    }
+                    else
+                    {
+                        int i;
+                        if (silentStart) System.Threading.Thread.Sleep(3000);
+                        for (i = 0; i < noteCount; i++)
+                        {
+                            createNote(i);
+                        }
                     }
                 }
+                else Visible = true;
             }
-            else Visible = true;
         }
 
         private void Login_Shown(object sender, EventArgs e)

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Time");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Day");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Message to remind");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Time");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Day");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Message to remind");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.materialSingleLineTextField1 = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
@@ -227,7 +227,7 @@
             this.materialListView3.FullRowSelect = true;
             this.materialListView3.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView3.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem4});
             this.materialListView3.Location = new System.Drawing.Point(140, 110);
             this.materialListView3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView3.MouseState = MaterialSkin.MouseState.OUT;
@@ -256,9 +256,9 @@
             this.materialListView2.FullRowSelect = true;
             this.materialListView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView2.ImeMode = System.Windows.Forms.ImeMode.On;
-            listViewItem2.StateImageIndex = 0;
+            listViewItem5.StateImageIndex = 0;
             this.materialListView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem5});
             this.materialListView2.Location = new System.Drawing.Point(4, 110);
             this.materialListView2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView2.MouseState = MaterialSkin.MouseState.OUT;
@@ -287,7 +287,7 @@
             this.materialListView1.FullRowSelect = true;
             this.materialListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.materialListView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem6});
             this.materialListView1.Location = new System.Drawing.Point(4, 65);
             this.materialListView1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialListView1.MouseState = MaterialSkin.MouseState.OUT;
@@ -346,6 +346,7 @@
             // 
             this.ReminderControl0.AutoSize = true;
             this.ReminderControl0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.ReminderControl0.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ReminderControl0.Icon = null;
             this.ReminderControl0.Location = new System.Drawing.Point(4, 5);
             this.ReminderControl0.Margin = new System.Windows.Forms.Padding(0);
@@ -420,7 +421,7 @@
             this.NoteLabel0.Depth = 0;
             this.NoteLabel0.Font = new System.Drawing.Font("Roboto", 11F);
             this.NoteLabel0.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.NoteLabel0.Location = new System.Drawing.Point(5, 8);
+            this.NoteLabel0.Location = new System.Drawing.Point(2, 3);
             this.NoteLabel0.MaximumSize = new System.Drawing.Size(270, 60);
             this.NoteLabel0.MinimumSize = new System.Drawing.Size(270, 40);
             this.NoteLabel0.MouseState = MaterialSkin.MouseState.HOVER;

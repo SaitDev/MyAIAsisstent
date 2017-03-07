@@ -256,7 +256,7 @@ namespace MyAIAsisstent.Controls
 
         private void pictureBox1_MouseEnter(object sender, EventArgs e)
         {
-            this.OnMouseLeave(e);
+            this.OnMouseEnter(e);
         }
 
         private void pictureBox2_MouseEnter(object sender, EventArgs e)
@@ -299,6 +299,21 @@ namespace MyAIAsisstent.Controls
             pictureBox2_Click(pictureBox2, null);
         }
 
+        private void MessageLabel_DoubleClick(object sender, EventArgs e)
+        {
+            this.OnDoubleClick(e);
+        }
+
+        private void TimeLabel_DoubleClick(object sender, EventArgs e)
+        {
+            this.OnDoubleClick(e);
+        }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            this.OnDoubleClick(e);
+        }
+
         private void RemindWait_Tick(object sender, EventArgs e)
         {
             RemindWait.Stop();
@@ -332,6 +347,7 @@ namespace MyAIAsisstent.Controls
             };
             noti.Show();
         }
+
     }
 
     public enum ReminderMouseState
