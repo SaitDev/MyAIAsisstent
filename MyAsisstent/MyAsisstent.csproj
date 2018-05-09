@@ -7,8 +7,8 @@
     <ProjectGuid>{CA28F5C6-DD68-468B-96B4-F6A118D5D4C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyAIAsisstent</RootNamespace>
-    <AssemblyName>My AI Asisstent</AssemblyName>
+    <RootNamespace>MyAsisstent</RootNamespace>
+    <AssemblyName>My Asisstent</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>AI-Assistant.ico</ApplicationIcon>
+    <ApplicationIcon>Assistant.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -111,7 +111,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="AI-Assistant.ico" />
+    <Resource Include="Assistant.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
