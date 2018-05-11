@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyAIAsisstent
+using System.Diagnostics;
+
+namespace MyAssistant
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +25,9 @@ namespace MyAIAsisstent
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

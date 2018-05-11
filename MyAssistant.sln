@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2043
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAsisstent", "MyAsisstent\MyAsisstent.csproj", "{CA28F5C6-DD68-468B-96B4-F6A118D5D4C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAssistant", "MyAssistant\MyAssistant.csproj", "{CA28F5C6-DD68-468B-96B4-F6A118D5D4C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
