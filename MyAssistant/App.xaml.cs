@@ -28,6 +28,14 @@ namespace MyAssistant
             {
                 switch (args[1])
                 {
+                    case "--nextbackground":
+                        try
+                        {
+                            var wallpaper = (IDesktopWallpaper)new DesktopWallpaper();
+                            wallpaper.AdvanceSlideshow(null, DesktopSlideshowDirection.Forward);
+                        }
+                        catch (System.Runtime.InteropServices.COMException ex) { }
+                        Environment.Exit(0);
                         break;
                     case "--autostart":
                         lazyStart = true;
