@@ -74,6 +74,7 @@
     </ApplicationDefinition>
     <Compile Include="Database\Hotspot\Credential.cs" />
     <Compile Include="Network\Hotspot.cs" />
+    <Compile Include="Utils\DebugHelper.cs" />
     <Compile Include="WinAPI\DesktopWallpaper.cs" />
     <Compile Include="WinAPI\NetworkUtil.cs" />
     <Page Include="MainWindow.xaml">
