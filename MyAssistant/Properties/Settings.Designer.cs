@@ -22,5 +22,16 @@ namespace MyAssistant.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::MyAssistant.Database.Hotspot.Credential Hotspot {
+            get {
+                return ((global::MyAssistant.Database.Hotspot.Credential)(this["Hotspot"]));
+            }
+            set {
+                this["Hotspot"] = value;
+            }
+        }
     }
 }

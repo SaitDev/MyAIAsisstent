@@ -3,18 +3,79 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyAsisstent"
+        xmlns:local="clr-namespace:MyAssistant"
+        xmlns:properties="clr-namespace:MyAssistant.Properties"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="My Assistant" Height="350" Width="525"
+        Title="My Assistant" Height="400" Width="600"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
-        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        Loaded="Load">
+    <!--FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid>
-        <Button Name="button" Content="Ready for reborn version" Click="Button_Click"
-                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <md:PopupBox x:Name="popupMenu" PopupMode="MouseOver"
+                     
+                     Margin="0 0 40 30" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                     Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                     PlacementMode="TopAndAlignCentres">
+            <md:PopupBox.ToggleCheckedContent>
+                <md:PackIcon Kind="DotsHorizontal"
+                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </md:PopupBox.ToggleCheckedContent>
+            <StackPanel>
+                <Button x:Name="autoHotspot"
+                        ToolTip="Auto MegaLag"
+                        Click="AutoHotspot">
+                    <md:PackIcon Kind="Wifi"/>
+                </Button>
+                <Button x:Name="troll"
+                        ToolTip="Chức năng khác"
+                        Click="Unimplemented">
+                    <md:PackIcon Kind="SortVariant"/>
+                </Button>
+            </StackPanel>
+        </md:PopupBox>
+
+        <StackPanel Name="settingPanel" Visibility="Collapsed"
+                    HorizontalAlignment="Center"
+                    Margin="0 50">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ComboBox Name="wifiList"
+                          MinWidth="100" MaxWidth="200"
+                          md:HintAssist.Hint="Select your megaLAG"
+                          md:HintAssist.IsFloating="True"/>
+                <TextBox Name="username" Width="100" Margin="20 0"
+                         md:HintAssist.Hint="User"
+                         md:HintAssist.IsFloating="True"/>
+                <PasswordBox Name="password" Width="100"
+                             md:HintAssist.Hint="Password"
+                             md:HintAssist.IsFloating="True"/>
+            </StackPanel>
+            <CheckBox Content="Start with window" HorizontalAlignment="Center" Margin="0 30"
+                      IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=AutoStart}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                        Margin="0 20">
+                <Button Content="Refresh" Margin="0 0 40 0"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="RefreshWifi"/>
+                <Button Content="OK" Width="80"
+                        Click="SaveSetting"/>
+            </StackPanel>
+        </StackPanel>
+
+        <md:Snackbar Name="snackbarMessage" MessageQueue="{md:MessageQueue}"
+                     HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>
