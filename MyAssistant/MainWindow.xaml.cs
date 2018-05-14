@@ -32,7 +32,6 @@ namespace MyAssistant
         Wifi wifi;
         Hotspot hotspot;
         RegistryKey regKey;
-        //bool lazyStart;
 
         public MainWindow()
         {
@@ -45,10 +44,17 @@ namespace MyAssistant
             hotspot = new Hotspot(this);
             regKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-            if (Settings.Default.Hotspot == null) return;
-            Task.Delay(1000).ContinueWith(_ =>
+            if (Settings.Default.Hotspot != null)
             {
-                if (!NetworkUtil.IsConnectedToInternet) Connect();
+                Task.Delay(1000).ContinueWith(_ =>
+                {
+                    if (!NetworkUtil.IsConnectedToInternet) Connect();
+                });
+            }
+
+            Task.Delay(5000).ContinueWith(_ =>
+            {
+                new Updater().Update();
             });
         }
 
