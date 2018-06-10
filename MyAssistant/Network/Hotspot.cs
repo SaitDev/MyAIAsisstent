@@ -19,7 +19,7 @@ namespace MyAssistant.Network
         MainWindow main;
         Wifi wifi;
         HttpClient client;
-        string loginHost = @"http://10.10.0.1:3992/wifi/login";
+        string loginHost = @"http://10.10.0.1/wifi/login";
         Dictionary<string, string> content;
         string user = "username", pass = "password";
 
